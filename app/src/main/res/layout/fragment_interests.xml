@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/white" >
+
+    <include
+        android:id="@+id/toolBarInterests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar_registro"
+        android:layout_alignParentTop="true"
+        />
+
+    <include
+        android:id="@+id/arrowsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/arrow_back_and_next"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/toolBarInterests"
+        android:layout_above="@id/arrowsContainer"
+        android:padding="16dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cuáles son tus intereses?"
+            android:layout_gravity="center"
+            />
+
+        <com.igalata.bubblepicker.rendering.BubblePicker
+            android:id="@+id/picker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:backgroundColor="@android:color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

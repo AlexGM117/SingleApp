@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".dashboard.PreferencesFragment" >
+
+    <include
+        android:id="@+id/buttonsContainer"
+        layout="@layout/arrow_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentBottom="true"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonsContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_gray"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/premium"
+                    android:layout_margin="8dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Encontrar"
+                    android:textColor="@color/colorPrimary"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_gray"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Hombres" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mujeres"
+                            android:layout_centerVertical="true" />
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rango de edad"
+                    android:textColor="@color/colorPrimary"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/background_gray"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp" >
+
+                    <TextView
+                        android:id="@+id/textMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorPrimary"/>
+
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/rangeSeekbar1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textMin"
+                        app:min_value="18"
+                        app:max_value="99"
+                        app:min_start_value="23"
+                        app:gap="5"
+                        app:bar_color="@color/colorGrayDark"
+                        app:bar_highlight_color="@color/colorAccent"
+                        app:left_thumb_color="@color/colorAccent"
+                        app:left_thumb_color_pressed="@color/colorAccent"
+                        app:right_thumb_color="@color/colorAccent"
+                        app:right_thumb_color_pressed="@color/colorAccent"
+                        app:thumb_diameter="15dp"
+                        />
+                    <!--<com.warkiz.widget.IndicatorStayLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<com.warkiz.widget.IndicatorSeekBar-->
+                            <!--android:id="@+id/seekBarMin"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--app:isb_show_indicator="circular_bubble"-->
+                            <!--app:isb_indicator_color="@color/colorAccent"-->
+                            <!--app:isb_thumb_color="@color/colorAccent"-->
+                            <!--app:isb_thumb_size="3dp"-->
+                            <!--app:isb_min="18"-->
+                            <!--app:isb_track_progress_color="@color/colorAccent"/>-->
+
+                    <!--</com.warkiz.widget.IndicatorStayLayout>-->
+
+                    <!--<com.warkiz.widget.IndicatorStayLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="2dp">-->
+
+                        <!--<com.warkiz.widget.IndicatorSeekBar-->
+                            <!--android:id="@+id/seekBarMax"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--app:isb_show_indicator="circular_bubble"-->
+                            <!--app:isb_indicator_color="@color/colorAccent"-->
+                            <!--app:isb_thumb_color="@color/colorAccent"-->
+                            <!--app:isb_thumb_size="3dp"-->
+                            <!--app:isb_min="18"-->
+                            <!--app:isb_track_progress_color="@color/colorAccent" />-->
+
+                    <!--</com.warkiz.widget.IndicatorStayLayout>-->
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mostrarme"
+                    android:textColor="@color/colorPrimary"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/background_gray"
+                    android:layout_height="50dp"
+                    android:padding="8dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mostrar mi perfil"
+                        android:layout_centerVertical="true" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

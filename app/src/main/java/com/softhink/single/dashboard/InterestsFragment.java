@@ -1,0 +1,104 @@
+package com.softhink.single.dashboard;
+
+
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.igalata.bubblepicker.BubblePickerListener;
+import com.igalata.bubblepicker.adapter.BubblePickerAdapter;
+import com.igalata.bubblepicker.model.BubbleGradient;
+import com.igalata.bubblepicker.model.PickerItem;
+import com.igalata.bubblepicker.rendering.BubblePicker;
+import com.softhink.single.R;
+
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class InterestsFragment extends Fragment implements BubblePickerListener {
+
+    private BubblePicker picker;
+    private TypedArray colors;
+    private String[] titles = new String[]{
+            "Encontrar pareja",
+            "Diversión",
+            "Sexo casual",
+            "Conocer gente nueva"
+    };
+
+    public InterestsFragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_interests, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        picker = view.findViewById(R.id.picker);
+
+        colors = getContext().getResources().obtainTypedArray(R.array.colors);
+
+        picker.setAdapter(new BubblePickerAdapter() {
+            @Override
+            public int getTotalCount() {
+                return titles.length;
+            }
+
+            @NotNull
+            @Override
+            public PickerItem getItem(int i) {
+                PickerItem item = new PickerItem();
+                item.setTitle(titles[i]);
+                item.setGradient(new BubbleGradient(colors.getColor((0) % 8, 0),
+                        colors.getColor((0) % 8, 0), BubbleGradient.VERTICAL));
+                item.setTextColor(Color.WHITE);
+                return item;
+            }
+        });
+
+        colors.recycle();
+
+        picker.setCenterImmediately(true);
+        picker.setBubbleSize(30);
+        picker.setListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        picker.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        picker.onPause();
+    }
+
+    @Override
+    public void onBubbleSelected(PickerItem pickerItem) {
+        Log.i("SingleApp", "Burbuja seleccionada: " + pickerItem.getTitle());
+    }
+
+    @Override
+    public void onBubbleDeselected(PickerItem pickerItem) {
+        Log.i("SingleApp", "Burbuja desseleccionada: " + pickerItem.getTitle());
+    }
+}
