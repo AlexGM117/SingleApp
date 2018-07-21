@@ -37,7 +37,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-//    implementation 'com.crystal:crystalrangeseekbar:+'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.0.6'
     implementation 'com.github.igalata:Bubble-Picker:v0.2.4'
 }

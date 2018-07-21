@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +28,6 @@ import org.jetbrains.annotations.NotNull;
 public class InterestsFragment extends Fragment implements BubblePickerListener {
 
     private BubblePicker picker;
-    private TypedArray colors;
-    private String[] titles = new String[]{
-            "Encontrar pareja",
-            "Diversión",
-            "Sexo casual",
-            "Conocer gente nueva"
-    };
 
     public InterestsFragment() {
         // Required empty public constructor
@@ -53,9 +47,14 @@ public class InterestsFragment extends Fragment implements BubblePickerListener 
 
         picker = view.findViewById(R.id.picker);
 
-        colors = getContext().getResources().obtainTypedArray(R.array.colors);
-
         picker.setAdapter(new BubblePickerAdapter() {
+            String[] titles = new String[]{
+                    "Encontrar pareja",
+                    "Diversión",
+                    "Sexo casual",
+                    "Conocer gente nueva"
+            };
+
             @Override
             public int getTotalCount() {
                 return titles.length;
@@ -66,14 +65,12 @@ public class InterestsFragment extends Fragment implements BubblePickerListener 
             public PickerItem getItem(int i) {
                 PickerItem item = new PickerItem();
                 item.setTitle(titles[i]);
-                item.setGradient(new BubbleGradient(colors.getColor((0) % 8, 0),
-                        colors.getColor((0) % 8, 0), BubbleGradient.VERTICAL));
+                item.setColor(Color.parseColor("#DA7C86"));
                 item.setTextColor(Color.WHITE);
+                item.setBackgroundImage(ContextCompat.getDrawable(getContext(), R.drawable.background_bubble));
                 return item;
             }
         });
-
-        colors.recycle();
 
         picker.setCenterImmediately(true);
         picker.setBubbleSize(30);
