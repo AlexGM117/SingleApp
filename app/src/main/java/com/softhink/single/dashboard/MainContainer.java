@@ -1,16 +1,18 @@
 package com.softhink.single.dashboard;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.softhink.single.BaseActivity;
+import com.softhink.single.OnboardingActivity;
 import com.softhink.single.R;
 import com.softhink.single.dashboard.adapters.PagerAdapter;
 
-public class MainContainer extends AppCompatActivity {
+public class MainContainer extends BaseActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -20,8 +22,7 @@ public class MainContainer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_container);
 
-        Toolbar toolbar = findViewById(R.id.toolbarMain);
-        setSupportActionBar(toolbar);
+        setUpToolbar("", false);
 
         viewPager = findViewById(R.id.viewPager);
         setUpViewPager();
@@ -53,7 +54,12 @@ public class MainContainer extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.menuOnboarding:
+                startActivity(new Intent(this, OnboardingActivity.class));
+                break;
+        }
+        return true;
     }
 }
 

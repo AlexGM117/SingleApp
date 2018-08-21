@@ -34,13 +34,13 @@ class PlacesAdapter(private val placeList: ArrayList<Int>, private val listener:
     }
 
 
-    class PlaceViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val card = itemView?.findViewById<CardView>(R.id.cardPlace)
-        val image = itemView?.findViewById<ImageView>(R.id.placeImage)
-        val name = itemView?.findViewById<TextView>(R.id.placeName)
-        val locattion = itemView?.findViewById<TextView>(R.id.placeLocation)
-        val description = itemView?.findViewById<TextView>(R.id.placeDescription)
-        val score = itemView?.findViewById<RatingBar>(R.id.placeScore)
+    class PlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val card = itemView.findViewById<CardView>(R.id.cardPlace)
+        val image = itemView.findViewById<ImageView>(R.id.placeImage)
+        val name = itemView.findViewById<TextView>(R.id.placeName)
+        val locattion = itemView.findViewById<TextView>(R.id.placeLocation)
+        val description = itemView.findViewById<TextView>(R.id.placeDescription)
+        val score = itemView.findViewById<RatingBar>(R.id.placeScore)
     }
 
     interface ClickItem{

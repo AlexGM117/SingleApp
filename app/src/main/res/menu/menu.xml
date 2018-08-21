@@ -9,6 +9,10 @@
         />
     <item android:id="@+id/menuTerms"
         android:title="Términos y condiciones"/>
+    <item android:id="@+id/menuAbout"
+        android:title="Acerca de"/>
+    <item android:id="@+id/menuOnboarding"
+        android:title="Tutorial"/>
     <item android:id="@+id/menuLogout"
         android:title="Cerrar sesión" />
 
