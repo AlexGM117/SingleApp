@@ -76,3 +76,5 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 >>>>>>> 484ecff589d7e5560188480d1d8a5e9379df30d4
+
+\.idea/

@@ -3,14 +3,14 @@ package com.softhink.single;
 import com.softhink.single.dashboard.DatesFragment;
 import com.softhink.single.dashboard.PerfilFragment;
 import com.softhink.single.dashboard.PlacesFragment;
-import com.softhink.single.dashboard.PreferencesFragment;
-import com.softhink.single.dashboard.PreferencesLastFragment;
+import com.softhink.single.survey.PreferencesFragment;
+import com.softhink.single.survey.PreferencesLastFragment;
 import com.softhink.single.login.LoginCommonFragment;
 import com.softhink.single.login.LoginFragment;
 import com.softhink.single.login.PassRecoveryFragment;
 import com.softhink.single.login.PassTmpFragment;
-import com.softhink.single.registro.RegistroDosFragment;
-import com.softhink.single.registro.RegistroUnoFragment;
+import com.softhink.single.registro.view.RegistroDosFragment;
+import com.softhink.single.registro.view.RegistroUnoFragment;
 
 public class Constants {
     public static final String DATESFRAGMENT = DatesFragment.class.getSimpleName();

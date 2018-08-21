@@ -6,4 +6,8 @@
     <string name="textview">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis messe ma.</string>
     <string name="title_activity_maps">Map</string>
     <string name="text_ex">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nosiusto odio dignissim qui blandit praesent Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</string>
+
+    <string name="date_mask">0%1$d</string>
+
+    <string name="empty_name">Agrega tu nombre para registrate</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registro.RegistroTresFragment">
+    tools:context=".registro.view.RegistroTresFragment">
 
 
     <android.support.constraint.Guideline
@@ -43,7 +43,7 @@
         app:layout_constraintGuide_percent=".5"/>
 
     <include
-        layout="@layout/toolbar_registro"
+        layout="@layout/toolbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"

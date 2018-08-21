@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard;
+package com.softhink.single.survey;
 
 
 import android.content.res.TypedArray;

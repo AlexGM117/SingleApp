@@ -13,5 +13,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="buttonSingle" >
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
 </resources>

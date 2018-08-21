@@ -1,6 +1,7 @@
-package com.softhink.single.registro;
+package com.softhink.single.registro.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,20 +10,22 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.softhink.single.Constants;
 import com.softhink.single.R;
+import com.softhink.single.dashboard.MainContainer;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegistroDosFragment extends Fragment implements View.OnClickListener {
+public class RegistroTresFragment extends Fragment implements View.OnClickListener {
 
-    ImageView btnNext;
-    ImageView btnBack;
+    private ImageView btnBack;
+    private Button btnEnviarRegistro;
 
-    public RegistroDosFragment() {
+    public RegistroTresFragment() {
         // Required empty public constructor
     }
 
@@ -31,33 +34,29 @@ public class RegistroDosFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_dos, container, false);
+        return inflater.inflate(R.layout.fragment_registro_tres, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnNext = view.findViewById(R.id.buttonNext2);
-        btnBack = view.findViewById(R.id.buttonBack);
-        btnNext.setOnClickListener(this);
+        btnBack = view.findViewById(R.id.buttonBack2);
+        btnEnviarRegistro = view.findViewById(R.id.button3);
         btnBack.setOnClickListener(this);
+        btnEnviarRegistro.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager = getFragmentManager();
-        switch (v.getId()){
-            case R.id.buttonNext2:
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.containerLogin, new RegistroTresFragment())
-                        .addToBackStack(Constants.REGISTROTRESFRAGMENT)
-                        .commit();
-                break;
 
-            case R.id.buttonBack:
+        switch (v.getId()){
+            case R.id.buttonBack2:
                 fragmentManager.popBackStack();
+                break;
+            case R.id.button3:
+                getActivity().startActivity(new Intent(getActivity(), MainContainer.class));
                 break;
         }
     }

@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
 import com.softhink.single.dashboard.MainContainer;
-import com.softhink.single.registro.RegistroUnoFragment;
+import com.softhink.single.registro.view.RegistroActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,11 +85,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.registro:
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                        .replace(R.id.containerLogin, new RegistroUnoFragment())
-                        .addToBackStack(Constants.REGISTROUNOFRAGMENT)
-                        .commit();
+                startActivity(new Intent(getActivity(), RegistroActivity.class));
                 break;
         }
     }

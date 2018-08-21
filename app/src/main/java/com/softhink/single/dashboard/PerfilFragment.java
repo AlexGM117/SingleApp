@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.softhink.single.MapsActivity;
 import com.softhink.single.R;
+import com.softhink.single.survey.SurveyActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,14 +53,13 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
         Intent intent = null;
         switch (v.getId()){
             case R.id.button5:
-                intent = new Intent(getContext(), PreferencesActivity.class);
-//                getActivity().startActivity(new Intent(getContext(), PreferencesActivity.class));
+                intent = new Intent(getActivity(), SurveyActivity.class);
                 break;
 
             case R.id.singlear:
-                intent = new Intent(getContext(), MapsActivity.class);
+                intent = new Intent(getActivity(), MapsActivity.class);
                 break;
         }
-        getActivity().startActivity(intent);
+        startActivity(intent);
     }
 }

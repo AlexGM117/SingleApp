@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.softhink.single.BaseActivity;
-import com.softhink.single.OnboardingActivity;
+import com.softhink.single.onboarding.OnboardingActivity;
 import com.softhink.single.R;
 import com.softhink.single.dashboard.adapters.PagerAdapter;
 

@@ -18,6 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(title);
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorGrayDark));
+        toolbar.setTitleMargin(16, 0, 0,0);
 
         if (back) {
             toolbar.setNavigationIcon(R.drawable.back);

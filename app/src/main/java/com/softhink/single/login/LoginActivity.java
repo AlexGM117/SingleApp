@@ -16,7 +16,6 @@ public class LoginActivity extends BaseActivity implements LoginFragment.onNavig
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
     private LinearLayout layoutToolbar;
-    private ImageView toolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +23,9 @@ public class LoginActivity extends BaseActivity implements LoginFragment.onNavig
         setContentView(R.layout.activity_login);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbarBack = findViewById(R.id.back);
         layoutToolbar = findViewById(R.id.include2);
 
         layoutToolbar.setVisibility(View.GONE);
-        toolbarBack.setOnClickListener(this);
         setSupportActionBar(toolbar);
 
 
@@ -50,12 +47,7 @@ public class LoginActivity extends BaseActivity implements LoginFragment.onNavig
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.back:
-                if (fragmentManager.getBackStackEntryCount() == 1) {
-                    layoutToolbar.setVisibility(View.GONE);
-                }
-                fragmentManager.popBackStack();
-                break;
+
         }
     }
 

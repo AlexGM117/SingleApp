@@ -1,4 +1,4 @@
-package com.softhink.single
+package com.softhink.single.onboarding
 
 import android.content.Context
 import android.support.v4.view.PagerAdapter
@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.softhink.single.R
 
 class OnboardingPagerAdapter(private val views: Array<Int>,
                              private val context: Context,
-                             private val listener: OnboardingPagerAdapter.OnClickPager) : PagerAdapter(),
+                             private val listener: OnClickPager) : PagerAdapter(),
         View.OnClickListener {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

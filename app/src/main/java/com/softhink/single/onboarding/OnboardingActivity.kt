@@ -1,7 +1,9 @@
-package com.softhink.single
+package com.softhink.single.onboarding
 
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import com.softhink.single.BaseActivity
+import com.softhink.single.R
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
 class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
