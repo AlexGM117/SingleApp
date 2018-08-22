@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.softhink.single.Constants;
 import com.softhink.single.R;
 import com.softhink.single.dashboard.MainContainer;
+import com.softhink.single.onboarding.OnboardingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,8 +41,8 @@ public class RegistroTresFragment extends Fragment implements View.OnClickListen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnBack = view.findViewById(R.id.buttonBack2);
-        btnEnviarRegistro = view.findViewById(R.id.button3);
+        btnBack = view.findViewById(R.id.btnPrevious);
+        btnEnviarRegistro = view.findViewById(R.id.btnSendReg);
         btnBack.setOnClickListener(this);
         btnEnviarRegistro.setOnClickListener(this);
     }
@@ -52,11 +52,12 @@ public class RegistroTresFragment extends Fragment implements View.OnClickListen
         FragmentManager fragmentManager = getFragmentManager();
 
         switch (v.getId()){
-            case R.id.buttonBack2:
+            case R.id.btnPrevious:
                 fragmentManager.popBackStack();
                 break;
-            case R.id.button3:
-                getActivity().startActivity(new Intent(getActivity(), MainContainer.class));
+            case R.id.btnSendReg:
+                startActivity(new Intent(getActivity(), OnboardingActivity.class));
+                getActivity().finish();
                 break;
         }
     }

@@ -76,6 +76,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.registro:
                 startActivity(new Intent(getActivity(), RegistroActivity.class));
+                getActivity().finish();
                 break;
         }
     }

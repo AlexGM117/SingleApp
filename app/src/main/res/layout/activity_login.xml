@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <include layout="@layout/toolbar" />
-    
+
     <FrameLayout
         android:id="@+id/containerLogin"
         android:layout_width="match_parent"

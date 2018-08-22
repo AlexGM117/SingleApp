@@ -1,6 +1,5 @@
 package com.softhink.single.login;
 
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
 import com.softhink.single.BaseActivity;
@@ -8,8 +7,6 @@ import com.softhink.single.Constants;
 import com.softhink.single.R;
 
 public class LoginActivity extends BaseActivity {
-
-    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +16,7 @@ public class LoginActivity extends BaseActivity {
         setUpToolbar("", true);
         getToolbar().setVisibility(View.GONE);
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.containerLogin, new LoginFragment(),
+        mFragmentManager.beginTransaction().add(R.id.containerLogin, new LoginFragment(),
                 Constants.LOGINFRAGMENT).commit();
     }
 

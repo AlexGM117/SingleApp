@@ -47,7 +47,7 @@ class TastesFragment : Fragment(),
         pickerTastes.bubbleSize = 30
         pickerTastes.listener = this
 
-        buttonBack2.setOnClickListener(this)
+        btnPrevious.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -62,7 +62,7 @@ class TastesFragment : Fragment(),
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.buttonBack2 -> {
+            R.id.btnPrevious -> {
                 fragmentManager?.popBackStack()
             }
         }

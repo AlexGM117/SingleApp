@@ -1,9 +1,11 @@
 package com.softhink.single.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.softhink.single.BaseActivity
 import com.softhink.single.R
+import com.softhink.single.dashboard.MainContainer
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
 class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
@@ -40,6 +42,7 @@ class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
     }
 
     override fun onSkipOnboarding() {
+        startActivity(Intent(this, MainContainer::class.java))
         finish()
     }
 }

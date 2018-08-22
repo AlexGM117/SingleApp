@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.softhink.single.login.LoginActivity
 
-class MainActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

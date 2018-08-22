@@ -1,6 +1,5 @@
 package com.softhink.single.survey;
 
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +7,7 @@ import com.softhink.single.BaseActivity;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
 
-public class SurveyActivity extends BaseActivity implements View.OnClickListener{
+public class SurveyActivity extends BaseActivity implements View.OnClickListener {
 
     private Button btnStartSurvey;
 
@@ -29,8 +28,8 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
         switch (v.getId()){
             case R.id.btnSurvey:
                 setNavigationUp();
-                fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().add(R.id.containerPreferences, new PreferencesFragment(),
+                mFragmentManager.beginTransaction()
+                        .add(R.id.containerPreferences, new PreferencesFragment(),
                         Constants.PREFERENCESFRAGMENT).commit();
                 break;
         }
