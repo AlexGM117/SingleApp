@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import com.softhink.single.BaseActivity
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.dashboard.MainContainer
+import kotlinx.android.synthetic.main.fragment_login_common.*
 
 /**
  * A simple [Fragment] subclass.
@@ -28,21 +28,21 @@ class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login_common, container, false)
+        presenter = LoginCommonPresenter(this)
 
-        initViews(view)
         return view
     }
 
-    private fun initViews(view: View) {
-        presenter = LoginCommonPresenter(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (activity as BaseActivity).toolbar.visibility = View.VISIBLE
 
         txtUser = view.findViewById(R.id.loginUser)
         txtPss = view.findViewById(R.id.loginPss)
-        val continuar = view.findViewById<Button>(R.id.btnContinuar)
-        val next = view.findViewById<TextView>(R.id.textView3)
 
-        continuar.setOnClickListener(this)
-        next.setOnClickListener(this)
+        btnContinuar.setOnClickListener(this)
+        textView3.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -68,14 +68,14 @@ class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
     }
 
     override fun serviceUnavailable() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.softhink.single.BaseActivity;
+import com.softhink.single.login.LoginActivity;
 import com.softhink.single.onboarding.OnboardingActivity;
 import com.softhink.single.R;
 import com.softhink.single.dashboard.adapters.PagerAdapter;
@@ -57,6 +58,11 @@ public class MainContainer extends BaseActivity {
         switch (item.getItemId()){
             case R.id.menuOnboarding:
                 startActivity(new Intent(this, OnboardingActivity.class));
+                break;
+
+            case R.id.menuLogout:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
         }
         return true;

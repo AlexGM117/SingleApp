@@ -37,8 +37,8 @@ public class RegistroDosFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnNext = view.findViewById(R.id.buttonNext2);
-        btnBack = view.findViewById(R.id.buttonBack);
+        btnNext = view.findViewById(R.id.btnLastPage);
+        btnBack = view.findViewById(R.id.btnFirstPage);
         btnNext.setOnClickListener(this);
         btnBack.setOnClickListener(this);
     }
@@ -47,7 +47,7 @@ public class RegistroDosFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (v.getId()){
-            case R.id.buttonNext2:
+            case R.id.btnLastPage:
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.registroContainer, new RegistroTresFragment())
@@ -55,7 +55,7 @@ public class RegistroDosFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
 
-            case R.id.buttonBack:
+            case R.id.btnFirstPage:
                 fragmentManager.popBackStack();
                 break;
         }

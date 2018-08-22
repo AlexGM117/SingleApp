@@ -6,8 +6,8 @@ import java.util.*
 
 class RegDataPresenter(private val view: RegDataContract) {
 
-    fun validateForm(name: String, date: Date?, gender: String) {
-        if (validateName(name) && validDate(date)) {
+    fun validateForm(name: String, date: Date?, gender: String?) {
+        if (validateName(name) && validDate(date) && gender != null) {
             view.toNextFragment()
         }
     }

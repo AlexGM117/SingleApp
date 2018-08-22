@@ -19,6 +19,6 @@ public class RegistroActivity extends BaseActivity {
 
         fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                .add(R.id.registroContainer, new RegistroUnoFragment(), Constants.REGISTROUNOFRAGMENT).commit();
+                .add(R.id.registroContainer, new RegistroFormFragment(), Constants.REGISTROUNOFRAGMENT).commit();
     }
 }

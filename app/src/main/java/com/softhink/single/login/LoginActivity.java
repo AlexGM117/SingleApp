@@ -2,32 +2,22 @@ package com.softhink.single.login;
 
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import com.softhink.single.BaseActivity;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
 
-public class LoginActivity extends BaseActivity implements LoginFragment.onNavigationListener,
-        View.OnClickListener {
+public class LoginActivity extends BaseActivity {
 
     private FragmentManager fragmentManager;
-    private Toolbar toolbar;
-    private LinearLayout layoutToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        toolbar = findViewById(R.id.toolbar);
-        layoutToolbar = findViewById(R.id.include2);
-
-        layoutToolbar.setVisibility(View.GONE);
-        setSupportActionBar(toolbar);
-
+        setUpToolbar("", true);
+        getToolbar().setVisibility(View.GONE);
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.containerLogin, new LoginFragment(),
@@ -40,22 +30,10 @@ public class LoginActivity extends BaseActivity implements LoginFragment.onNavig
     }
 
     @Override
-    public void onNavigationclick() {
-        layoutToolbar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-
-        }
-    }
-
-    @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (fragmentManager.findFragmentByTag(Constants.LOGINFRAGMENT).isVisible()){
-            layoutToolbar.setVisibility(View.GONE);
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
+            getToolbar().setVisibility(View.GONE);
         }
+        super.onBackPressed();
     }
 }

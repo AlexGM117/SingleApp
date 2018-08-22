@@ -36,7 +36,7 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnNext = view.findViewById(R.id.buttonNext);
+        btnNext = view.findViewById(R.id.btnNextPage);
         btnNext.setOnClickListener(this);
 
     }
@@ -44,7 +44,7 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.buttonNext:
+            case R.id.btnNextPage:
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)

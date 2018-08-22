@@ -4,13 +4,12 @@ import com.softhink.single.dashboard.DatesFragment;
 import com.softhink.single.dashboard.PerfilFragment;
 import com.softhink.single.dashboard.PlacesFragment;
 import com.softhink.single.survey.PreferencesFragment;
-import com.softhink.single.survey.PreferencesLastFragment;
 import com.softhink.single.login.LoginCommonFragment;
 import com.softhink.single.login.LoginFragment;
 import com.softhink.single.login.PassRecoveryFragment;
 import com.softhink.single.login.PassTmpFragment;
 import com.softhink.single.registro.view.RegistroDosFragment;
-import com.softhink.single.registro.view.RegistroUnoFragment;
+import com.softhink.single.registro.view.RegistroFormFragment;
 
 public class Constants {
     public static final String DATESFRAGMENT = DatesFragment.class.getSimpleName();
@@ -22,8 +21,6 @@ public class Constants {
     public static final String PASSTMPFRAGMENT = PassTmpFragment.class.getSimpleName();
     public static final String REGISTRODOSFRAGMENT = RegistroDosFragment.class.getSimpleName();
     public static final String REGISTROTRESFRAGMENT = RegistroDosFragment.class.getSimpleName();
-    public static final String REGISTROUNOFRAGMENT = RegistroUnoFragment.class.getSimpleName();
+    public static final String REGISTROUNOFRAGMENT = RegistroFormFragment.class.getSimpleName();
     public static final String PREFERENCESFRAGMENT = PreferencesFragment.class.getSimpleName();
-    public static final String PREFERENCESLASTFRAGMENT = PreferencesLastFragment.class.getSimpleName();
-
 }

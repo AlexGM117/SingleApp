@@ -49,7 +49,6 @@
                         android:text="Polanco CDMX"
                         android:textColor="@color/colorGrayDark"
                         style="@style/TextAppearance.AppCompat.Small"
-                        android:layout_marginRight="8dp"
                         android:layout_marginEnd="8dp" />
 
                     <RatingBar
@@ -78,19 +77,16 @@
                         android:id="@+id/hoursText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:text="Horario"
                         android:textColor="@color/colorGrayDark"
-                        android:drawableLeft="@drawable/lugares"
-                        android:drawableStart="@drawable/lugares"
+                        android:drawableStart="@drawable/horario"
                         android:drawablePadding="8dp"
                         android:gravity="center"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:text="7:00 am - 10:00 pm"
                         android:textColor="@color/colorGrayDark" />
@@ -102,16 +98,14 @@
                         android:layout_marginTop="8dp"
                         android:text="Atención al cliente"
                         android:textColor="@color/colorGrayDark"
-                        android:drawableLeft="@drawable/lugares"
-                        android:drawableStart="@drawable/lugares"
+                        android:drawableStart="@drawable/contacto"
                         android:drawablePadding="8dp"/>
 
                     <ImageView
                         android:id="@+id/mailLink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/correo"
-                        android:layout_alignParentRight="true"
+                        android:src="@drawable/place_correo"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_margin="8dp" />
@@ -119,11 +113,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/pin"
-                        android:layout_toLeftOf="@id/mailLink"
+                        android:src="@drawable/phone"
                         android:layout_toStartOf="@id/mailLink"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginRight="8dp"
                         android:layout_marginEnd="8dp" />
 
                 </RelativeLayout>
@@ -132,12 +124,19 @@
 
         </ScrollView>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".1" >
+            android:layout_weight=".1"
+            android:background="@drawable/background_gray">
 
-        </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ubicacion"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -10,7 +10,6 @@ import com.softhink.single.R;
 
 public class SurveyActivity extends BaseActivity implements View.OnClickListener{
 
-    private FragmentManager fragmentManager;
     private Button btnStartSurvey;
 
     @Override
@@ -29,6 +28,7 @@ public class SurveyActivity extends BaseActivity implements View.OnClickListener
 
         switch (v.getId()){
             case R.id.btnSurvey:
+                setNavigationUp();
                 fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().add(R.id.containerPreferences, new PreferencesFragment(),
                         Constants.PREFERENCESFRAGMENT).commit();

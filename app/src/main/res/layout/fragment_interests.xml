@@ -8,14 +8,6 @@
     android:background="@android:color/white" >
 
     <include
-        android:id="@+id/toolBarInterests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/toolbar"
-        android:layout_alignParentTop="true"
-        />
-
-    <include
         android:id="@+id/arrowsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/toolBarInterests"
         android:layout_above="@id/arrowsContainer"
         android:padding="16dp" >
 

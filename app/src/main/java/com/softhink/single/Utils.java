@@ -8,7 +8,7 @@ import com.softhink.single.login.LoginFragment;
 import com.softhink.single.login.PassRecoveryFragment;
 import com.softhink.single.login.PassTmpFragment;
 import com.softhink.single.registro.view.RegistroDosFragment;
-import com.softhink.single.registro.view.RegistroUnoFragment;
+import com.softhink.single.registro.view.RegistroFormFragment;
 
 public class Utils {
 
@@ -21,5 +21,5 @@ public class Utils {
     public static final String PASSTMPFRAGMENT = PassTmpFragment.class.getSimpleName();
     public static final String REGISTRODOSFRAGMENT = RegistroDosFragment.class.getSimpleName();
     public static final String REGISTROTRESFRAGMENT = RegistroDosFragment.class.getSimpleName();
-    public static final String REGISTROUNOFRAGMENT = RegistroUnoFragment.class.getSimpleName();
+    public static final String REGISTROUNOFRAGMENT = RegistroFormFragment.class.getSimpleName();
 }

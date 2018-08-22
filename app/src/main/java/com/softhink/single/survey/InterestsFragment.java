@@ -1,7 +1,6 @@
 package com.softhink.single.survey;
 
 
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,10 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.igalata.bubblepicker.BubblePickerListener;
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter;
-import com.igalata.bubblepicker.model.BubbleGradient;
 import com.igalata.bubblepicker.model.PickerItem;
 import com.igalata.bubblepicker.rendering.BubblePicker;
 import com.softhink.single.R;
@@ -25,9 +24,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InterestsFragment extends Fragment implements BubblePickerListener {
+public class InterestsFragment extends Fragment
+        implements BubblePickerListener, View.OnClickListener {
 
     private BubblePicker picker;
+    private ImageButton btnNext;
+    private ImageButton btnPrev;
 
     public InterestsFragment() {
         // Required empty public constructor
@@ -75,6 +77,12 @@ public class InterestsFragment extends Fragment implements BubblePickerListener 
         picker.setCenterImmediately(true);
         picker.setBubbleSize(30);
         picker.setListener(this);
+
+        btnNext = view.findViewById(R.id.btnLastPage);
+        btnPrev = view.findViewById(R.id.btnFirstPage);
+
+        btnNext.setOnClickListener(this);
+        btnPrev.setOnClickListener(this);
     }
 
     @Override
@@ -87,6 +95,23 @@ public class InterestsFragment extends Fragment implements BubblePickerListener 
     public void onPause() {
         super.onPause();
         picker.onPause();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnLastPage:
+                getFragmentManager().beginTransaction().replace(R.id.containerPreferences,
+                        new TastesFragment(),
+                        TastesFragment.class.getSimpleName())
+                        .addToBackStack(TastesFragment.class.getSimpleName())
+                        .commit();
+                break;
+
+            case R.id.btnFirstPage:
+                getFragmentManager().popBackStack();
+                break;
+        }
     }
 
     @Override

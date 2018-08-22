@@ -36,7 +36,7 @@
             android:id="@+id/view3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorGrayDark" />
+            android:background="@color/colorGrayMed" />
 
     </LinearLayout>
 
@@ -59,47 +59,8 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorGrayDark"
+            android:background="@color/colorGrayMed"
             />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp" >
-
-            <Button
-                android:id="@+id/btnTwitter"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/twitter"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginEnd="24dp" />
-
-            <Button
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/linkedin"
-                android:layout_toLeftOf="@id/btnTwitter"
-                android:layout_toStartOf="@id/btnTwitter" />
-
-            <Button
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/facebook"
-                android:layout_toRightOf="@id/btnTwitter"
-                android:layout_toEndOf="@id/btnTwitter" />
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGrayDark"
-            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/button5"

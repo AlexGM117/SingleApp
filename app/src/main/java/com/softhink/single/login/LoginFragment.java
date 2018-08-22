@@ -25,7 +25,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private View view;
     private Context context;
-    private onNavigationListener navigationListener;
     private LinearLayout layoutRegistro;
 
     public LoginFragment() {
@@ -46,8 +45,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button = view.findViewById(R.id.button);
-        Button button2 = view.findViewById(R.id.button2);
+        Button button = view.findViewById(R.id.btnDoLogin);
+        Button button2 = view.findViewById(R.id.btnLoginFB);
         layoutRegistro = view.findViewById(R.id.registro);
         layoutRegistro.setOnClickListener(this);
 
@@ -55,42 +54,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         button.setOnClickListener(this);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            navigationListener = (onNavigationListener) context;
-        } catch (ClassCastException e){
-            throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
-        }
-    }
+
 
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (v.getId()){
-            case R.id.button2:
+            case R.id.btnLoginFB:
                 getActivity().finish();
                 startActivity(new Intent(context, MainContainer.class));
                 break;
 
-            case R.id.button:
+            case R.id.btnDoLogin:
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.containerLogin,
                         new LoginCommonFragment())
                         .addToBackStack(Constants.LOGINCOMMONFRAGMENT)
                         .commit();
-                navigationListener.onNavigationclick();
                 break;
 
             case R.id.registro:
                 startActivity(new Intent(getActivity(), RegistroActivity.class));
                 break;
         }
-    }
-
-    public interface onNavigationListener {
-        void onNavigationclick();
     }
 }
