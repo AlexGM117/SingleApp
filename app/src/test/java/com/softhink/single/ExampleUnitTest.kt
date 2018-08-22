@@ -1,7 +1,6 @@
 package com.softhink.single
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**

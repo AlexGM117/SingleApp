@@ -16,20 +16,38 @@ android {
     }
     buildTypes {
         debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix = ".debug"
             versionNameSuffix "_dev"
-            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/SingleServices\"")
+//            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/SingleServices/\"")
+            buildConfigField("String", "BASE_URL", "\"http://jsonstub.com/\"")
+            debuggable true
         }
 
         release {
+            applicationIdSuffix ".release"
+            applicationIdSuffix = ".release"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/SingleServices\"")
+            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/SingleServices/\"")
+        }
+    }
+
+    flavorDimensions 'free'
+    productFlavors {
+        develop {
+            dimension 'free'
+        }
+
+        production {
+            dimension 'free'
         }
     }
 }
 
 ext {
     libraryVersion = '28.0.0-rc01'
+    playServices = '15.0.1'
 }
 
 dependencies {
@@ -40,7 +58,7 @@ dependencies {
     implementation "com.android.support:support-v4:$libraryVersion"
     implementation "com.android.support:cardview-v7:$libraryVersion"
     implementation "com.android.support:recyclerview-v7:$libraryVersion"
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation "com.google.android.gms:play-services-maps:$playServices"
     implementation "com.android.support:support-v4:$libraryVersion"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -53,4 +71,5 @@ dependencies {
     implementation 'com.appyvet:materialrangebar:1.4.3'
     implementation 'com.afollestad.material-dialogs:core:2.0.0-alpha04'
     implementation 'com.github.vivchar:ViewPagerIndicator:1.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 }

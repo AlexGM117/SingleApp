@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.softhink.single.models.request.LoginRequest
+import com.softhink.single.models.response.LoginResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -14,6 +19,24 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mFragmentManager = supportFragmentManager
+
+        var request = LoginRequest()
+        request.username = "test@mail.com"
+        request.password = "password"
+        var client = SingleClient.getInstance()
+
+        val login : Call<LoginResponse>
+        login = client.login(request)
+
+        login.enqueue(object : Callback<LoginResponse> {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                println(t.message)
+            }
+
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                println("${response.isSuccessful} ${response.code()} ${response.body().toString()}")
+            }
+        })
     }
 
     fun setUpToolbar(title: String, back: Boolean) {

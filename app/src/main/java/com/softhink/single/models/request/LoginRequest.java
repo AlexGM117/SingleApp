@@ -5,17 +5,17 @@ import com.softhink.single.models.AppInfo;
 
 import java.io.Serializable;
 
-public class LoginRequest implements Serializable {
+public class LoginRequest extends BaseRequest implements Serializable {
 
     @SerializedName("password")
     private String password;
     @SerializedName("username")
     private String username;
-    @SerializedName("appInfo")
-    private AppInfo appInfo;
+
+    public LoginRequest() {
+    }
 
     public LoginRequest(String password, String username) {
-        this.appInfo = new AppInfo();
         this.password = password;
         this.username = username;
     }
@@ -34,10 +34,6 @@ public class LoginRequest implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public AppInfo getAppInfo() {
-        return appInfo;
     }
 
 }
