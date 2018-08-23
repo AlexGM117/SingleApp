@@ -169,8 +169,8 @@ public class RegDataFragment extends BaseFragment implements
     public void toNextFragment() {
         getFragmentManager().beginTransaction().replace(R.id.registroContainer,
                 new RegAccountFragment(),
-                Constants.REGISTRODOSFRAGMENT)
-                .addToBackStack(Constants.REGISTRODOSFRAGMENT)
+                Constants.INSTANCE.getREGISTRODOSFRAGMENT())
+                .addToBackStack(Constants.INSTANCE.getREGISTRODOSFRAGMENT())
                 .commit();
     }
 }

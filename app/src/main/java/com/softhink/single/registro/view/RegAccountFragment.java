@@ -16,12 +16,12 @@ import com.softhink.single.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegistroDosFragment extends Fragment implements View.OnClickListener {
+public class RegAccountFragment extends Fragment implements View.OnClickListener {
 
     ImageView btnNext;
     ImageView btnBack;
 
-    public RegistroDosFragment() {
+    public RegAccountFragment() {
         // Required empty public constructor
     }
 
@@ -51,7 +51,7 @@ public class RegistroDosFragment extends Fragment implements View.OnClickListene
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.registroContainer, new RegistroTresFragment())
-                        .addToBackStack(Constants.REGISTROTRESFRAGMENT)
+                        .addToBackStack(Constants.INSTANCE.getREGISTROTRESFRAGMENT())
                         .commit();
                 break;
 
