@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registro.view.RegistroFormFragment"
+    tools:context=".registro.view.RegDataFragment"
     android:background="@android:color/white" >
 
     <android.support.constraint.Guideline

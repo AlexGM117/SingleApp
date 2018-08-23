@@ -49,7 +49,7 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         .replace(R.id.containerPreferences, new InterestsFragment())
-                        .addToBackStack(Constants.PREFERENCESFRAGMENT)
+                        .addToBackStack(Constants.INSTANCE.getPREFERENCESFRAGMENT())
                         .commit();
                 break;
         }

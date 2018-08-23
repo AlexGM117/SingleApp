@@ -67,10 +67,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.btnDoLogin:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
+                                android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.containerLogin,
                         new LoginCommonFragment())
-                        .addToBackStack(Constants.LOGINCOMMONFRAGMENT)
+                        .addToBackStack(Constants.INSTANCE.getLOGINCOMMONFRAGMENT())
                         .commit();
                 break;
 

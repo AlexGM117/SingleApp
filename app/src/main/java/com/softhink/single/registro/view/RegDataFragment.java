@@ -23,7 +23,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegistroFormFragment extends BaseFragment implements
+public class RegDataFragment extends BaseFragment implements
         View.OnClickListener,
         RadioGroup.OnCheckedChangeListener,
         RegDataContract {
@@ -39,7 +39,7 @@ public class RegistroFormFragment extends BaseFragment implements
     private Date userBirthday;
     private String gender;
 
-    public RegistroFormFragment() {
+    public RegDataFragment() {
         // Required empty public constructor
     }
 
@@ -168,7 +168,7 @@ public class RegistroFormFragment extends BaseFragment implements
     @Override
     public void toNextFragment() {
         getFragmentManager().beginTransaction().replace(R.id.registroContainer,
-                new RegistroDosFragment(),
+                new RegAccountFragment(),
                 Constants.REGISTRODOSFRAGMENT)
                 .addToBackStack(Constants.REGISTRODOSFRAGMENT)
                 .commit();

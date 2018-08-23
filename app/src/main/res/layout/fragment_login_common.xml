@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".30" />
+        app:layout_constraintGuide_percent=".40" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -20,6 +20,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".80" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/toobar_size" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline7"
@@ -36,16 +43,27 @@
         app:layout_constraintGuide_percent=".90" />
 
     <ImageView
+        android:id="@+id/arrowBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        android:padding="8dp"
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toTopOf="@+id/guideline33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/logo_single"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -70,8 +88,8 @@
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/correo"
                 android:hint="Usuario / Correo electrónico"
-                android:maxLines="1"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -87,8 +105,8 @@
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_pass"
                 android:hint="Contraseña"
-                android:maxLines="1"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLines="1" />
 
         </android.support.design.widget.TextInputLayout>
 

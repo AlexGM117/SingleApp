@@ -35,18 +35,20 @@ class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as BaseActivity).toolbar.visibility = View.VISIBLE
-
         txtUser = view.findViewById(R.id.loginUser)
         txtPss = view.findViewById(R.id.loginPss)
 
+        arrowBack.setOnClickListener(this)
         btnContinuar.setOnClickListener(this)
         textView3.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
+
+            R.id.arrowBack -> {
+                fragmentManager?.popBackStack()
+            }
 
             R.id.btnContinuar -> {
                 val u = txtUser.editText?.text?.toString()

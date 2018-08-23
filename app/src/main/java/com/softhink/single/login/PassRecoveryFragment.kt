@@ -28,6 +28,7 @@ class PassRecoveryFragment : Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arrowBack.setOnClickListener(this)
         btnToTmp.setOnClickListener(this)
     }
 
@@ -37,6 +38,10 @@ class PassRecoveryFragment : Fragment(), View.OnClickListener{
                 val fragmentManager = fragmentManager
                 fragmentManager?.beginTransaction()?.replace(R.id.containerLogin,
                         PassTmpFragment())?.addToBackStack(Constants.PASSTMPFRAGMENT)?.commit()
+            }
+
+            R.id.arrowBack -> {
+                fragmentManager?.popBackStack()
             }
         }
     }
