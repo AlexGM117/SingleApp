@@ -1,6 +1,7 @@
 package com.softhink.single.registro.view;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,6 +40,8 @@ public class RegDataFragment extends BaseFragment implements
     private Date userBirthday;
     private String gender;
 
+    private RegDataContract.CallbackData callback;
+
     public RegDataFragment() {
         // Required empty public constructor
     }
@@ -74,6 +77,17 @@ public class RegDataFragment extends BaseFragment implements
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            callback = (RegDataContract.CallbackData) context;
+        } catch (ClassCastException e){
+            throw new ClassCastException(getActivity().toString() + " must implements interface");
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.pickerDay:
@@ -87,7 +101,7 @@ public class RegDataFragment extends BaseFragment implements
                 break;
 
             case R.id.btnNextPage:
-                presenter.validateForm(inputName.getText().toString(), userBirthday, "");
+                presenter.validateForm(inputName.getText().toString(), userBirthday, gender);
                 break;
         }
     }
@@ -167,10 +181,12 @@ public class RegDataFragment extends BaseFragment implements
 
     @Override
     public void toNextFragment() {
+        callback.dataForm(inputName.getText().toString(), userBirthday.toString(), gender);
         getFragmentManager().beginTransaction().replace(R.id.registroContainer,
                 new RegAccountFragment(),
                 Constants.INSTANCE.getREGISTRODOSFRAGMENT())
                 .addToBackStack(Constants.INSTANCE.getREGISTRODOSFRAGMENT())
                 .commit();
     }
+
 }

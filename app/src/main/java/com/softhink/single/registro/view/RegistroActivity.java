@@ -9,8 +9,14 @@ import com.softhink.single.BaseActivity;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
 import com.softhink.single.login.LoginActivity;
+import com.softhink.single.registro.presenter.RegAccountContract;
+import com.softhink.single.registro.presenter.RegDataContract;
 
-public class RegistroActivity extends BaseActivity implements View.OnClickListener {
+import org.jetbrains.annotations.NotNull;
+
+public class RegistroActivity extends BaseActivity implements View.OnClickListener,
+        RegDataContract.CallbackData,
+        RegAccountContract.CallbackAccount {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +46,15 @@ public class RegistroActivity extends BaseActivity implements View.OnClickListen
     public void onBackPressed() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    @Override
+    public void dataForm(@NotNull String name, @NotNull String date, @NotNull String gender) {
+
+    }
+
+    @Override
+    public void accountData(@NotNull String email, @NotNull String pss, @NotNull String pss1) {
+
     }
 }

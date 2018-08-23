@@ -64,7 +64,6 @@
         app:layout_constraintTop_toTopOf="@+id/guideline20" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/selectPhoto"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
@@ -76,6 +75,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline19">
 
         <FrameLayout
+            android:id="@+id/selectPhoto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorGrayMed">
@@ -113,10 +113,12 @@
             </RelativeLayout>
 
             <ImageView
+                android:id="@+id/imagePreview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:scaleType="fitXY"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
         </FrameLayout>
 

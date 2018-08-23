@@ -1,10 +1,18 @@
 package com.softhink.single.registro.presenter
 
+import com.softhink.single.BasePresenter
+import com.softhink.single.Interactor
+import com.softhink.single.models.request.LoginRequest
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegDataPresenter(private val view: RegDataContract) {
+class RegDataPresenter(private val view: RegDataContract) : BasePresenter() {
+
+    init {
+        interactor = Interactor(this)
+        interactor.callLogin(LoginRequest("pss", "text@mail.com"))
+    }
 
     fun validateForm(name: String, date: Date?, gender: String?) {
         if (validateName(name) && validDate(date) && gender != null) {
@@ -48,7 +56,19 @@ class RegDataPresenter(private val view: RegDataContract) {
     }
 
     fun getUserBirthDay(year: Int, month: Int, dayOfMonth: Int):Date {
-        val date: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val date = SimpleDateFormat("yyyy-MM-dd")
         return date.parse("$year-${month+1}-$dayOfMonth")
+    }
+
+    override fun onResponseSuccess(t: Any) {
+        println(t)
+    }
+
+    override fun onResponseError(t: Any) {
+
+    }
+
+    override fun onFailed() {
+
     }
 }

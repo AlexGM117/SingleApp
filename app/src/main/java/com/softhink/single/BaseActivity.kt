@@ -20,24 +20,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mFragmentManager = supportFragmentManager
-
-//        var request = LoginRequest()
-//        request.username = "test@mail.com"
-//        request.password = "password"
-//        var client = SingleClient.getInstance()
-//
-//        val login : Call<LoginResponse>
-//        login = client.login(request)
-//
-//        login.enqueue(object : Callback<LoginResponse> {
-//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                println(t.message)
-//            }
-//
-//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                println("${response.isSuccessful} ${response.code()} ${response.body().toString()}")
-//            }
-//        })
     }
 
     fun setUpToolbar(title: String, back: Boolean) {

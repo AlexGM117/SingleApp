@@ -1,6 +1,7 @@
 package com.softhink.single.registro.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +13,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
+import com.softhink.single.registro.presenter.RegAccountContract;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegAccountFragment extends Fragment implements View.OnClickListener {
 
-    ImageView btnNext;
-    ImageView btnBack;
+    private ImageView btnNext;
+    private ImageView btnBack;
+    private RegAccountContract.CallbackAccount callback;
 
     public RegAccountFragment() {
         // Required empty public constructor
@@ -41,6 +44,17 @@ public class RegAccountFragment extends Fragment implements View.OnClickListener
         btnBack = view.findViewById(R.id.btnFirstPage);
         btnNext.setOnClickListener(this);
         btnBack.setOnClickListener(this);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            callback = (RegAccountContract.CallbackAccount) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString() + " must implements interface");
+        }
+
     }
 
     @Override

@@ -9,4 +9,8 @@ interface RegDataContract : BaseView {
     fun isUnderAge()
     fun genderUnselected()
     fun toNextFragment()
+
+    interface CallbackData{
+        fun dataForm(name:String, date: String, gender:String)
+    }
 }
