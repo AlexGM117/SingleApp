@@ -13,21 +13,21 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-
 import com.softhink.single.BaseFragment;
-import com.softhink.single.Constants;
 import com.softhink.single.R;
-import com.softhink.single.registro.presenter.RegDataContract;
-import com.softhink.single.registro.presenter.RegDataPresenter;
+import com.softhink.single.registro.presenter.RegistroContract;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegDataFragment extends BaseFragment implements
         View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener,
-        RegDataContract {
+        RadioGroup.OnCheckedChangeListener {
 
     private ImageView btnNext;
     private EditText inputName;
@@ -35,12 +35,9 @@ public class RegDataFragment extends BaseFragment implements
     private EditText txtMonth;
     private EditText txtYear;
     private RadioGroup radioGender;
-
-    private RegDataPresenter presenter;
     private Date userBirthday;
     private String gender;
-
-    private RegDataContract.CallbackData callback;
+    private RegistroContract.DataContract.CallbackData callback;
 
     public RegDataFragment() {
         // Required empty public constructor
@@ -57,8 +54,6 @@ public class RegDataFragment extends BaseFragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        presenter = new RegDataPresenter(this);
 
         if (savedInstanceState == null) {
             inputName = view.findViewById(R.id.inputName);
@@ -81,7 +76,7 @@ public class RegDataFragment extends BaseFragment implements
         super.onAttach(context);
 
         try {
-            callback = (RegDataContract.CallbackData) context;
+            callback = (RegistroContract.DataContract.CallbackData) context;
         } catch (ClassCastException e){
             throw new ClassCastException(getActivity().toString() + " must implements interface");
         }
@@ -101,7 +96,7 @@ public class RegDataFragment extends BaseFragment implements
                 break;
 
             case R.id.btnNextPage:
-                presenter.validateForm(inputName.getText().toString(), userBirthday, gender);
+                callback.dataForm(inputName.getText().toString(), userBirthday, gender);
                 break;
         }
     }
@@ -121,13 +116,13 @@ public class RegDataFragment extends BaseFragment implements
     }
 
     private void showDatePicker() {
-        Integer[] date = presenter.getDateForPicker(txtYear.getText().toString(),
+        Integer[] date = getDateForPicker(txtYear.getText().toString(),
                 txtMonth.getText().toString(), txtDay.getText().toString());
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                userBirthday = presenter.getUserBirthDay(year, month, dayOfMonth);
+                userBirthday = getUserBirthDay(year, month, dayOfMonth);
 
                 txtDay.setText((dayOfMonth < 10)?getString(R.string.date_mask, dayOfMonth):
                         String.valueOf(dayOfMonth));
@@ -139,54 +134,23 @@ public class RegDataFragment extends BaseFragment implements
         datePickerDialog.show();
     }
 
-    @Override
-    public void nameIsEmpty() {
-        showMessageDialog(getString(R.string.empty_name));
+    private Integer[] getDateForPicker(String s1, String s2, String s3) {
+        if (s1.isEmpty() && s2.isEmpty() && s3.isEmpty()){
+            return new Integer[]{Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH),
+                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH)};
+        } else {
+            return new Integer[]{Integer.valueOf(s1), Integer.valueOf(s2) -1, Integer.valueOf(s3)};
+        }
     }
 
-    @Override
-    public void nameStringLenght() {
-        showMessageDialog("Desbes agregar un nombre válido");
+    private Date getUserBirthDay(int year, int month, int dayOfMonth) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd", new Locale("es"))
+                    .parse(""+year+"-"+(month+1)+"-"+dayOfMonth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-
-    @Override
-    public void dateEmpty() {
-        showMessageDialog("Agrega tu fecha de nacimiento");
-    }
-
-    @Override
-    public void isUnderAge() {
-        showMessageDialog("Debes ser mayor de edad para poder utilizar la aplicacion");
-    }
-
-    @Override
-    public void genderUnselected() {
-        showMessageDialog("Selecciona H ó M");
-    }
-
-    @Override
-    public void serviceUnavailable() {
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void toNextFragment() {
-        callback.dataForm(inputName.getText().toString(), userBirthday.toString(), gender);
-        getFragmentManager().beginTransaction().replace(R.id.registroContainer,
-                new RegAccountFragment(),
-                Constants.INSTANCE.getREGISTRODOSFRAGMENT())
-                .addToBackStack(Constants.INSTANCE.getREGISTRODOSFRAGMENT())
-                .commit();
-    }
-
 }

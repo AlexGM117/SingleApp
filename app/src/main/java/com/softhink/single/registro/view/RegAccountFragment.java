@@ -5,15 +5,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.softhink.single.Constants;
 import com.softhink.single.R;
-import com.softhink.single.registro.presenter.RegAccountContract;
+import com.softhink.single.registro.presenter.RegistroContract;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +22,10 @@ public class RegAccountFragment extends Fragment implements View.OnClickListener
 
     private ImageView btnNext;
     private ImageView btnBack;
-    private RegAccountContract.CallbackAccount callback;
+    private TextInputLayout inputEmail;
+    private TextInputLayout inputPss;
+    private TextInputLayout inputPss2;
+    private RegistroContract.AccountContract.CallbackAccount callback;
 
     public RegAccountFragment() {
         // Required empty public constructor
@@ -40,17 +43,23 @@ public class RegAccountFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnNext = view.findViewById(R.id.btnLastPage);
-        btnBack = view.findViewById(R.id.btnFirstPage);
-        btnNext.setOnClickListener(this);
-        btnBack.setOnClickListener(this);
+        if (savedInstanceState == null) {
+            inputEmail = view.findViewById(R.id.inputEmail);
+            inputPss = view.findViewById(R.id.inputPss);
+            inputPss2 = view.findViewById(R.id.inputPss2);
+            btnNext = view.findViewById(R.id.btnLastPage);
+            btnBack = view.findViewById(R.id.btnFirstPage);
+
+            btnNext.setOnClickListener(this);
+            btnBack.setOnClickListener(this);
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            callback = (RegAccountContract.CallbackAccount) context;
+            callback = (RegistroContract.AccountContract.CallbackAccount) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must implements interface");
         }
@@ -62,11 +71,9 @@ public class RegAccountFragment extends Fragment implements View.OnClickListener
         FragmentManager fragmentManager = getFragmentManager();
         switch (v.getId()){
             case R.id.btnLastPage:
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.registroContainer, new RegistroTresFragment())
-                        .addToBackStack(Constants.INSTANCE.getREGISTROTRESFRAGMENT())
-                        .commit();
+                callback.accountData(inputEmail.getEditText().getText().toString(),
+                        inputPss.getEditText().getText().toString(),
+                        inputPss2.getEditText().getText().toString());
                 break;
 
             case R.id.btnFirstPage:

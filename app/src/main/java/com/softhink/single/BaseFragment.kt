@@ -40,13 +40,6 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
-//    fun checkCameraPermissions(){
-//        if (ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED ){
-//            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CAMERA), 0)
-//        }
-//    }
-
     interface onOptionsSelected {
         fun fromGalery()
         fun fromCamera()

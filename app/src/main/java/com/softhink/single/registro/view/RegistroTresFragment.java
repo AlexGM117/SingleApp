@@ -1,8 +1,8 @@
 package com.softhink.single.registro.view;
 
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,7 @@ import android.widget.ImageView;
 
 import com.softhink.single.BaseFragment;
 import com.softhink.single.R;
-import com.softhink.single.dashboard.MainContainer;
-import com.softhink.single.onboarding.OnboardingActivity;
+import com.softhink.single.registro.presenter.RegistroContract;
 
 import java.io.IOException;
 
@@ -36,6 +34,7 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
     private Button btnEnviarRegistro;
     private FrameLayout imageSelector;
 
+    private RegistroContract.PhotoProfileContract.CallbackPhoto callback;
     private final int GALLERY = 0, CAMERA = 1;
 
     public RegistroTresFragment() {
@@ -54,14 +53,26 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        imageSelector = view.findViewById(R.id.selectPhoto);
-        imagePreview = view.findViewById(R.id.imagePreview);
-        btnBack = view.findViewById(R.id.btnPrevious);
-        btnEnviarRegistro = view.findViewById(R.id.btnSendReg);
+        if (savedInstanceState == null) {
+            imageSelector = view.findViewById(R.id.selectPhoto);
+            imagePreview = view.findViewById(R.id.imagePreview);
+            btnBack = view.findViewById(R.id.btnPrevious);
+            btnEnviarRegistro = view.findViewById(R.id.btnSendForm);
 
-        imageSelector.setOnClickListener(this);
-        btnBack.setOnClickListener(this);
-        btnEnviarRegistro.setOnClickListener(this);
+            imageSelector.setOnClickListener(this);
+            btnBack.setOnClickListener(this);
+            btnEnviarRegistro.setOnClickListener(this);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            callback = (RegistroContract.PhotoProfileContract.CallbackPhoto) context;
+        } catch (ClassCastException e){
+
+        }
     }
 
     @Override
@@ -99,9 +110,8 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
                 fragmentManager.popBackStack();
                 break;
 
-            case R.id.btnSendReg:
-                startActivity(new Intent(getActivity(), OnboardingActivity.class));
-                getActivity().finish();
+            case R.id.btnSendForm:
+                callback.callService(null);
                 break;
 
             case R.id.selectPhoto:

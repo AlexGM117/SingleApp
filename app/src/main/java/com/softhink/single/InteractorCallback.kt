@@ -13,6 +13,10 @@ class InteractorCallback(var callback: BaseView.Interactor<Any>) : Callback<Any>
 
     override fun onResponse(call: Call<Any>, response: Response<Any>) {
         println(response.isSuccessful)
-        callback.onResponseSuccess(response.body())
+        if (response.code() == 200) {
+            callback.onResponseSuccess(response.body())
+        } else {
+            callback.onResponseError(response.errorBody())
+        }
     }
 }

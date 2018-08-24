@@ -1,4 +1,4 @@
-package com.softhink.single.models;
+package com.softhink.single.models.response;
 
 import com.google.gson.annotations.SerializedName;
 

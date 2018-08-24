@@ -1,7 +1,7 @@
 package com.softhink.single.models.response;
 
 import com.google.gson.annotations.SerializedName;
-import com.softhink.single.models.User;
+
 import java.io.Serializable;
 
 public class LoginResponse implements Serializable {

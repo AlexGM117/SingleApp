@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
+import com.afollestad.materialdialogs.MaterialDialog
 import com.softhink.single.models.request.LoginRequest
 import com.softhink.single.models.response.LoginResponse
 import retrofit2.Call
@@ -20,6 +21,14 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         mFragmentManager = supportFragmentManager
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            finish()
+        }
     }
 
     fun setUpToolbar(title: String, back: Boolean) {
@@ -62,11 +71,11 @@ abstract class BaseActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener(listener)
     }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        } else {
-            finish()
-        }
+    fun showMessageDialog(message: String){
+        MaterialDialog(this)
+                .title(R.string.app_name)
+                .message(text = message)
+                .positiveButton(text = "Continuar")
+                .show()
     }
 }
