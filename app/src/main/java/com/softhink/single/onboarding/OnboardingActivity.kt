@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.softhink.single.BaseActivity
 import com.softhink.single.R
+import com.softhink.single.ZooOutPager
 import com.softhink.single.dashboard.MainContainer
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
@@ -22,6 +23,8 @@ class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
                 R.layout.onboarding_match,
                 R.layout.onboarding_chat),
                 this, this)
+
+        onboardingPager.setPageTransformer(true, ZooOutPager())
 
         onboardingPager.addOnPageChangeListener(this)
 
