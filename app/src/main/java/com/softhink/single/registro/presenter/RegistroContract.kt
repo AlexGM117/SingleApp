@@ -5,6 +5,9 @@ import java.util.*
 
 interface RegistroContract : BaseView {
 
+    fun succesToSurvey(message: String)
+    fun errorMessage(message: String)
+
     interface DataContract {
         fun nameIsEmpty()
         fun nameStringLenght()

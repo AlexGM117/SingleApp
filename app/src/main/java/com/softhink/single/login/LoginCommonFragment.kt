@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.softhink.single.BaseActivity
+import com.softhink.single.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.dashboard.MainContainer
@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.fragment_login_common.*
  * A simple [Fragment] subclass.
  *
  */
-class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
+class LoginCommonFragment : BaseFragment(), LoginCommonView,
+        View.OnClickListener {
 
     private lateinit var presenter: LoginCommonPresenter
     private lateinit var txtUser: TextInputLayout
@@ -35,12 +36,14 @@ class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        txtUser = view.findViewById(R.id.loginUser)
-        txtPss = view.findViewById(R.id.loginPss)
+        if (savedInstanceState == null) {
+            txtUser = view.findViewById(R.id.loginUser)
+            txtPss = view.findViewById(R.id.loginPss)
 
-        arrowBack.setOnClickListener(this)
-        btnContinuar.setOnClickListener(this)
-        textView3.setOnClickListener(this)
+            arrowBack.setOnClickListener(this)
+            btnContinuar.setOnClickListener(this)
+            forgotPss.setOnClickListener(this)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -51,22 +54,34 @@ class LoginCommonFragment : Fragment(), LoginCommonView, View.OnClickListener {
             }
 
             R.id.btnContinuar -> {
-                val u = txtUser.editText?.text?.toString()
-                val p = txtPss.editText?.text?.toString()
-
-                presenter.login(u, p)
-
-                activity?.finish()
-                val intent = Intent(activity, MainContainer::class.java)
-                startActivity(intent)
+                presenter.login(txtUser.editText?.text?.toString(),
+                        txtPss.editText?.text?.toString())
             }
 
-            R.id.textView3 -> {
+            R.id.forgotPss -> {
                 val fragmentManager = fragmentManager
                 fragmentManager?.beginTransaction()?.replace(R.id.containerLogin,
                         PassRecoveryFragment())?.addToBackStack(Constants.PASSRECOVERYFRAGMENT)?.commit()
             }
         }
+    }
+
+    override fun emailEmpty() {
+
+    }
+
+    override fun passEmpty() {
+
+    }
+
+    override fun loginSuccess() {
+        val intent = Intent(activity, MainContainer::class.java)
+        startActivity(intent)
+        activity?.finish()
+    }
+
+    override fun loginFail() {
+
     }
 
     override fun serviceUnavailable() {

@@ -1,12 +1,13 @@
 package com.softhink.single
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.list.listItems
 
 abstract class BaseFragment : Fragment() {
@@ -27,11 +28,11 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
-    fun showImagePickerDialog(callback: onOptionsSelected) {
+    fun showImagePickerDialog(callback: OnOptionsSelected) {
         val options = listOf("Seleccionar foto de la galeria", "Tomar foto de la camara")
         MaterialDialog(context!!)
                 .title(text = "Selecciona")
-                .listItems(items = options) { dialog, index, text ->
+                .listItems(items = options) { _, index, _ ->
                     when(index){
                         0 -> callback.fromGalery()
                         1 -> callback.fromCamera()
@@ -40,7 +41,27 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
-    interface onOptionsSelected {
+    fun checkPermissions(): Boolean{
+        if(ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            return false
+        }
+
+        return true
+    }
+    fun showMessageDialogGalery(listener: DialogCallBack){
+        MaterialDialog(context!!)
+                .customView(R.layout.dialog_galery_access)
+                .positiveButton(text = "ACEPTAR"){
+                    listener.onAccept()
+                }
+                .negativeButton(text = "CANCELAR"){
+                    listener.onCancel()
+                }
+                .show()
+    }
+
+    interface OnOptionsSelected {
         fun fromGalery()
         fun fromCamera()
     }

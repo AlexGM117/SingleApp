@@ -42,10 +42,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        textView = view.findViewById(R.id.button5);
-        singlear = view.findViewById(R.id.singlear);
-        textView.setOnClickListener(this);
-        singlear.setOnClickListener(this);
+        if (savedInstanceState == null) {
+            textView = view.findViewById(R.id.button5);
+            singlear = view.findViewById(R.id.singlear);
+            textView.setOnClickListener(this);
+            singlear.setOnClickListener(this);
+        }
     }
 
     @Override

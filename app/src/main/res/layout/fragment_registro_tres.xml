@@ -81,9 +81,10 @@
             android:layout_height="match_parent"
             android:background="@color/colorGrayMed">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_margin="5dp"
                 android:padding="16dp"
                 android:background="@color/colorGrayLight">
@@ -92,26 +93,30 @@
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
+                    android:padding="16dp"
                     android:text="Selecciona tu foto de perfil."
                     android:textColor="@color/colorGrayDark" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_centerInParent="true"
-                    android:src="@color/colorGrayMed" />
-
-                <ImageView
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/icon_galeria" />
+                    android:layout_gravity="center_horizontal">
 
-            </RelativeLayout>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_centerInParent="true"
+                        android:src="@color/colorGrayMed" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_galeria" />
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/imagePreview"

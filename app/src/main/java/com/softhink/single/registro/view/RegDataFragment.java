@@ -63,12 +63,12 @@ public class RegDataFragment extends BaseFragment implements
             radioGender = view.findViewById(R.id.radioGender);
             radioGender.setOnCheckedChangeListener(this);
             btnNext = view.findViewById(R.id.btnNextPage);
-        }
 
-        btnNext.setOnClickListener(this);
-        txtDay.setOnClickListener(this);
-        txtMonth.setOnClickListener(this);
-        txtYear.setOnClickListener(this);
+            btnNext.setOnClickListener(this);
+            txtDay.setOnClickListener(this);
+            txtMonth.setOnClickListener(this);
+            txtYear.setOnClickListener(this);
+        }
     }
 
     @Override

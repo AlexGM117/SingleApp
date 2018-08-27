@@ -23,13 +23,15 @@ public class MainContainer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_container);
 
-        setUpToolbar("", false);
+        if (savedInstanceState == null) {
+            setUpToolbar("", false);
 
-        viewPager = findViewById(R.id.viewPager);
-        setUpViewPager();
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
+            viewPager = findViewById(R.id.viewPager);
+            setUpViewPager();
+            tabLayout = findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(viewPager);
+            setupTabIcons();
+        }
     }
 
     private void setupTabIcons() {

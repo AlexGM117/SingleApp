@@ -40,6 +40,7 @@ class TastesFragment : Fragment(),
                 return PickerItem().apply {
                     title = tastes[position]
                     textColor = Color.WHITE
+                    color = Color.parseColor("#4464b0")
                 }
             }
         }

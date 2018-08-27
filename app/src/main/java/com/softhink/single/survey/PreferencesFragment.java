@@ -9,15 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.appyvet.materialrangebar.RangeBar;
+import com.softhink.single.BaseFragment;
 import com.softhink.single.Constants;
 import com.softhink.single.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreferencesFragment extends Fragment implements View.OnClickListener {
+public class PreferencesFragment extends BaseFragment
+        implements View.OnClickListener,
+        RangeBar.OnRangeBarChangeListener {
 
     private ImageButton btnNext;
+    private RangeBar rangeBar;
 
 
     public PreferencesFragment() {
@@ -36,8 +42,14 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnNext = view.findViewById(R.id.btnNextPage);
-        btnNext.setOnClickListener(this);
+        if (savedInstanceState == null) {
+            rangeBar = view.findViewById(R.id.ageRangebar);
+            btnNext = view.findViewById(R.id.btnNextPage);
+
+            rangeBar.setRangePinsByValue(18F, 28F);
+            rangeBar.setOnRangeBarChangeListener(this);
+            btnNext.setOnClickListener(this);
+        }
 
     }
 
@@ -53,5 +65,10 @@ public class PreferencesFragment extends Fragment implements View.OnClickListene
                         .commit();
                 break;
         }
+    }
+
+    @Override
+    public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
+
     }
 }

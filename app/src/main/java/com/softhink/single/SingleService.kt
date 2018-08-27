@@ -2,6 +2,7 @@ package com.softhink.single
 
 import com.softhink.single.models.request.LoginRequest
 import com.softhink.single.models.request.RegRequest
+import com.softhink.single.models.response.BaseResponse
 import com.softhink.single.models.response.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -10,8 +11,8 @@ import retrofit2.http.POST
 interface SingleService {
 
     @POST("/users/login")
-    fun login(@Body request:LoginRequest) : Call<Any>
+    fun login(@Body request:LoginRequest) : Call<BaseResponse<LoginResponse, Any>>
 
     @POST("/users/register")
-    fun registroDeUsuario(@Body request: RegRequest) : Call<Any>
+    fun userRegistry(@Body request: RegRequest) : Call<BaseResponse<Any, Any>>
 }

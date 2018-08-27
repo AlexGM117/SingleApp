@@ -124,6 +124,7 @@
                     android:elevation="10dp" >
 
                     <com.appyvet.materialrangebar.RangeBar
+                        android:id="@+id/ageRangebar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:mrb_temporaryPins="false"

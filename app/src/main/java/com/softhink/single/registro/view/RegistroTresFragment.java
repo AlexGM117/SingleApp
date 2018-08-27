@@ -1,8 +1,10 @@
 package com.softhink.single.registro.view;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,17 +19,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import com.softhink.single.BaseFragment;
+import com.softhink.single.DialogCallBack;
 import com.softhink.single.R;
 import com.softhink.single.registro.presenter.RegistroContract;
-
 import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegistroTresFragment extends BaseFragment implements View.OnClickListener, BaseFragment.onOptionsSelected {
+public class RegistroTresFragment extends BaseFragment implements View.OnClickListener,
+        BaseFragment.OnOptionsSelected,
+        DialogCallBack {
 
     private ImageView btnBack;
     private ImageView imagePreview;
@@ -36,6 +39,7 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
 
     private RegistroContract.PhotoProfileContract.CallbackPhoto callback;
     private final int GALLERY = 0, CAMERA = 1;
+    private final int PERMISSION_REQUEST_READ_STORAGE = 1;
 
     public RegistroTresFragment() {
         // Required empty public constructor
@@ -76,9 +80,19 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case PERMISSION_REQUEST_READ_STORAGE:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    showImagePickerDialog(this);
+                }
+                break;
+        }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case GALLERY:
                 if (data != null){
@@ -115,7 +129,11 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
                 break;
 
             case R.id.selectPhoto:
-                showImagePickerDialog(this);
+                if (checkPermissions()) {
+                    showImagePickerDialog(this);
+                } else {
+                    showMessageDialogGalery(this);
+                }
                 break;
         }
     }
@@ -132,5 +150,17 @@ public class RegistroTresFragment extends BaseFragment implements View.OnClickLi
     public void fromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
+    }
+
+    @Override
+    public void onAccept() {
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA},
+                PERMISSION_REQUEST_READ_STORAGE);
+    }
+
+    @Override
+    public void onCancel() {
+
     }
 }

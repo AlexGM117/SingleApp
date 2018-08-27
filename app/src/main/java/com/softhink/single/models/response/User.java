@@ -2,7 +2,9 @@ package com.softhink.single.models.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     @SerializedName("order")
     private int order;
     @SerializedName("token")

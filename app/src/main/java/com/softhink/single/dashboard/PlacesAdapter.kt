@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.softhink.single.R
+import java.util.*
 
 class PlacesAdapter(private val placeList: ArrayList<Int>, private val listener: PlacesAdapter.ClickItem) :
         RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder>() {
@@ -23,15 +24,20 @@ class PlacesAdapter(private val placeList: ArrayList<Int>, private val listener:
     override fun getItemCount() = placeList.size
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        if(position %2 == 0)
+        if(position %2 == 0) {
             holder.image?.setImageResource(R.drawable.restaurante)
-        else
+            holder.score?.rating = (0..5).random().toFloat()
+        } else {
             holder.image?.setImageResource(R.drawable.restaurante_1)
+        }
 
         holder.card?.setOnClickListener {
             listener.onClickItem()
         }
     }
+
+    fun ClosedRange<Int>.random() =
+            Random().nextInt((endInclusive + 1) - start) +  start
 
 
     class PlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -10,6 +10,8 @@ class PlaceDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_detail)
 
-        setUpToolbar("Detalles", true)
+        if(savedInstanceState == null) {
+            setUpToolbar("Detalles", true)
+        }
     }
 }

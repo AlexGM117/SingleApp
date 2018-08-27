@@ -3,23 +3,27 @@ package com.softhink.single.registro.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import com.softhink.single.BaseActivity;
 import com.softhink.single.Constants;
+import com.softhink.single.DialogCallBack;
 import com.softhink.single.R;
 import com.softhink.single.login.LoginActivity;
 import com.softhink.single.registro.presenter.RegistroContract;
 import com.softhink.single.registro.presenter.RegistroPresenter;
+import com.softhink.single.survey.SurveyActivity;
 import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 
 public class RegistroActivity extends BaseActivity implements View.OnClickListener,
+        RegistroContract,
         RegistroContract.DataContract,
         RegistroContract.AccountContract,
         RegistroContract.DataContract.CallbackData,
         RegistroContract.AccountContract.CallbackAccount,
         RegistroContract.PhotoProfileContract,
-        RegistroContract.PhotoProfileContract.CallbackPhoto{
+        RegistroContract.PhotoProfileContract.CallbackPhoto {
 
     private RegistroPresenter presenter;
 
@@ -28,17 +32,16 @@ public class RegistroActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        presenter = new RegistroPresenter(this, this);
-
-        final Context context = this;
-
-        setUpToolbar("Registro", this);
-
-        mFragmentManager = getSupportFragmentManager();
-                mFragmentManager.beginTransaction()
-                .add(R.id.registroContainer, new RegDataFragment(),
-                        Constants.INSTANCE.getREGISTROUNOFRAGMENT())
-                        .commit();
+        if (savedInstanceState == null) {
+            presenter = new RegistroPresenter(this, this, this);
+            final Context context = this;
+            setUpToolbar("Registro", this);
+            mFragmentManager = getSupportFragmentManager();
+            mFragmentManager.beginTransaction()
+                    .add(R.id.registroContainer, new RegDataFragment(),
+                            Constants.INSTANCE.getREGISTROUNOFRAGMENT())
+                    .commit();
+        }
     }
 
     @Override
@@ -55,6 +58,43 @@ public class RegistroActivity extends BaseActivity implements View.OnClickListen
     public void onBackPressed() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    @Override
+    public void succesToSurvey(@NonNull String responseMessage) {
+        final Intent intent = new Intent(this, SurveyActivity.class);
+        showMessageDialog(responseMessage, new DialogCallBack() {
+            @Override
+            public void onAccept() {
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
+
+    @Override
+    public void errorMessage(@NonNull String message) {
+        showMessageDialog(message);
+    }
+
+    @Override
+    public void serviceUnavailable() {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 
     @Override

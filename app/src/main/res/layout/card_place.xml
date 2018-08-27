@@ -65,7 +65,7 @@
                 android:layout_marginBottom="8dp"
                 android:numStars="5"
                 android:rating="5"
-                style="@style/Base.Widget.AppCompat.RatingBar.Small" />
+                style="@style/CustomRatingBar"/>
 
         </LinearLayout>
 

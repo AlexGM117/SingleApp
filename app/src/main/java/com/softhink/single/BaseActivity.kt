@@ -78,4 +78,14 @@ abstract class BaseActivity : AppCompatActivity() {
                 .positiveButton(text = "Continuar")
                 .show()
     }
+
+    fun showMessageDialog(message: String, listener: DialogCallBack){
+        MaterialDialog(this)
+                .title(R.string.app_name)
+                .message(text = message)
+                .positiveButton(text = "Continuar"){
+                    listener.onAccept()
+                }
+                .show()
+    }
 }
