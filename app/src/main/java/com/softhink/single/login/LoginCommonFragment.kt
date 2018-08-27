@@ -54,24 +54,28 @@ class LoginCommonFragment : BaseFragment(), LoginCommonView,
             }
 
             R.id.btnContinuar -> {
-                presenter.login(txtUser.editText?.text?.toString(),
-                        txtPss.editText?.text?.toString())
+                presenter.login(txtUser.editText?.text?.toString()!!,
+                        txtPss.editText?.text?.toString()!!)
             }
 
             R.id.forgotPss -> {
                 val fragmentManager = fragmentManager
-                fragmentManager?.beginTransaction()?.replace(R.id.containerLogin,
-                        PassRecoveryFragment())?.addToBackStack(Constants.PASSRECOVERYFRAGMENT)?.commit()
+                fragmentManager?.beginTransaction()
+                        ?.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up,
+                                R.anim.slide_in_down, R.anim.slide_out_down)
+                        ?.replace(R.id.containerLogin,
+                        PassRecoveryFragment())
+                        ?.addToBackStack(Constants.PASSRECOVERYFRAGMENT)?.commit()
             }
         }
     }
 
     override fun emailEmpty() {
-
+        showMessageDialog("Usuario ó email vacio")
     }
 
     override fun passEmpty() {
-
+        showMessageDialog("Contraseña vacia")
     }
 
     override fun loginSuccess() {

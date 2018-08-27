@@ -1,7 +1,5 @@
 package com.softhink.single
 
-import android.util.Log
-
 import com.softhink.single.models.response.BaseResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +24,7 @@ class BaseCallback<T, U>(private val callback: BaseView.Interactor<T, U>) : Call
     }
 
     override fun onFailure(call: Call<BaseResponse<T, U>>, t: Throwable) {
-        Log.d("Single Services: ", t.message)
+        println(t.message)
         callback.onFailed()
     }
 }

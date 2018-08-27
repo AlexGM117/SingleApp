@@ -45,13 +45,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button = view.findViewById(R.id.btnDoLogin);
-        Button button2 = view.findViewById(R.id.btnLoginFB);
-        layoutRegistro = view.findViewById(R.id.registro);
-        layoutRegistro.setOnClickListener(this);
+        if (savedInstanceState == null) {
+            Button button = view.findViewById(R.id.btnDoLogin);
+            Button button2 = view.findViewById(R.id.btnLoginFB);
+            layoutRegistro = view.findViewById(R.id.registro);
+            layoutRegistro.setOnClickListener(this);
 
-        button2.setOnClickListener(this);
-        button.setOnClickListener(this);
+            button2.setOnClickListener(this);
+            button.setOnClickListener(this);
+        }
     }
 
 
@@ -67,8 +69,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
             case R.id.btnDoLogin:
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,
-                                android.R.anim.fade_in, android.R.anim.fade_out)
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
                         .replace(R.id.containerLogin,
                         new LoginCommonFragment())
                         .addToBackStack(Constants.INSTANCE.getLOGINCOMMONFRAGMENT())

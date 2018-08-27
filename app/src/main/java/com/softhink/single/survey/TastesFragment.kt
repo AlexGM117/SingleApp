@@ -31,24 +31,27 @@ class TastesFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tastes = arrayOf("Cafeterías", "Comida rápida", "Bares", "Restaurantes")
+        if (savedInstanceState == null) {
+            tastes = arrayOf("Cafeterías", "Comida rápida", "Bares", "Restaurantes")
 
-        pickerTastes.adapter = object : BubblePickerAdapter{
-            override val totalCount = tastes.size
+            pickerTastes.adapter = object : BubblePickerAdapter {
+                override val totalCount = tastes.size
 
-            override fun getItem(position: Int): PickerItem {
-                return PickerItem().apply {
-                    title = tastes[position]
-                    textColor = Color.WHITE
-                    color = Color.parseColor("#4464b0")
+                override fun getItem(position: Int): PickerItem {
+                    return PickerItem().apply {
+                        title = tastes[position]
+                        textColor = Color.WHITE
+                        textSize = 32F
+                        color = Color.parseColor("#4464b0")
+                    }
                 }
             }
-        }
-        pickerTastes.centerImmediately = true
-        pickerTastes.bubbleSize = 30
-        pickerTastes.listener = this
+            pickerTastes.centerImmediately = true
+            pickerTastes.bubbleSize = 40
+            pickerTastes.listener = this
 
-        btnPrevious.setOnClickListener(this)
+            btnPrevious.setOnClickListener(this)
+        }
     }
 
     override fun onResume() {

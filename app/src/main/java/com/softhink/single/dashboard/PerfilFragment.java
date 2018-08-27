@@ -21,7 +21,8 @@ import com.softhink.single.survey.SurveyActivity;
  */
 public class PerfilFragment extends Fragment implements View.OnClickListener {
 
-    private TextView textView;
+    private TextView editParam;
+    private TextView editProfile;
     private View view;
     private Button singlear;
 
@@ -43,9 +44,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         if (savedInstanceState == null) {
-            textView = view.findViewById(R.id.button5);
+            editParam = view.findViewById(R.id.toEditParams);
+            editProfile = view.findViewById(R.id.toEditProfile);
             singlear = view.findViewById(R.id.singlear);
-            textView.setOnClickListener(this);
+
+            editProfile.setOnClickListener(this);
+            editParam.setOnClickListener(this);
             singlear.setOnClickListener(this);
         }
     }
@@ -54,8 +58,12 @@ public class PerfilFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()){
-            case R.id.button5:
+            case R.id.toEditParams:
                 intent = new Intent(getActivity(), SurveyActivity.class);
+                break;
+
+            case R.id.toEditProfile:
+                intent = new Intent(getActivity(), EditProfileActivity.class);
                 break;
 
             case R.id.singlear:

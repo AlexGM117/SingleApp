@@ -47,42 +47,44 @@ public class InterestsFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        picker = view.findViewById(R.id.picker);
+        if (savedInstanceState == null) {
+            picker = view.findViewById(R.id.picker);
 
-        picker.setAdapter(new BubblePickerAdapter() {
-            String[] titles = new String[]{
-                    "Encontrar pareja",
-                    "Diversión",
-                    "Sexo casual",
-                    "Conocer gente nueva"
-            };
+            picker.setAdapter(new BubblePickerAdapter() {
+                String[] titles = new String[]{
+                        "Encontrar pareja",
+                        "Diversión",
+                        "Sexo casual",
+                        "Conocer gente nueva"
+                };
 
-            @Override
-            public int getTotalCount() {
-                return titles.length;
-            }
+                @Override
+                public int getTotalCount() {
+                    return titles.length;
+                }
 
-            @NotNull
-            @Override
-            public PickerItem getItem(int i) {
-                PickerItem item = new PickerItem();
-                item.setTitle(titles[i]);
-                item.setColor(Color.parseColor("#DA7C86"));
-                item.setTextColor(Color.WHITE);
-                item.setBackgroundImage(ContextCompat.getDrawable(getContext(), R.drawable.background_bubble));
-                return item;
-            }
-        });
+                @NotNull
+                @Override
+                public PickerItem getItem(int i) {
+                    PickerItem item = new PickerItem();
+                    item.setTitle(titles[i]);
+                    item.setColor(Color.parseColor("#DA7C86"));
+                    item.setTextColor(Color.WHITE);
+                    item.setBackgroundImage(ContextCompat.getDrawable(getContext(), R.drawable.background_bubble));
+                    return item;
+                }
+            });
 
-        picker.setCenterImmediately(true);
-        picker.setBubbleSize(30);
-        picker.setListener(this);
+            picker.setCenterImmediately(true);
+            picker.setBubbleSize(30);
+            picker.setListener(this);
 
-        btnNext = view.findViewById(R.id.btnLastPage);
-        btnPrev = view.findViewById(R.id.btnFirstPage);
+            btnNext = view.findViewById(R.id.btnLastPage);
+            btnPrev = view.findViewById(R.id.btnFirstPage);
 
-        btnNext.setOnClickListener(this);
-        btnPrev.setOnClickListener(this);
+            btnNext.setOnClickListener(this);
+            btnPrev.setOnClickListener(this);
+        }
     }
 
     @Override

@@ -12,8 +12,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mFragmentManager.beginTransaction().add(R.id.containerLogin, new LoginFragment(),
-                Constants.INSTANCE.getLOGINFRAGMENT()).commit();
+        mFragmentManager.beginTransaction()
+                .add(R.id.containerLogin, new LoginFragment(),
+                Constants.INSTANCE.getLOGINFRAGMENT())
+                .commit();
     }
 
 }

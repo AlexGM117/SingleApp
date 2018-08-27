@@ -14,11 +14,11 @@ class LoginCommonPresenter(val view: LoginCommonView) : BasePresenter(),
         interactor = Interactor()
     }
 
-    fun login(user: String?, pss: String?){
+    fun login(user: String, pss: String){
         println("LOGIN PRESENTER: $user $pss")
-        if (user == null || user.isEmpty()){
+        if (user.isEmpty()){
             view.emailEmpty()
-        } else if (pss == null || pss.isEmpty()){
+        } else if (pss.isEmpty()){
             view.passEmpty()
         } else{
             interactor.callLogin(LoginRequest(pss, user), this)
