@@ -1,7 +1,9 @@
 package com.softhink.single.registro.view;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
 import com.softhink.single.BaseFragment;
 import com.softhink.single.R;
 import com.softhink.single.registro.presenter.RegistroContract;
@@ -116,22 +120,42 @@ public class RegDataFragment extends BaseFragment implements
     }
 
     private void showDatePicker() {
-        Integer[] date = getDateForPicker(txtYear.getText().toString(),
-                txtMonth.getText().toString(), txtDay.getText().toString());
+//        Integer[] date = getDateForPicker(txtYear.getText().toString(),
+//                txtMonth.getText().toString(), txtDay.getText().toString());
+//
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                userBirthday = getUserBirthDay(year, month, dayOfMonth);
+//
+//                txtDay.setText((dayOfMonth < 10)?getString(R.string.date_mask, dayOfMonth):
+//                        String.valueOf(dayOfMonth));
+//                txtMonth.setText((month < 9)?getString(R.string.date_mask, month+1):String.valueOf(month));
+//                txtYear.setText(String.valueOf(year));
+//            }
+//        }, date[0], date[1], date[2]);
+//
+//        datePickerDialog.show();
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        
+        View view = inflater.inflate(R.layout.picker_layout, null);
+        final DatePicker datePicker = view.findViewById(R.id.pickerDate);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view);
+        builder.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                userBirthday = getUserBirthDay(year, month, dayOfMonth);
+            public void onClick(DialogInterface dialogInterface, int i) {
+                userBirthday = getUserBirthDay(datePicker.getYear(),
+                        datePicker.getMonth(), datePicker.getDayOfMonth());
 
-                txtDay.setText((dayOfMonth < 10)?getString(R.string.date_mask, dayOfMonth):
-                        String.valueOf(dayOfMonth));
-                txtMonth.setText((month < 9)?getString(R.string.date_mask, month+1):String.valueOf(month));
-                txtYear.setText(String.valueOf(year));
+                txtDay.setText(String.valueOf(datePicker.getDayOfMonth()));
+                txtMonth.setText(String.valueOf(datePicker.getMonth() + 1));
+                txtYear.setText(String.valueOf(datePicker.getYear()));
             }
-        }, date[0], date[1], date[2]);
-
-        datePickerDialog.show();
+        });
+        builder.setNegativeButton("CANCELAR", null);
+        builder.create().show();
     }
 
     private Integer[] getDateForPicker(String s1, String s2, String s3) {

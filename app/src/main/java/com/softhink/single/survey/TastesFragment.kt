@@ -1,5 +1,6 @@
 package com.softhink.single.survey
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import com.igalata.bubblepicker.BubblePickerListener
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter
 import com.igalata.bubblepicker.model.PickerItem
 import com.softhink.single.R
+import com.softhink.single.dashboard.MainContainer
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_tastes.*
 
@@ -50,6 +52,7 @@ class TastesFragment : Fragment(),
             pickerTastes.bubbleSize = 40
             pickerTastes.listener = this
 
+            btnSendSurvey.setOnClickListener(this)
             btnPrevious.setOnClickListener(this)
         }
     }
@@ -66,6 +69,11 @@ class TastesFragment : Fragment(),
 
     override fun onClick(v: View?) {
         when(v?.id){
+            R.id.btnSendSurvey -> {
+                startActivity(Intent(activity, MainContainer::class.java))
+                activity?.finish()
+            }
+
             R.id.btnPrevious -> {
                 fragmentManager?.popBackStack()
             }

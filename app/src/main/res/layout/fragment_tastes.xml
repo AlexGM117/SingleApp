@@ -42,12 +42,14 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="250dp"
+            android:id="@+id/btnSendSurvey"
+            android:layout_width="300dp"
             android:layout_height="0dp"
-            android:layout_weight=".1"
+            android:layout_weight=".08"
             style="@style/buttonSingle"
             android:layout_gravity="center_horizontal"
-            android:text="Guardar cambios"/>
+            android:text="Guardar cambios"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
