@@ -1,7 +1,6 @@
 package com.softhink.single.registro.view;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,14 +14,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
 import com.softhink.single.BaseFragment;
 import com.softhink.single.R;
 import com.softhink.single.registro.presenter.RegistroContract;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -120,22 +116,6 @@ public class RegDataFragment extends BaseFragment implements
     }
 
     private void showDatePicker() {
-//        Integer[] date = getDateForPicker(txtYear.getText().toString(),
-//                txtMonth.getText().toString(), txtDay.getText().toString());
-//
-//        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                userBirthday = getUserBirthDay(year, month, dayOfMonth);
-//
-//                txtDay.setText((dayOfMonth < 10)?getString(R.string.date_mask, dayOfMonth):
-//                        String.valueOf(dayOfMonth));
-//                txtMonth.setText((month < 9)?getString(R.string.date_mask, month+1):String.valueOf(month));
-//                txtYear.setText(String.valueOf(year));
-//            }
-//        }, date[0], date[1], date[2]);
-//
-//        datePickerDialog.show();
         LayoutInflater inflater = getActivity().getLayoutInflater();
         
         View view = inflater.inflate(R.layout.picker_layout, null);
@@ -156,16 +136,6 @@ public class RegDataFragment extends BaseFragment implements
         });
         builder.setNegativeButton("CANCELAR", null);
         builder.create().show();
-    }
-
-    private Integer[] getDateForPicker(String s1, String s2, String s3) {
-        if (s1.isEmpty() && s2.isEmpty() && s3.isEmpty()){
-            return new Integer[]{Calendar.getInstance().get(Calendar.YEAR),
-                    Calendar.getInstance().get(Calendar.MONTH),
-                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH)};
-        } else {
-            return new Integer[]{Integer.valueOf(s1), Integer.valueOf(s2) -1, Integer.valueOf(s3)};
-        }
     }
 
     private Date getUserBirthDay(int year, int month, int dayOfMonth) {
