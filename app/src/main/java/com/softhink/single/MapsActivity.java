@@ -1,9 +1,13 @@
 package com.softhink.single;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ImageView swipeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        LinearLayout layoutBottomSheet = findViewById(R.id.bottom_sheet);
+        final LinearLayout layout = findViewById(R.id.view1);
+        swipeView = findViewById(R.id.swipeView);
+
+        final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_DRAGGING);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int state) {
+//                System.out.println(state);
+                switch (state){
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        layout.setVisibility(View.GONE);
+                        break;
+
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        layout.setVisibility(View.VISIBLE);
+                        break;
+
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        layout.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                animateBottomSheetArrow(slideOffset);
+            }
+        });
+    }
+
+    private void animateBottomSheetArrow(float slideOffset) {
+        swipeView.setRotation(slideOffset * 180);
     }
 
 
