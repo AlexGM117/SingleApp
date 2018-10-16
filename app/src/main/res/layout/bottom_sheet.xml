@@ -8,9 +8,11 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
+    android:clickable="true"
     app:behavior_hideable="false"
     app:behavior_peekHeight="350dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:focusable="true">
 
     <LinearLayout
         android:id="@+id/view1"
@@ -19,10 +21,19 @@
         android:orientation="vertical"
         android:padding="16dp" >
 
+        <ImageView
+            android:id="@+id/swipeViewDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/swipe_up"
+            android:rotation="180"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".8"
+            android:layout_weight=".85"
             android:orientation="vertical"
             android:gravity="center_horizontal" >
 
@@ -33,17 +44,17 @@
                 android:src="@drawable/avatar"/>
 
             <TextView
+                android:id="@+id/singleName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="nombre de single"/>
-
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/matcher"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".2"
+            android:layout_weight=".15"
             android:orientation="horizontal" >
 
             <TextView
@@ -66,28 +77,61 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/swipeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/swipe_up"
+            android:layout_gravity="center_horizontal"/>
 
-    <ImageView
-        android:id="@+id/swipeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/swipe_up"
-        android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/singleDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/textview"
-            android:gravity="center|start"/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomRatingBar"
+                    android:numStars="5"
+                    android:rating="5"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicacion"
+                    style="@style/TextAppearance.AppCompat.Small"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ocupacion"
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textview"
+                    android:gravity="center|start"
+                    android:layout_marginBottom="8dp"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

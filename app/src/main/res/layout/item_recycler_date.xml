@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="80dp">
@@ -37,11 +37,17 @@
         android:layout_height="match_parent"
         android:layout_weight=".2"
         android:gravity="center">
-        <RatingBar
+
+        <com.varunest.sparkbutton.SparkButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numStars="1"
-            style="@style/Base.Widget.AppCompat.RatingBar.Indicator"/>
+            app:sparkbutton_activeImage="@drawable/custom_range_on"
+            app:sparkbutton_inActiveImage="@drawable/custom_range_off"
+            app:sparkbutton_iconSize="30dp"
+            app:sparkbutton_primaryColor="@android:color/black"
+            app:sparkbutton_secondaryColor="@android:color/black"
+            app:sparkbutton_animationSpeed="1.5"
+            />
     </LinearLayout>
 
 </LinearLayout>

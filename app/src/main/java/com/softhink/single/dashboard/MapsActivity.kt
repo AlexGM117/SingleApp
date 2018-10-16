@@ -1,7 +1,7 @@
 package com.softhink.single.dashboard
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
@@ -11,19 +11,25 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.softhink.single.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.SingleHeaderAdapter
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.botom_sheet.*
+import kotlinx.android.synthetic.main.bottom_sheet.*
 
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private lateinit var mMap: GoogleMap
+    private val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
+        setUpToolbar("", true)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
@@ -41,7 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                animateBottomSheetArrow(slideOffset)
+
             }
 
             override fun onStateChanged(bottomSheet: View, state: Int) {
@@ -53,14 +59,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     }
 
                     BottomSheetBehavior.STATE_EXPANDED -> {
+                        params.gravity = Gravity.START
                         matcher.visibility = View.GONE
-                        val layoutParams = LinearLayout.LayoutParams(120, 120)
-                        singleImage.layoutParams = layoutParams
+                        singleImage.layoutParams = LinearLayout.LayoutParams(120, 120)
+                        singleName.layoutParams = params
+                        swipeView.visibility = View.GONE
+                        swipeViewDown.visibility = View.VISIBLE
                         view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                     }
 
                     BottomSheetBehavior.STATE_COLLAPSED -> {
+                        params.gravity = Gravity.CENTER
                         matcher.visibility = View.VISIBLE
+                        swipeView.visibility = View.VISIBLE
+                        swipeViewDown.visibility = View.GONE
+                        singleName.layoutParams = params
                         singleImage.layoutParams = LinearLayout.LayoutParams(440, 440)
                         view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700)
                     }

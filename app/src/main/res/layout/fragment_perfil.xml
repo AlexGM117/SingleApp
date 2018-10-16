@@ -92,7 +92,7 @@
             android:id="@+id/singlear"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorAccent"
+            style="@style/ButtonSingle"
             android:text="Singlear"
             android:textColor="@android:color/white"
             />

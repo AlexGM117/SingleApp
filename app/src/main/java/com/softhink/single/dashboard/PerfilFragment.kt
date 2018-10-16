@@ -6,20 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import com.softhink.single.R
 import com.softhink.single.survey.SurveyActivity
+import kotlinx.android.synthetic.main.fragment_perfil.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class PerfilFragment : Fragment(), View.OnClickListener {
-
-    private var editParam: TextView? = null
-    private var editProfile: TextView? = null
-    private var singlear: Button? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,13 +24,9 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
         super.onViewCreated(v, savedInstanceState)
         if (savedInstanceState == null) {
-            editParam = view!!.findViewById(R.id.toEditParams)
-            editProfile = view!!.findViewById(R.id.toEditProfile)
-            singlear = view!!.findViewById(R.id.singlear)
-
-            editProfile!!.setOnClickListener(this)
-            editParam!!.setOnClickListener(this)
-            singlear!!.setOnClickListener(this)
+            toEditProfile.setOnClickListener(this)
+            toEditParams.setOnClickListener(this)
+            singlear.setOnClickListener(this)
         }
     }
 
@@ -51,4 +41,4 @@ class PerfilFragment : Fragment(), View.OnClickListener {
         }
         startActivity(intent)
     }
-}// Required empty public constructor
+}

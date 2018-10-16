@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorAccent"
+        style="@style/ButtonSingle"
         android:text="Continuar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline20"

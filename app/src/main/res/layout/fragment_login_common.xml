@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
+            style="@style/ButtonSingle"
             android:text="Continuar"
             android:textColor="@android:color/white" />
 

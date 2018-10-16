@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.softhink.single.BaseFragment
 
 import com.softhink.single.R
@@ -37,5 +39,14 @@ class DatesFragment : BaseFragment() {
         dates.add("Cita con Diana Mendoza")
 
         datesRecycler.adapter = DatesAdapter(dates)
+
+        actionButton.addActionItem(SpeedDialActionItem
+                .Builder(R.id.action_fav, R.drawable.ic_action_all)
+                .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
+                .create())
+        actionButton.addActionItem(SpeedDialActionItem
+                .Builder(R.id.action_all, R.drawable.ic_action_all)
+                .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
+                .create())
     }
 }

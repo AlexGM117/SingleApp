@@ -55,7 +55,7 @@
             android:id="@+id/btnToTmp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            style="@style/ButtonSingle"
             android:text="Continuar"
             android:textColor="@android:color/white" />
 

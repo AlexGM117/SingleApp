@@ -68,4 +68,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "com.leinardi.android:speed-dial:2.0.0"
+    implementation 'com.github.varunest:sparkbutton:1.0.6'
 }
