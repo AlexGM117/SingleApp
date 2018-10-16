@@ -27,15 +27,15 @@ class MainContainer : BaseActivity() {
             viewPager = findViewById(R.id.viewPager)
             setUpViewPager()
             tabLayout = findViewById(R.id.tabs)
-            tabLayout!!.setupWithViewPager(viewPager)
+            tabLayout?.setupWithViewPager(viewPager)
             setupTabIcons()
         }
     }
 
     private fun setupTabIcons() {
-        tabLayout!!.getTabAt(0).setIcon(R.drawable.mis_citas)
-        tabLayout!!.getTabAt(1).setIcon(R.drawable.perfil)
-        tabLayout!!.getTabAt(2).setIcon(R.drawable.lugares)
+        tabLayout?.getTabAt(0)?.setIcon(R.drawable.mis_citas)
+        tabLayout?.getTabAt(1)?.setIcon(R.drawable.perfil)
+        tabLayout?.getTabAt(2)?.setIcon(R.drawable.lugares)
     }
 
     private fun setUpViewPager() {

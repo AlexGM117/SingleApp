@@ -2,21 +2,18 @@ package com.softhink.single.registro.view
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.RadioGroup
 import com.softhink.single.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.registro.presenter.RegistroContract
+import kotlinx.android.synthetic.main.arrow_next.*
+import kotlinx.android.synthetic.main.fragment_registro_uno.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -27,39 +24,27 @@ import java.util.Locale
  */
 class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    private var btnNext: ImageView? = null
-    private var inputName: EditText? = null
-    private var txtDay: EditText? = null
-    private var txtMonth: EditText? = null
-    private var txtYear: EditText? = null
-    private var radioGender: RadioGroup? = null
+
     private var userBirthday: Date? = null
     private var gender: String? = null
     private var callback: RegistroContract.DataContract.CallbackData? = null
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_registro_uno, container, false)
+        return inflater.inflate(R.layout.fragment_registro_uno, container, false)
     }
 
-    override fun onViewCreated(@NonNull view: View, @Nullable savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            inputName = view.findViewById(R.id.inputName)
-            txtDay = view.findViewById(R.id.pickerDay)
-            txtMonth = view.findViewById(R.id.pickerMonth)
-            txtYear = view.findViewById(R.id.pickerYear)
-            radioGender = view.findViewById(R.id.radioGender)
-            radioGender!!.setOnCheckedChangeListener(this)
-            btnNext = view.findViewById(R.id.btnNextPage)
-
-            btnNext!!.setOnClickListener(this)
-            txtDay!!.setOnClickListener(this)
-            txtMonth!!.setOnClickListener(this)
-            txtYear!!.setOnClickListener(this)
+            btnNextPage.setOnClickListener(this)
+            pickerDay.setOnClickListener(this)
+            pickerMonth.setOnClickListener(this)
+            pickerYear.setOnClickListener(this)
+            radioGender.setOnCheckedChangeListener(this)
         }
     }
 
@@ -94,20 +79,21 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
     }
 
     private fun showDatePicker() {
-        val inflater = activity.getLayoutInflater()
+        val inflater = activity?.layoutInflater
 
-        val view = inflater.inflate(R.layout.picker_layout, null)
-        val datePicker = view.findViewById<DatePicker>(R.id.pickerDate)
+        val view = inflater?.inflate(R.layout.picker_layout, null)
+        val datePicker = view?.findViewById<DatePicker>(R.id.pickerDate)
 
         val builder = AlertDialog.Builder(activity)
         builder.setView(view)
-        builder.setPositiveButton("ACEPTAR") { dialogInterface, i ->
-            userBirthday = getUserBirthDay(datePicker.year,
+        builder.setPositiveButton("ACEPTAR") {
+            dialogInterface, i ->
+            userBirthday = getUserBirthDay(datePicker?.year!!,
                     datePicker.month, datePicker.dayOfMonth)
 
-            txtDay!!.setText(datePicker.dayOfMonth.toString())
-            txtMonth!!.setText((datePicker.month + 1).toString())
-            txtYear!!.setText(datePicker.year.toString())
+            pickerDay.setText(datePicker.dayOfMonth.toString())
+            pickerMonth.setText((datePicker.month + 1).toString())
+            pickerYear.setText(datePicker.year.toString())
         }
         builder.setNegativeButton("CANCELAR", null)
         builder.create().show()

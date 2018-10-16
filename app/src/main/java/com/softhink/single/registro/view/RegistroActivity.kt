@@ -1,6 +1,5 @@
 package com.softhink.single.registro.view
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.NonNull

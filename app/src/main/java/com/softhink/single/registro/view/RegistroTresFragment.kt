@@ -6,23 +6,20 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ImageView
 import com.softhink.single.BaseFragment
 import com.softhink.single.DialogCallBack
 import com.softhink.single.R
 import com.softhink.single.registro.presenter.RegistroContract
+import kotlinx.android.synthetic.main.arrow_back.*
+import kotlinx.android.synthetic.main.fragment_registro_tres.*
 import java.io.IOException
 
 /**
@@ -30,35 +27,25 @@ import java.io.IOException
  */
 class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected, DialogCallBack {
 
-    private var btnBack: ImageView? = null
-    private var imagePreview: ImageView? = null
-    private var btnEnviarRegistro: Button? = null
-    private var imageSelector: FrameLayout? = null
-
     private var callback: RegistroContract.PhotoProfileContract.CallbackPhoto? = null
     private val GALLERY = 0
     private val CAMERA = 1
     private val PERMISSION_REQUEST_READ_STORAGE = 1
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_registro_tres, container, false)
+        return inflater.inflate(R.layout.fragment_registro_tres, container, false)
     }
 
     override fun onViewCreated(@NonNull view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            imageSelector = view.findViewById(R.id.selectPhoto)
-            imagePreview = view.findViewById(R.id.imagePreview)
-            btnBack = view.findViewById(R.id.btnPrevious)
-            btnEnviarRegistro = view.findViewById(R.id.btnSendForm)
-
-            imageSelector!!.setOnClickListener(this)
-            btnBack!!.setOnClickListener(this)
-            btnEnviarRegistro!!.setOnClickListener(this)
+            selectPhoto.setOnClickListener(this)
+            btnPrevious.setOnClickListener(this)
+            btnSendForm.setOnClickListener(this)
         }
     }
 
@@ -72,9 +59,9 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
 
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>?, @NonNull grantResults: IntArray?) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            PERMISSION_REQUEST_READ_STORAGE -> if (grantResults!!.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            PERMISSION_REQUEST_READ_STORAGE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showImagePickerDialog(this)
             }
         }
@@ -85,7 +72,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
             GALLERY -> if (data != null) {
                 val contentURI = data.data
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), contentURI)
+                    val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
                     imagePreview!!.setImageBitmap(bitmap)
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -104,7 +91,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
         val fragmentManager = fragmentManager
 
         when (v.id) {
-            R.id.btnPrevious -> fragmentManager.popBackStack()
+            R.id.btnPrevious -> fragmentManager?.popBackStack()
 
             R.id.btnSendForm -> callback!!.callService(null)
 

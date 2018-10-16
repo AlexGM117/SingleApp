@@ -12,8 +12,6 @@ class LoginRequest : BaseRequest, Serializable {
     @SerializedName("username")
     var username: String? = null
 
-    constructor() {}
-
     constructor(password: String, username: String) {
         this.password = password
         this.username = username
