@@ -3,7 +3,7 @@ package com.softhink.single.models.response
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class BaseResponse<T, U> : Serializable {
+class BaseResponse<T> : Serializable {
 
     @SerializedName("responseMessage")
     var responseMessage: String? = null
@@ -13,7 +13,7 @@ class BaseResponse<T, U> : Serializable {
     var result: T? = null
 
     @SerializedName("responseErrors")
-    var error: U? = null
+    var error: T? = null
 
     fun getResponseCode(): Int {
         return responseCode!!

@@ -2,20 +2,20 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet"
+    android:id="@+id/singleBottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="250dp"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    app:behavior_peekHeight="350dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <LinearLayout
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="350dp"
         android:orientation="vertical"
         android:padding="16dp" >
 
@@ -27,8 +27,9 @@
             android:gravity="center_horizontal" >
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/singleImage"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
                 android:src="@drawable/avatar"/>
 
             <TextView
@@ -39,6 +40,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/matcher"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".2"
@@ -74,22 +76,11 @@
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
+        android:id="@+id/singleDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/avatar"
-            android:layout_gravity="center_horizontal"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="nombre de single"
-            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="match_parent"

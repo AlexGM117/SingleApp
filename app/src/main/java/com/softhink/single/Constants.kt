@@ -4,10 +4,10 @@ import com.softhink.single.dashboard.DatesFragment
 import com.softhink.single.dashboard.PerfilFragment
 import com.softhink.single.dashboard.PlacesFragment
 import com.softhink.single.survey.PreferencesFragment
-import com.softhink.single.login.LoginCommonFragment
-import com.softhink.single.login.LoginFragment
-import com.softhink.single.login.PassRecoveryFragment
-import com.softhink.single.login.PassTmpFragment
+import com.softhink.single.login.ui.LoginCommonFragment
+import com.softhink.single.login.ui.LoginFragment
+import com.softhink.single.login.ui.PassRecoveryFragment
+import com.softhink.single.login.ui.PassTmpFragment
 import com.softhink.single.registro.view.RegAccountFragment
 import com.softhink.single.registro.view.RegDataFragment
 import com.softhink.single.registro.view.RegistroTresFragment

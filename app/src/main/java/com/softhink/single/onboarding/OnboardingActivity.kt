@@ -2,7 +2,7 @@ package com.softhink.single.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import com.softhink.single.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.ZooOutPager
@@ -27,9 +27,6 @@ class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
         onboardingPager.setPageTransformer(true, ZooOutPager())
 
         onboardingPager.addOnPageChangeListener(this)
-
-        pagerIndicator.setupWithViewPager(onboardingPager)
-        pagerIndicator.addOnPageChangeListener(this)
     }
 
     override fun onPageScrollStateChanged(p0: Int) {

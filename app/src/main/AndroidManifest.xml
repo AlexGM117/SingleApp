@@ -26,6 +26,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,10 +34,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".registro.view.RegistroActivity" />
-        <activity android:name=".dashboard.MainContainer" />
-        <activity android:name=".survey.SurveyActivity" />
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registro.view.RegistroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.MainContainer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".survey.SurveyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.PlaceDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".onboarding.OnboardingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".dashboard.EditProfileActivity"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -50,11 +68,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".dashboard.PlaceDetailActivity" />
-        <activity android:name=".onboarding.OnboardingActivity" />
-        <activity android:name=".dashboard.EditProfileActivity"></activity>
+            android:name=".dashboard.MapsActivity"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

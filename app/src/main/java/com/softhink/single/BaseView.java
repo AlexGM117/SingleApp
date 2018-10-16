@@ -7,9 +7,9 @@ public interface BaseView {
     void showProgress();
     void hideProgress();
 
-    interface Interactor<T, U> {
-        void onResponseSuccess(BaseResponse<T, U> response);
-        void onResponseError(U error);
+    interface Interactor<T> {
+        void onResponseSuccess(BaseResponse<T> response);
+        void onResponseError();
         void onFailed();
     }
 }

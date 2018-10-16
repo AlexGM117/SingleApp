@@ -3,7 +3,7 @@ package com.softhink.single.registro.presenter
 import android.util.Patterns
 import com.softhink.single.BasePresenter
 import com.softhink.single.BaseView
-import com.softhink.single.Interactor
+import com.softhink.single.SingleRepository
 import com.softhink.single.models.request.RegRequest
 import com.softhink.single.models.response.BaseResponse
 import java.text.SimpleDateFormat
@@ -12,12 +12,12 @@ import java.util.*
 class RegistroPresenter(private var view: RegistroContract,
                         private var viewData: RegistroContract.DataContract,
                         private var viewAccount: RegistroContract.AccountContract): BasePresenter(),
-        BaseView.Interactor<Any, Any> {
+        BaseView.Interactor<Any> {
 
     private lateinit var request: RegRequest
 
     init {
-        interactor = Interactor()
+        repository = SingleRepository()
     }
 
     fun validateForm(name: String, date: Date?, gender: String?) {
@@ -97,14 +97,14 @@ class RegistroPresenter(private var view: RegistroContract,
 
     fun sendRegistro(photo: String?) {
         if (photo != null) request.imageProfile = photo
-        interactor.callRegistro(request, this)
+//        repository.callRegistro(request, this)
     }
 
-    override fun onResponseSuccess(response: BaseResponse<Any, Any>) {
+    override fun onResponseSuccess(response: BaseResponse<Any>) {
         view.succesToSurvey(response.responseMessage!!)
     }
 
-    override fun onResponseError(response: Any) {
+    override fun onResponseError() {
         view.errorMessage("")
     }
 

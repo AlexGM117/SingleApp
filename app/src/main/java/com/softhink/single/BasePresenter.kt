@@ -2,5 +2,5 @@ package com.softhink.single
 
 abstract class BasePresenter {
 
-    protected lateinit var interactor : Interactor
+    protected lateinit var repository : SingleRepository
 }

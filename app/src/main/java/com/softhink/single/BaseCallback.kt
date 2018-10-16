@@ -4,27 +4,27 @@ import com.softhink.single.models.response.BaseResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+abstract class BaseCallback<T> : Callback<BaseResponse<T>> {
 
-class BaseCallback<T, U>(private val callback: BaseView.Interactor<T, U>) : Callback<BaseResponse<T, U>> {
-
-    override fun onResponse(call: Call<BaseResponse<T, U>>, response: Response<BaseResponse<T, U>>) {
-        if (response.code() == 200) {
-            if (response.body() != null) {
-                if (response.body()?.getResponseCode() == 0) {
-                    callback.onResponseSuccess(response.body())
-                } else if (response.body()?.getResponseCode() == -1) {
-                    callback.onResponseError(response.body()!!.error)
-                }
-            } else {
-                callback.onFailed()
-            }
-        } else {
-            callback.onResponseError(response.body()?.error)
+    override fun onResponse(call: Call<BaseResponse<T>>, response: Response<BaseResponse<T>>) {
+        if(response.body() != null){
+            handleResponseData(response.body()?.result!!)
+        } else{
+            handleError(response.body()!!)
         }
     }
 
-    override fun onFailure(call: Call<BaseResponse<T, U>>, t: Throwable) {
-        println(t.message)
-        callback.onFailed()
+    override fun onFailure(call: Call<BaseResponse<T>>, t: Throwable) {
+        if (t is Exception) {
+            handleException(t)
+        } else{
+
+        }
     }
+
+    protected abstract fun handleResponseData(data: T)
+
+    protected abstract fun handleError(response: BaseResponse<T>)
+
+    protected abstract fun handleException(t: Exception)
 }

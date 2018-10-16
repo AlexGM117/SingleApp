@@ -1,16 +1,11 @@
 package com.softhink.single
 
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
-import com.softhink.single.models.request.LoginRequest
-import com.softhink.single.models.response.LoginResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 abstract class BaseActivity : AppCompatActivity() {
 
