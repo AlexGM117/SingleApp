@@ -41,12 +41,15 @@ class DatesFragment : BaseFragment() {
         datesRecycler.adapter = DatesAdapter(dates)
 
         actionButton.addActionItem(SpeedDialActionItem
-                .Builder(R.id.action_fav, R.drawable.ic_action_all)
-                .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
-                .create())
-        actionButton.addActionItem(SpeedDialActionItem
                 .Builder(R.id.action_all, R.drawable.ic_action_all)
                 .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
+                .setLabel("Todos")
+                .create())
+
+        actionButton.addActionItem(SpeedDialActionItem
+                .Builder(R.id.action_fav, R.drawable.ic_action_fav)
+                .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
+                .setLabel("Favoritos")
                 .create())
     }
 }

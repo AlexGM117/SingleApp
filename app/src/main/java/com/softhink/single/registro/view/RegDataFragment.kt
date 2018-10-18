@@ -9,11 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.RadioGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.BaseFragment
 import com.softhink.single.R
+import com.softhink.single.registro.SignUpViewModel
+import com.softhink.single.registro.Status
+import com.softhink.single.registro.Status.*
 import com.softhink.single.registro.presenter.RegistroContract
 import kotlinx.android.synthetic.main.arrow_next.*
 import kotlinx.android.synthetic.main.fragment_registro_uno.*
+import java.lang.Exception
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -24,11 +30,17 @@ import java.util.Locale
  */
 class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-
     private var userBirthday: Date? = null
     private var gender: String? = null
-    private var callback: RegistroContract.DataContract.CallbackData? = null
+    private lateinit var model: SignUpViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        model = activity?.run {
+            ViewModelProviders.of(this).get(SignUpViewModel::class.java)
+        }?:throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -48,24 +60,21 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        try {
-            callback = context as RegistroContract.DataContract.CallbackData?
-        } catch (e: ClassCastException) {
-            throw ClassCastException(activity.toString() + " must implements interface")
-        }
-
-    }
-
     override fun onClick(v: View) {
         when (v.id) {
             R.id.pickerDay -> showDatePicker()
             R.id.pickerMonth -> showDatePicker()
             R.id.pickerYear -> showDatePicker()
 
-            R.id.btnNextPage -> callback!!.dataForm(inputName!!.text.toString(), userBirthday, gender)
+            R.id.btnNextPage -> model.validateForm(inputName.text?.trim().toString(),
+                    userBirthday, gender).observe(this,
+                    Observer {
+                        when(it.status){
+                            ERROR -> showMessageDialog(getString(it.message))
+                            SUCCESS -> toAccountFragment()
+                            FAILED -> TODO()
+                        }
+                    })
         }
     }
 
@@ -109,4 +118,12 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
 
         return null
     }
-}// Required empty public constructor
+
+    private fun toAccountFragment(){
+        fragmentManager?.beginTransaction()
+                ?.add(R.id.registroContainer,
+                        RegAccountFragment(), RegAccountFragment::class.java.simpleName)
+                ?.addToBackStack(RegAccountFragment::class.java.simpleName)
+                ?.commit()
+    }
+}

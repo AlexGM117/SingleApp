@@ -1,8 +1,6 @@
 package com.softhink.single.registro.view
 
-
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,24 +12,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.BaseFragment
 import com.softhink.single.DialogCallBack
+import com.softhink.single.GlideApp
 import com.softhink.single.R
-import com.softhink.single.registro.presenter.RegistroContract
+import com.softhink.single.registro.SignUpViewModel
+import com.softhink.single.registro.Status.*
+import com.softhink.single.survey.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_registro_tres.*
 import java.io.IOException
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
  */
 class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected, DialogCallBack {
 
-    private var callback: RegistroContract.PhotoProfileContract.CallbackPhoto? = null
     private val GALLERY = 0
     private val CAMERA = 1
     private val PERMISSION_REQUEST_READ_STORAGE = 1
 
+    private lateinit var model: SignUpViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        model = activity?.run {
+            ViewModelProviders.of(this).get(SignUpViewModel::class.java)
+        }?:throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -49,16 +61,6 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        try {
-            callback = context as RegistroContract.PhotoProfileContract.CallbackPhoto?
-        } catch (e: ClassCastException) {
-
-        }
-
-    }
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_REQUEST_READ_STORAGE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -73,7 +75,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
                 val contentURI = data.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
-                    imagePreview!!.setImageBitmap(bitmap)
+                    GlideApp.with(this).load(bitmap).centerCrop().into(imagePreview)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
@@ -82,7 +84,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
 
             CAMERA -> if (data != null) {
                 val thumbnail = data.extras!!.get("data") as Bitmap
-                imagePreview!!.setImageBitmap(thumbnail)
+                GlideApp.with(this).load(thumbnail).centerCrop().into(imagePreview)
             }
         }
     }
@@ -93,7 +95,13 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
         when (v.id) {
             R.id.btnPrevious -> fragmentManager?.popBackStack()
 
-            R.id.btnSendForm -> callback!!.callService(null)
+            R.id.btnSendForm -> model.callSignUpService().observe(this, Observer {
+                when(it.status){
+                    SUCCESS -> signUpSuccess("")
+                    ERROR -> showMessageDialog("")
+                    FAILED -> showMessageDialog(it.data.toString())
+                }
+            })
 
             R.id.selectPhoto -> if (checkPermissions()) {
                 showImagePickerDialog(this)
@@ -123,4 +131,18 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
     override fun onCancel() {
 
     }
-}// Required empty public constructor
+
+    private fun signUpSuccess(message: String){
+        val intent = Intent(activity, SurveyActivity::class.java)
+        showMessageDialog(message, object : DialogCallBack {
+            override fun onAccept() {
+                startActivity(intent)
+                activity?.finish()
+            }
+
+            override fun onCancel() {
+                activity?.finish()
+            }
+        })
+    }
+}

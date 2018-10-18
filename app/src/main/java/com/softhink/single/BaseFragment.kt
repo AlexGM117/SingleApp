@@ -61,6 +61,16 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
+    fun showMessageDialog(message: String, listener: DialogCallBack){
+        MaterialDialog(context!!)
+                .title(R.string.app_name)
+                .message(text = message)
+                .positiveButton(text = "Continuar"){
+                    listener.onAccept()
+                }
+                .show()
+    }
+
     interface OnOptionsSelected {
         fun fromGalery()
         fun fromCamera()

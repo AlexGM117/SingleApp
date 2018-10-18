@@ -10,9 +10,9 @@ import retrofit2.http.POST
 
 interface SingleService {
 
-    @POST("/users/login")
+    @POST("users/login")
     fun login(@Body request:LoginRequest) : Call<BaseResponse<LoginResponse>>
 
-    @POST("/users/register")
-    fun userRegistry(@Body request: RegRequest) : Call<BaseResponse<Any>>
+    @POST("users/register")
+    fun userRegistry(@Body request: RegRequest) : Call<BaseResponse<GenericObserver<Any>>>
 }

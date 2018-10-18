@@ -1,24 +1,34 @@
 package com.softhink.single.registro.view
 
-
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.softhink.single.BaseFragment
 import com.softhink.single.R
-import com.softhink.single.registro.presenter.RegistroContract
+import com.softhink.single.registro.SignUpViewModel
+import com.softhink.single.registro.Status.*
 import kotlinx.android.synthetic.main.arrow_back_and_next.*
 import kotlinx.android.synthetic.main.fragment_registro_dos.*
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
  */
-class RegAccountFragment : Fragment(), View.OnClickListener {
+class RegAccountFragment : BaseFragment(), View.OnClickListener {
 
-    private var callback: RegistroContract.AccountContract.CallbackAccount? = null
+    private lateinit var model: SignUpViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        model = activity?.run {
+            ViewModelProviders.of(this).get(SignUpViewModel::class.java)
+        }?:throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -35,24 +45,28 @@ class RegAccountFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        try {
-            callback = context as RegistroContract.AccountContract.CallbackAccount?
-        } catch (e: ClassCastException) {
-            throw ClassCastException(activity.toString() + " must implements interface")
-        }
-
-    }
-
     override fun onClick(v: View) {
         val fragmentManager = fragmentManager
         when (v.id) {
-            R.id.btnLastPage -> callback?.accountData(inputEmail!!.editText?.text.toString(),
-                    inputPss!!.editText?.text.toString(),
-                    inputPss2!!.editText?.text.toString())
-
+            R.id.btnLastPage -> model.accountData(inputEmail.editText?.text?.trim().toString(),
+                    inputPss.editText?.text?.trim().toString(),
+                    inputPss2.editText?.text?.trim().toString()).observe(this,
+                    Observer {
+                        when(it.status){
+                            SUCCESS -> finishSignUp()
+                            ERROR -> showMessageDialog(getString(it.message))
+                            FAILED -> TODO()
+                        }
+                    })
             R.id.btnFirstPage -> fragmentManager?.popBackStack()
         }
     }
-}// Required empty public constructor
+
+    fun finishSignUp() {
+        fragmentManager?.beginTransaction()
+                ?.add(R.id.registroContainer,
+                        RegistroTresFragment(), RegistroTresFragment::class.java.simpleName)
+                ?.addToBackStack(RegistroTresFragment::class.java.simpleName)
+                ?.commit()
+    }
+}

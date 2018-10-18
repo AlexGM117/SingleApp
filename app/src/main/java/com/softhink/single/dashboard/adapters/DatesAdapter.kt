@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.softhink.single.R
+import com.varunest.sparkbutton.SparkButton
 
 class DatesAdapter(val dateList: ArrayList<String>) : RecyclerView.Adapter<DatesAdapter.DateViewHolder>() {
 
@@ -21,9 +22,11 @@ class DatesAdapter(val dateList: ArrayList<String>) : RecyclerView.Adapter<Dates
 
     override fun onBindViewHolder(holder: DateViewHolder, position: Int) {
         holder.dateDesc.text = dateList[position]
+        holder.fav.isChecked = false
     }
 
     class DateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dateDesc = itemView.findViewById<TextView>(R.id.dateDescription)
+        val fav = itemView.findViewById<SparkButton>(R.id.favoriteDate)
     }
 }

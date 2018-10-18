@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.igalata.bubblepicker.BubblePickerListener
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter
 import com.igalata.bubblepicker.model.PickerItem
@@ -44,7 +45,8 @@ class TastesFragment : Fragment(),
                         title = tastes[position]
                         textColor = Color.WHITE
                         textSize = 32F
-                        color = Color.parseColor("#4464b0")
+                        color = Color.parseColor("#8b9dd3")
+                        backgroundImage = ContextCompat.getDrawable(context!!, R.drawable.bg_bubble_blue)
                     }
                 }
             }

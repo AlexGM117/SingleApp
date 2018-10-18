@@ -9,5 +9,16 @@
 
     <string name="date_mask">0%1$d</string>
 
-    <string name="empty_name">Agrega tu nombre para registrarte</string>
+    <!--REGISTRO-->
+    <string name="signup_succes">Complete</string>
+    <string name="signup_empty_name">Agrega tu nombre para registrarte</string>
+    <string name="signup_invalid_name">Desbes agregar un nombre válido</string>
+    <string name="signup_birthday_null">Agrega tu fecha de nacimiento</string>
+    <string name="signup_under_age">Debes ser mayor de edad para poder utilizar la aplicacion</string>
+    <string name="signup_missing_gender">Selecciona H ó M</string>
+    <string name="signup_missing_email">Agrega una direccion de correo electronico</string>
+    <string name="signup_invalid_email">Agrega una direccion de correo electronico valida</string>
+    <string name="signup_missing_pss">Ingresa una contraseña y confirmala</string>
+    <string name="signup_pss_lenght">Tú contraseña debe contener minimo 8 caracteres</string>
+    <string name="signup_pss_match">Verifica la contraseña que ingresaste</string>
 </resources>

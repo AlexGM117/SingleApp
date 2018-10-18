@@ -24,7 +24,7 @@ class InterestsFragment : Fragment(), BubblePickerListener, View.OnClickListener
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_interests, container, false)
+        return inflater.inflate(R.layout.fragment_interests, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,13 +37,13 @@ class InterestsFragment : Fragment(), BubblePickerListener, View.OnClickListener
                 override val totalCount: Int
                     get() = titles.size
 
-                override fun getItem(i: Int): PickerItem {
-                    val item = PickerItem()
-                    item.title = titles[i]
-                    item.color = Color.parseColor("#DA7C86")
-                    item.textColor = Color.WHITE
-                    item.backgroundImage = ContextCompat.getDrawable(context!!, R.drawable.background_bubble)
-                    return item
+                override fun getItem(position: Int): PickerItem {
+                    return PickerItem().apply {
+                        title = titles[position]
+                        color = Color.parseColor("#DA7C86")
+                        textColor = Color.WHITE
+                        backgroundImage = ContextCompat.getDrawable(context!!, R.drawable.bg_bubble_red)
+                    }
                 }
             }
 
@@ -86,4 +86,4 @@ class InterestsFragment : Fragment(), BubblePickerListener, View.OnClickListener
     override fun onBubbleDeselected(pickerItem: PickerItem) {
         Log.i("SingleApp", "Burbuja desseleccionada: " + pickerItem.title!!)
     }
-}// Required empty public constructor
+}
