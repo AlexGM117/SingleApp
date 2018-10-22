@@ -69,10 +69,8 @@ class InterestsFragment : Fragment(), BubblePickerListener, View.OnClickListener
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnLastPage -> fragmentManager?.beginTransaction()?.
-                    replace(R.id.containerPreferences,
-                    TastesFragment(),
-                    TastesFragment::class.java.simpleName)
-                    ?.addToBackStack(TastesFragment::class.java.simpleName)
+                    add(R.id.containerPreferences, TastesFragment(), TastesFragment::class.java.simpleName)?.
+                    addToBackStack(TastesFragment::class.java.simpleName)
                     ?.commit()
 
             R.id.btnFirstPage -> fragmentManager?.popBackStack()

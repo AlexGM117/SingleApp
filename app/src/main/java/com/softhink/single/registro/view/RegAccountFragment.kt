@@ -54,7 +54,7 @@ class RegAccountFragment : BaseFragment(), View.OnClickListener {
                     Observer {
                         when(it.status){
                             SUCCESS -> finishSignUp()
-                            ERROR -> showMessageDialog(getString(it.message))
+                            ERROR -> showMessageDialog(getString(it.data))
                             FAILED -> TODO()
                         }
                     })
@@ -62,7 +62,7 @@ class RegAccountFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    fun finishSignUp() {
+    private fun finishSignUp() {
         fragmentManager?.beginTransaction()
                 ?.add(R.id.registroContainer,
                         RegistroTresFragment(), RegistroTresFragment::class.java.simpleName)

@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_dates.*
 /**
  * A simple [Fragment] subclass.
  */
-class DatesFragment : BaseFragment() {
+class DatesFragment : BaseFragment(), DatesAdapter.RecyclerClickListener {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +38,7 @@ class DatesFragment : BaseFragment() {
         dates.add("Cita con Daniel Díaz")
         dates.add("Cita con Diana Mendoza")
 
-        datesRecycler.adapter = DatesAdapter(dates)
+        datesRecycler.adapter = DatesAdapter(dates, this)
 
         actionButton.addActionItem(SpeedDialActionItem
                 .Builder(R.id.action_all, R.drawable.ic_action_all)
@@ -51,5 +51,9 @@ class DatesFragment : BaseFragment() {
                 .setFabBackgroundColor(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
                 .setLabel("Favoritos")
                 .create())
+    }
+
+    override fun onClick() {
+
     }
 }

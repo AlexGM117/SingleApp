@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".dashboard.DatesFragment"
+    tools:context=".dashboard.dates.DatesFragment"
     android:background="@android:color/white">
 
     <androidx.recyclerview.widget.RecyclerView

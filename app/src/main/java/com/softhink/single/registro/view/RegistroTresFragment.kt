@@ -34,8 +34,8 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
     private val GALLERY = 0
     private val CAMERA = 1
     private val PERMISSION_REQUEST_READ_STORAGE = 1
-
     private lateinit var model: SignUpViewModel
+    private val surveyFlag = "SURVEY_DESTINATION"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,13 +95,17 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
         when (v.id) {
             R.id.btnPrevious -> fragmentManager?.popBackStack()
 
-            R.id.btnSendForm -> model.callSignUpService().observe(this, Observer {
-                when(it.status){
-                    SUCCESS -> signUpSuccess("")
-                    ERROR -> showMessageDialog("")
-                    FAILED -> showMessageDialog(it.data.toString())
-                }
-            })
+            R.id.btnSendForm -> {
+//                model.callSignUpService().observe(this, Observer {
+//                    when (it.status) {
+//                        SUCCESS -> signUpSuccess("")
+//                        ERROR -> showMessageDialog("")
+//                        FAILED -> showMessageDialog(it.data.toString())
+//                    }
+//                })
+
+                signUpSuccess("Registro exitoso")
+            }
 
             R.id.selectPhoto -> if (checkPermissions()) {
                 showImagePickerDialog(this)
@@ -134,6 +138,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
 
     private fun signUpSuccess(message: String){
         val intent = Intent(activity, SurveyActivity::class.java)
+        intent.putExtra(surveyFlag, true)
         showMessageDialog(message, object : DialogCallBack {
             override fun onAccept() {
                 startActivity(intent)

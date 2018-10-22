@@ -1,13 +1,11 @@
 package com.softhink.single;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import java.util.List;
 
 public class SingleHeaderAdapter extends ArrayAdapter<String> {
@@ -16,7 +14,6 @@ public class SingleHeaderAdapter extends ArrayAdapter<String> {
     private int layoutId;
     private Holder holder;
     public View view;
-    public int currPosition = 0;
 
     public SingleHeaderAdapter(Context context, int textViewResourceId,
                                List<String> list) {

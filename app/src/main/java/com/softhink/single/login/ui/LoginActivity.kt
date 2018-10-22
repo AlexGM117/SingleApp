@@ -14,7 +14,7 @@ class LoginActivity : BaseActivity() {
         mFragmentManager.beginTransaction()
                 .add(R.id.containerLogin, LoginFragment(),
                         Constants.LOGINFRAGMENT)
-                .commit()
+                .commitNow()
     }
 
 }

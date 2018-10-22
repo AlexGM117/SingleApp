@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-
 import com.appyvet.materialrangebar.RangeBar
 import com.softhink.single.BaseFragment
 import com.softhink.single.Constants
@@ -45,8 +42,7 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
             R.id.btnNextPage -> {
                 val fragmentManager = fragmentManager
                 fragmentManager!!.beginTransaction()
-                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                        .replace(R.id.containerPreferences, InterestsFragment())
+                        .add(R.id.containerPreferences, InterestsFragment())
                         .addToBackStack(Constants.PREFERENCESFRAGMENT)
                         .commit()
             }

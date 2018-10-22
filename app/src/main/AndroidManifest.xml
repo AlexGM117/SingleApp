@@ -25,7 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"> <!--Deep linking false -->
+        tools:ignore="GoogleAppIndexingWarning"> <!-- Deep linking false -->
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -49,13 +49,13 @@
             android:name=".survey.SurveyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.PlaceDetailActivity"
+            android:name=".dashboard.places.PlaceDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".onboarding.OnboardingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.EditProfileActivity"
+            android:name=".dashboard.profile.EditProfileActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -72,7 +72,9 @@
         <activity
             android:name=".dashboard.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".dashboard.HelpActivity" />
+        <activity android:name=".dashboard.dates.SingleProfileActivity"></activity>
     </application>
 
 </manifest>

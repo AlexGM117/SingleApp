@@ -9,6 +9,7 @@ import com.softhink.single.login.ui.LoginActivity
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SplashTheme)
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({

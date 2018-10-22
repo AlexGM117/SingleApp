@@ -1,32 +1,49 @@
 package com.softhink.single.survey
 
 import android.os.Bundle
-import android.view.View
 import com.softhink.single.BaseActivity
-import com.softhink.single.Constants
 import com.softhink.single.R
-import kotlinx.android.synthetic.main.survey_layout.*
+import com.softhink.single.TermsFragment
 
-class SurveyActivity : BaseActivity(), View.OnClickListener {
+class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
+
+    private val surveyFlag = "SURVEY_DESTINATION"
+    private var welcomeScreen : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
 
-        setUpToolbar("Encuesta", false)
+        welcomeScreen = intent.getBooleanExtra(surveyFlag, false)
 
-        btnSurvey.setOnClickListener(this)
+        if (welcomeScreen) {
+            setUpToolbar("Encuesta", false)
+            supportFragmentManager?.beginTransaction()?.
+                    replace(R.id.containerPreferences, SurveyFragment())?.
+                    commitNow()
+        } else {
+            setUpToolbar("Parámetros", true)
+            supportFragmentManager?.beginTransaction()?.
+                    replace(R.id.containerPreferences, PreferencesFragment())?.
+                    commitNow()
+        }
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.btnSurvey -> {
-                setNavigationUp()
-                mFragmentManager.beginTransaction()
-                        .add(R.id.containerPreferences, PreferencesFragment(),
-                                Constants.PREFERENCESFRAGMENT).commit()
-            }
+    override fun onBackPressed() {
+        if (supportFragmentManager.findFragmentByTag(TermsFragment::class.java.simpleName) == null){
+            super.onBackPressed()
         }
+    }
 
+    override fun showTerms() {
+        if (welcomeScreen){
+            supportFragmentManager?.
+                    beginTransaction()?.
+                    replace(R.id.containerPreferences, TermsFragment(), TermsFragment::class.java.simpleName)?.
+                    commit()
+        } else{
+            //Call Service
+            finish()
+        }
     }
 }

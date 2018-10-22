@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 object SingleClient {
     lateinit var clientBuilder : OkHttpClient.Builder
     var loggingInterceptor = HttpLoggingInterceptor()
+    private var BASE_URL = "http://singleservices.ddns.net/" //PRO
 
     fun getInstance() : SingleService {
         clientBuilder = OkHttpClient.Builder()
@@ -19,6 +20,9 @@ object SingleClient {
         clientBuilder.writeTimeout(30, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG){
+            //DEV
+//            BASE_URL = "http://singleservices.ddns.net/registro/login"
+
             loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
                 override fun log(message: String) {
                     Log.d("Single Services:", message)
@@ -28,26 +32,25 @@ object SingleClient {
             clientBuilder.interceptors().add(loggingInterceptor)
         }
 
-
-        clientBuilder.addInterceptor(buildInterceptor())
+//        clientBuilder.addInterceptor(buildInterceptor())
 
         return Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(clientBuilder.build())
                 .build()
                 .create(SingleService::class.java)
     }
 
-    private fun buildInterceptor() : Interceptor {
-        return Interceptor { chain ->
-            var request: Request = chain.request()
-            val headers = request.headers().newBuilder()
-                    .add("JsonStub-User-Key", "bca9357c-bbbf-4fbd-a03c-ce38d8b3e1b1")
-                    .add("JsonStub-Project-Key", "66dd5c7a-8ad6-4422-bbd6-77fbaa6435d2")
-                    .build()
-            request = request.newBuilder().headers(headers).build()
-            chain.proceed(request)
-        }
-    }
+//    private fun buildInterceptor() : Interceptor {
+//        return Interceptor { chain ->
+//            var request: Request = chain.request()
+//            val headers = request.headers().newBuilder()
+//                    .add("JsonStub-User-Key", "bca9357c-bbbf-4fbd-a03c-ce38d8b3e1b1")
+//                    .add("JsonStub-Project-Key", "66dd5c7a-8ad6-4422-bbd6-77fbaa6435d2")
+//                    .build()
+//            request = request.newBuilder().headers(headers).build()
+//            chain.proceed(request)
+//        }
+//    }
 }

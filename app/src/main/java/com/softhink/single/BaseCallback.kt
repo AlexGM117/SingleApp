@@ -8,7 +8,11 @@ abstract class BaseCallback<T> : Callback<BaseResponse<T>> {
 
     override fun onResponse(call: Call<BaseResponse<T>>, response: Response<BaseResponse<T>>) {
         if(response.body() != null){
-            handleResponseData(response.body()?.result!!)
+            if (response.body()?.responseCode == "200"){
+                handleResponseData(response.body()?.result!!)
+            } else {
+                handleError(response.body()?.result)
+            }
         } else{
             handleError(response.body()!!)
         }
@@ -24,7 +28,7 @@ abstract class BaseCallback<T> : Callback<BaseResponse<T>> {
 
     protected abstract fun handleResponseData(data: T)
 
-    protected abstract fun handleError(response: BaseResponse<T>)
+    protected abstract fun handleError(error: T?)
 
     protected abstract fun handleException(t: Exception)
 }

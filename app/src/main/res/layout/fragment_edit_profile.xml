@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context="com.softhink.single.dashboard.EditProfileFragment">
+    tools:context="com.softhink.single.dashboard.profile.EditProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -13,16 +13,15 @@ import com.softhink.single.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.dashboard.MainContainer
-import com.softhink.single.login.LoginCommonView
 import com.softhink.single.login.LoginViewModel
+import com.softhink.single.registro.Status.*
 import kotlinx.android.synthetic.main.fragment_login_common.*
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class LoginCommonFragment : BaseFragment(), LoginCommonView,
-        View.OnClickListener {
+class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var txtUser: TextInputLayout
     private lateinit var txtPss: TextInputLayout
@@ -75,38 +74,28 @@ class LoginCommonFragment : BaseFragment(), LoginCommonView,
 
     private fun doLogin(toString: String, toString1: String) {
         mViewModel.login(toString, toString1).observe(this, Observer {
-            if (it.user?.token != null){
-                loginSuccess()
+            when (it.status){
+                SUCCESS -> loginSuccess()
+                ERROR -> loginFail(it.data)
+                FAILED -> loginFail(it.data)
             }
         })
     }
-    override fun emailEmpty() {
+    fun emailEmpty() {
         showMessageDialog("Usuario ó email vacio")
     }
 
-    override fun passEmpty() {
+    fun passEmpty() {
         showMessageDialog("Contraseña vacia")
     }
 
-    override fun loginSuccess() {
+    fun loginSuccess() {
         val intent = Intent(activity, MainContainer::class.java)
         startActivity(intent)
         activity?.finish()
     }
 
-    override fun loginFail() {
-
-    }
-
-    override fun serviceUnavailable() {
-
-    }
-
-    override fun showProgress() {
-
-    }
-
-    override fun hideProgress() {
-
+    fun loginFail(message: String) {
+        showMessageDialog(message)
     }
 }

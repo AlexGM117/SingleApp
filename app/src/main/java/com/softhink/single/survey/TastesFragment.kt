@@ -1,6 +1,6 @@
 package com.softhink.single.survey
 
-import android.content.Intent
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,7 @@ import com.igalata.bubblepicker.BubblePickerListener
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter
 import com.igalata.bubblepicker.model.PickerItem
 import com.softhink.single.R
-import com.softhink.single.dashboard.MainContainer
+import com.softhink.single.TermsFragment
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_tastes.*
 
@@ -24,6 +24,7 @@ class TastesFragment : Fragment(),
         View.OnClickListener, BubblePickerListener {
 
     private lateinit var tastes :Array<String>
+    private lateinit var callback: CallbackSurvey
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -59,6 +60,11 @@ class TastesFragment : Fragment(),
         }
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        callback = context as CallbackSurvey
+    }
+
     override fun onResume() {
         super.onResume()
         pickerTastes.onResume()
@@ -72,8 +78,7 @@ class TastesFragment : Fragment(),
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnSendSurvey -> {
-                startActivity(Intent(activity, MainContainer::class.java))
-                activity?.finish()
+                callback.showTerms()
             }
 
             R.id.btnPrevious -> {
@@ -88,5 +93,9 @@ class TastesFragment : Fragment(),
 
     override fun onBubbleSelected(item: PickerItem) {
 
+    }
+
+    interface CallbackSurvey {
+        fun showTerms()
     }
 }

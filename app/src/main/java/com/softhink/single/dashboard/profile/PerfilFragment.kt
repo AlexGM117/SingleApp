@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.fragment_perfil.*
  */
 class PerfilFragment : Fragment(), View.OnClickListener {
 
+    private val surveyFlag = "SURVEY_DESTINATION"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,7 +35,7 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         var intent: Intent? = null
         when (v.id) {
-            R.id.toEditParams -> intent = Intent(activity, SurveyActivity::class.java)
+            R.id.toEditParams -> intent = Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, false)
 
             R.id.toEditProfile -> intent = Intent(activity, EditProfileActivity::class.java)
 

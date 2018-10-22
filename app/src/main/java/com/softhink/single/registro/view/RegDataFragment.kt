@@ -70,7 +70,7 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
                     userBirthday, gender).observe(this,
                     Observer {
                         when(it.status){
-                            ERROR -> showMessageDialog(getString(it.message))
+                            ERROR -> showMessageDialog(getString(it.data))
                             SUCCESS -> toAccountFragment()
                             FAILED -> TODO()
                         }

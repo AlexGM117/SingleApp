@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    android:id="@+id/dateItemCard"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="80dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".2">
+        android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/avatar"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/dateDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cita con Tania Ramírez"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:gravity="center">
+
+            <com.like.LikeButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon_type="heart"
+                app:icon_size="25dp"
+                app:liked="false"
+                app:like_drawable="@drawable/ic_fav_on"
+                app:unlike_drawable="@drawable/ic_fav_off"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight=".6"
-        android:gravity="center_vertical"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/dateDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cita con Tania Ramírez"
-            style="@style/TextAppearance.AppCompat.Medium"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight=".2"
-        android:gravity="center">
-
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/favoriteDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:sparkbutton_activeImage="@drawable/ic_range_on"
-            app:sparkbutton_inActiveImage="@drawable/ic_range_off"
-            app:sparkbutton_iconSize="30dp"
-            app:sparkbutton_primaryColor="@color/colorAccent"
-            app:sparkbutton_secondaryColor="@color/colorAccent"
-            app:sparkbutton_animationSpeed="1.5"
-            />
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

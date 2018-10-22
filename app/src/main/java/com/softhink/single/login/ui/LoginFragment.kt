@@ -57,4 +57,4 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-}// Required empty public constructor
+}

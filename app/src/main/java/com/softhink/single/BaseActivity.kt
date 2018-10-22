@@ -45,17 +45,6 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun setNavigationUp() {
-        toolbar.setNavigationIcon(R.drawable.back)
-        toolbar.setNavigationOnClickListener {
-            if (supportFragmentManager.backStackEntryCount > 0) {
-                supportFragmentManager.popBackStack()
-            } else {
-                finish()
-            }
-        }
-    }
-
     fun setUpToolbar(title: String, listener: View.OnClickListener){
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = title

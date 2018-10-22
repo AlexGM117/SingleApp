@@ -1,4 +1,7 @@
 package com.softhink.single.models.request
 
-class RegRequest(name: String, date: String, gender: String,
-                 email: String, pss: String, imageProfile: String?) : BaseRequest()
+data class RegRequest(var name: String?, var date: String?, var gender: String?,
+                      var email: String?, var pss: String?, var imageProfile: String?) : BaseRequest(){
+
+    constructor() : this(null, null, null, null, null, null)
+}

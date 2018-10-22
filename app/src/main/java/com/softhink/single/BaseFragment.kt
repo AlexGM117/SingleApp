@@ -12,12 +12,9 @@ import com.afollestad.materialdialogs.list.listItems
 
 abstract class BaseFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    fun updateToolbar(title: String, back: Boolean){
+        val toolbar = activity!! as BaseActivity
+        toolbar.setUpToolbar(title, back)
     }
 
     fun showMessageDialog(message: String){
@@ -67,6 +64,19 @@ abstract class BaseFragment : Fragment() {
                 .message(text = message)
                 .positiveButton(text = "Continuar"){
                     listener.onAccept()
+                }
+                .show()
+    }
+
+    fun showMessageDialog(title: String, message: String, listener: DialogCallBack){
+        MaterialDialog(context!!)
+                .title(text = title)
+                .message(text = message)
+                .positiveButton(text = "CONTINUAR"){
+                    listener.onAccept()
+                }
+                .negativeButton(text = "CANCELAR") {
+                    listener.onCancel()
                 }
                 .show()
     }

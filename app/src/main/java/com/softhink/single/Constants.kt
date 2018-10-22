@@ -1,8 +1,8 @@
 package com.softhink.single
 
-import com.softhink.single.dashboard.DatesFragment
-import com.softhink.single.dashboard.PerfilFragment
-import com.softhink.single.dashboard.PlacesFragment
+import com.softhink.single.dashboard.dates.DatesFragment
+import com.softhink.single.dashboard.profile.PerfilFragment
+import com.softhink.single.dashboard.places.PlacesFragment
 import com.softhink.single.survey.PreferencesFragment
 import com.softhink.single.login.ui.LoginCommonFragment
 import com.softhink.single.login.ui.LoginFragment

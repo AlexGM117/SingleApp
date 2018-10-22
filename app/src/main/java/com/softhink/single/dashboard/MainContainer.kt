@@ -11,6 +11,9 @@ import com.softhink.single.login.ui.LoginActivity
 import com.softhink.single.onboarding.OnboardingActivity
 import com.softhink.single.R
 import com.softhink.single.dashboard.adapters.PagerAdapter
+import com.softhink.single.dashboard.dates.DatesFragment
+import com.softhink.single.dashboard.places.PlacesFragment
+import com.softhink.single.dashboard.profile.PerfilFragment
 
 class MainContainer : BaseActivity() {
 
@@ -53,7 +56,17 @@ class MainContainer : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val FRAGMENT_KEY = "FRAGMENT_MENU"
+
         when (item.itemId) {
+            R.id.menuHelp -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 0))
+
+            R.id.menuAsk -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 1))
+
+            R.id.menuTerms -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 2))
+
+            R.id.menuAbout -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 3))
+
             R.id.menuOnboarding -> startActivity(Intent(this, OnboardingActivity::class.java))
 
             R.id.menuLogout -> {

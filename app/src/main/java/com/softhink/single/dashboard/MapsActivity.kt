@@ -17,7 +17,6 @@ import com.softhink.single.SingleHeaderAdapter
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 
-
 class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private lateinit var mMap: GoogleMap
