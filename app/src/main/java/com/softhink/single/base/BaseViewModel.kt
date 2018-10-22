@@ -1,3 +1,3 @@
-package com.softhink.single
+package com.softhink.single.base
 
 abstract class BaseViewModel

@@ -1,14 +1,14 @@
-package com.softhink.single
+package com.softhink.single.base
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.list.listItems
+import com.softhink.single.DialogCallBack
+import com.softhink.single.R
 
 abstract class BaseFragment : Fragment() {
 

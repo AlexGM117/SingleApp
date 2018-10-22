@@ -1,4 +1,6 @@
-package com.softhink.single
+package com.softhink.single.base
+
+import com.softhink.single.SingleRepository
 
 abstract class BasePresenter {
 

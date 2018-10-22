@@ -12,31 +12,46 @@ import com.softhink.single.registro.Status
 class LoginViewModel : ViewModel() {
 
     private var repository: SingleRepository = SingleRepository()
-    private var dataLogin = SingleLiveEvent<GenericObserver<String>>()
+    private var login = SingleLiveEvent<GenericObserver<String>>()
     private val request = LoginRequest()
 
     fun login(user: String, pss: String): LiveData<GenericObserver<String>> {
         request.username = user
         request.password = pss
-        return makeRequest()
+        if (validateData()){
+            return makeRequest()
+        }
+        return login
     }
 
-    fun makeRequest() : LiveData<GenericObserver<String>> {
+    private fun makeRequest() : LiveData<GenericObserver<String>> {
         repository.callLogin(request, object : BaseCallback<String>() {
             override fun handleResponseData(data: String) {
-                dataLogin.value = GenericObserver(Status.SUCCESS, data)
+                login.value = GenericObserver(Status.SUCCESS, data)
             }
 
             override fun handleError(error: String?) {
-                dataLogin.value = GenericObserver(Status.ERROR, "error")
+                login.value = GenericObserver(Status.ERROR, "error")
             }
 
             override fun handleException(t: Exception) {
-                dataLogin.value = GenericObserver(Status.FAILED, t.message!!)
+                login.value = GenericObserver(Status.FAILED, t.message!!)
             }
         })
 
-        return dataLogin
+        return login
     }
 
+    private fun validateData(): Boolean{
+        if (request.username.isNullOrBlank()){
+            login.value = GenericObserver(Status.ERROR, "Ingresa tu correo y contraeña para ingresar")
+            return false
+        }
+        if (request.password.isNullOrBlank()){
+            login.value = GenericObserver(Status.ERROR, "Ingresa tu correo y contraeña para ingresar")
+            return false
+        }
+
+        return true
+    }
 }

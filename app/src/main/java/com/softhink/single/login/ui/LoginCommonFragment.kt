@@ -81,13 +81,6 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
             }
         })
     }
-    fun emailEmpty() {
-        showMessageDialog("Usuario ó email vacio")
-    }
-
-    fun passEmpty() {
-        showMessageDialog("Contraseña vacia")
-    }
 
     fun loginSuccess() {
         val intent = Intent(activity, MainContainer::class.java)

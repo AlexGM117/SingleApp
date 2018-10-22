@@ -1,4 +1,4 @@
-package com.softhink.single
+package com.softhink.single.base
 
 import com.softhink.single.models.response.BaseResponse
 import retrofit2.Call

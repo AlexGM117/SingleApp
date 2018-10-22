@@ -1,4 +1,4 @@
-package com.softhink.single
+package com.softhink.single.base
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.View
 import com.afollestad.materialdialogs.MaterialDialog
+import com.softhink.single.DialogCallBack
+import com.softhink.single.R
 
 abstract class BaseActivity : AppCompatActivity() {
 
