@@ -1,18 +1,16 @@
-package com.softhink.single.dashboard
+package com.softhink.single.dashboard.places
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.softhink.single.R
+import com.softhink.single.dashboard.adapters.PlacesAdapter
 import kotlinx.android.synthetic.main.fragment_places.*
 
 import java.util.ArrayList

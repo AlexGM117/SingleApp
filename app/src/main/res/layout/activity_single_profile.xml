@@ -91,6 +91,11 @@
                     android:gravity="center|start"
                     android:layout_marginBottom="8dp"/>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerGalery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
             </LinearLayout>
 
         </LinearLayout>

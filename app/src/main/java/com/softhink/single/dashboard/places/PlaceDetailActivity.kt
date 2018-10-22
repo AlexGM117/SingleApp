@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard
+package com.softhink.single.dashboard.places
 
 import android.os.Bundle
 import com.softhink.single.BaseActivity

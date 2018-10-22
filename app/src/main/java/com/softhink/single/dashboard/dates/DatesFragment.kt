@@ -1,6 +1,7 @@
-package com.softhink.single.dashboard
+package com.softhink.single.dashboard.dates
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.softhink.single.BaseFragment
-
 import com.softhink.single.R
 import com.softhink.single.dashboard.adapters.DatesAdapter
 import kotlinx.android.synthetic.main.fragment_dates.*
@@ -54,6 +54,6 @@ class DatesFragment : BaseFragment(), DatesAdapter.RecyclerClickListener {
     }
 
     override fun onClick() {
-
+        startActivity(Intent(activity, SingleProfileActivity::class.java))
     }
 }

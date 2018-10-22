@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard
+package com.softhink.single.dashboard.adapters
 
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.softhink.single.R
 import java.util.*
 
-class PlacesAdapter(private val placeList: ArrayList<Int>, private val listener: PlacesAdapter.ClickItem) :
+class PlacesAdapter(private val placeList: ArrayList<Int>, private val listener: ClickItem) :
         RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
