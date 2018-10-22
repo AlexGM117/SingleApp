@@ -1,7 +1,7 @@
 package com.softhink.single.login.ui
 
 import android.os.Bundle
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.Constants
 import com.softhink.single.R
 

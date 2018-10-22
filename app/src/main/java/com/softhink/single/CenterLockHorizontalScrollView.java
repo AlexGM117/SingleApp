@@ -3,12 +3,10 @@ package com.softhink.single;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-
 import java.util.List;
 
 public class CenterLockHorizontalScrollView extends HorizontalScrollView {
@@ -28,7 +26,7 @@ public class CenterLockHorizontalScrollView extends HorizontalScrollView {
         try {
             fillViewWithAdapter(mAdapter);
         } catch (Exception e) {
-
+            e.getMessage();
         }
     }
 

@@ -12,14 +12,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.softhink.single.BaseFragment
+import com.softhink.single.base.BaseFragment
 import com.softhink.single.DialogCallBack
 import com.softhink.single.GlideApp
 import com.softhink.single.R
 import com.softhink.single.registro.SignUpViewModel
-import com.softhink.single.registro.Status.*
 import com.softhink.single.survey.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_registro_tres.*

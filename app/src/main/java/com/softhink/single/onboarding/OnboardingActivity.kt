@@ -3,7 +3,7 @@ package com.softhink.single.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.ZooOutPager
 import com.softhink.single.dashboard.MainContainer

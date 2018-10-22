@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.softhink.single.*
+import com.softhink.single.base.BaseCallback
 import com.softhink.single.models.request.RegRequest
 import java.text.SimpleDateFormat
 import java.util.*
@@ -99,7 +100,7 @@ class SignUpViewModel: ViewModel() {
     }
 
     fun callSignUpService() : LiveData<GenericObserver<Any>> {
-        repository.callRegistro(request, object :BaseCallback<GenericObserver<Any>>(){
+        repository.callRegistro(request, object : BaseCallback<GenericObserver<Any>>(){
             override fun handleResponseData(data: GenericObserver<Any>) {
 
             }

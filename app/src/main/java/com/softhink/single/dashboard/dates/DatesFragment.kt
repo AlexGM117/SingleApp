@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
-import com.softhink.single.BaseFragment
+import com.softhink.single.base.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.dashboard.adapters.DatesAdapter
 import kotlinx.android.synthetic.main.fragment_dates.*

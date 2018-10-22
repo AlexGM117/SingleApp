@@ -1,9 +1,8 @@
 package com.softhink.single.login
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.softhink.single.BaseCallback
+import com.softhink.single.base.BaseCallback
 import com.softhink.single.GenericObserver
 import com.softhink.single.SingleLiveEvent
 import com.softhink.single.SingleRepository

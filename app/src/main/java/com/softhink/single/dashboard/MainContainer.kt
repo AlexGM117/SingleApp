@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.login.ui.LoginActivity
 import com.softhink.single.onboarding.OnboardingActivity
 import com.softhink.single.R

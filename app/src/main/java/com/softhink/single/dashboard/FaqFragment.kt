@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.softhink.single.BaseFragment
+import com.softhink.single.base.BaseFragment
 
 import com.softhink.single.R
 

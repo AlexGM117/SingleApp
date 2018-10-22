@@ -1,7 +1,7 @@
 package com.softhink.single.dashboard.places
 
 import android.os.Bundle
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
 
 class PlaceDetailActivity : BaseActivity() {

@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.softhink.single.BaseFragment
+import com.softhink.single.base.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.dashboard.MainContainer

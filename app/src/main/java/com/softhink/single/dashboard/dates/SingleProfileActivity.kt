@@ -2,7 +2,7 @@ package com.softhink.single.dashboard.dates
 
 import android.os.Bundle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.dashboard.adapters.GaleryAdapter
 import kotlinx.android.synthetic.main.activity_single_profile.*
@@ -16,6 +16,6 @@ class SingleProfileActivity : BaseActivity() {
 
         recyclerGalery.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         recyclerGalery.adapter = GaleryAdapter()
-        recyclerGalery.addItemDecoration(SpacesItemDecoration(8))
+        recyclerGalery.addItemDecoration(SpacesItemDecoration(3))
     }
 }

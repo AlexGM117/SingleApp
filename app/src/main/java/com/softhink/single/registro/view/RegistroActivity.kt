@@ -3,7 +3,7 @@ package com.softhink.single.registro.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.softhink.single.BaseActivity
+import com.softhink.single.base.BaseActivity
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.login.ui.LoginActivity

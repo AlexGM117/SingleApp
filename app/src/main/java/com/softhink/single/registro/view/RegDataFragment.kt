@@ -1,7 +1,6 @@
 package com.softhink.single.registro.view
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,12 +10,10 @@ import android.widget.DatePicker
 import android.widget.RadioGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.softhink.single.BaseFragment
+import com.softhink.single.base.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.registro.SignUpViewModel
-import com.softhink.single.registro.Status
 import com.softhink.single.registro.Status.*
-import com.softhink.single.registro.presenter.RegistroContract
 import kotlinx.android.synthetic.main.arrow_next.*
 import kotlinx.android.synthetic.main.fragment_registro_uno.*
 import java.lang.Exception

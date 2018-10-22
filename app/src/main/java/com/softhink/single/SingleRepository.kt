@@ -1,5 +1,6 @@
 package com.softhink.single
 
+import com.softhink.single.base.BaseCallback
 import com.softhink.single.models.request.LoginRequest
 import com.softhink.single.models.request.RegRequest
 
