@@ -65,4 +65,5 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "com.leinardi.android:speed-dial:2.0.0"
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+    implementation 'com.facebook.android:facebook-android-sdk:4.37.0'
 }

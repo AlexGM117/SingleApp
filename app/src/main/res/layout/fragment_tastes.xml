@@ -14,11 +14,21 @@
         layout="@layout/arrow_back"
         android:layout_margin="8dp" />
 
+    <Button
+        android:id="@+id/btnSendSurvey"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/containerButtons"
+        style="@style/ButtonSingle"
+        android:layout_centerHorizontal="true"
+        android:text="Guardar cambios" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_above="@id/containerButtons"  >
+        android:layout_above="@id/btnSendSurvey"
+        android:layout_marginBottom="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,16 +50,6 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnSendSurvey"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_weight=".08"
-            style="@style/ButtonSingle"
-            android:layout_gravity="center_horizontal"
-            android:text="Guardar cambios"
-            android:textSize="14sp"/>
 
     </LinearLayout>
 

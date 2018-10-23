@@ -8,9 +8,9 @@ import com.softhink.single.login.ui.LoginCommonFragment
 import com.softhink.single.login.ui.LoginFragment
 import com.softhink.single.login.ui.PassRecoveryFragment
 import com.softhink.single.login.ui.PassTmpFragment
-import com.softhink.single.registro.view.RegAccountFragment
-import com.softhink.single.registro.view.RegDataFragment
-import com.softhink.single.registro.view.RegistroTresFragment
+import com.softhink.single.registro.view.SignUpAccountFragment
+import com.softhink.single.registro.view.SignUpDataFragment
+import com.softhink.single.registro.view.SignUpFinishFragment
 
 object Constants {
     val DATESFRAGMENT = DatesFragment::class.java.simpleName
@@ -20,8 +20,8 @@ object Constants {
     val LOGINFRAGMENT = LoginFragment::class.java.simpleName
     val PASSRECOVERYFRAGMENT = PassRecoveryFragment::class.java.simpleName
     val PASSTMPFRAGMENT = PassTmpFragment::class.java.simpleName
-    val REGISTRODOSFRAGMENT = RegAccountFragment::class.java.simpleName
-    val REGISTROTRESFRAGMENT = RegistroTresFragment::class.java.simpleName
-    val REGISTROUNOFRAGMENT = RegDataFragment::class.java.simpleName
+    val REGISTRODOSFRAGMENT = SignUpAccountFragment::class.java.simpleName
+    val REGISTROTRESFRAGMENT = SignUpFinishFragment::class.java.simpleName
+    val REGISTROUNOFRAGMENT = SignUpDataFragment::class.java.simpleName
     val PREFERENCESFRAGMENT = PreferencesFragment::class.java.simpleName
 }

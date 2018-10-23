@@ -42,7 +42,7 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
             R.id.btnNextPage -> {
                 val fragmentManager = fragmentManager
                 fragmentManager!!.beginTransaction()
-                        .add(R.id.containerPreferences, InterestsFragment())
+                        .replace(R.id.containerPreferences, InterestsFragment())
                         .addToBackStack(Constants.PREFERENCESFRAGMENT)
                         .commit()
             }
@@ -52,4 +52,4 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
     override fun onRangeChangeListener(rangeBar: RangeBar, leftPinIndex: Int, rightPinIndex: Int, leftPinValue: String, rightPinValue: String) {
 
     }
-}// Required empty public constructor
+}

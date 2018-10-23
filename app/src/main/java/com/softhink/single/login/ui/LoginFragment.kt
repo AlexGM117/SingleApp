@@ -7,16 +7,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.softhink.single.Constants
+import com.softhink.single.DialogCallBack
 import com.softhink.single.R
-import com.softhink.single.dashboard.MainContainer
-import com.softhink.single.registro.view.RegistroActivity
+import com.softhink.single.base.BaseFragment
+import com.softhink.single.registro.view.SignUpActivity
+import com.softhink.single.survey.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_login.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class LoginFragment : Fragment(), View.OnClickListener {
+class LoginFragment : BaseFragment(), View.OnClickListener {
+
+    private lateinit var callbackManager: CallbackManager
+    private val surveyFlag = "SURVEY_DESTINATION"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        callbackManager = CallbackManager.Factory.create()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,13 +50,16 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
     override fun onClick(v: View) {
         val fragmentManager = fragmentManager
         when (v.id) {
             R.id.btnLoginFB -> {
-                activity?.finish()
-                startActivity(Intent(context, MainContainer::class.java))
+                facebookCallback()
             }
 
             R.id.btnDoLogin -> fragmentManager?.beginTransaction()
@@ -52,9 +71,39 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     ?.commit()
 
             R.id.registro -> {
-                startActivity(Intent(activity, RegistroActivity::class.java))
+                startActivity(Intent(activity, SignUpActivity::class.java))
                 activity?.finish()
             }
         }
+    }
+
+    private fun facebookCallback() {
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                val intent = Intent(activity, SurveyActivity::class.java)
+                intent.putExtra(surveyFlag, true)
+                showMessageDialog("Registro exitoso", object : DialogCallBack {
+                    override fun onAccept() {
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+
+                    override fun onCancel() {
+                        activity?.finish()
+                    }
+                })
+            }
+
+            override fun onCancel() {
+
+            }
+
+            override fun onError(error: FacebookException?) {
+
+            }
+
+        })
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"))
     }
 }

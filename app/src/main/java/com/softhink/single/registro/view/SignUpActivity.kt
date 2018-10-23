@@ -8,17 +8,17 @@ import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.login.ui.LoginActivity
 
-class RegistroActivity : BaseActivity(), View.OnClickListener{
+class SignUpActivity : BaseActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registro)
+        setContentView(R.layout.activity_signup)
 
         if (savedInstanceState == null) {
             setUpToolbar("Registro", this)
             mFragmentManager = supportFragmentManager
             mFragmentManager.beginTransaction()
-                    .add(R.id.registroContainer, RegDataFragment(),
+                    .add(R.id.signUpContainer, SignUpDataFragment(),
                             Constants.REGISTROUNOFRAGMENT)
                     .commit()
         }

@@ -20,14 +20,14 @@ import com.softhink.single.R
 import com.softhink.single.registro.SignUpViewModel
 import com.softhink.single.survey.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
-import kotlinx.android.synthetic.main.fragment_registro_tres.*
+import kotlinx.android.synthetic.main.fragment_signup_finish.*
 import java.io.IOException
 import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
  */
-class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected, DialogCallBack {
+class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected, DialogCallBack {
 
     private val GALLERY = 0
     private val CAMERA = 1
@@ -46,7 +46,7 @@ class RegistroTresFragment : BaseFragment(), View.OnClickListener, BaseFragment.
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_tres, container, false)
+        return inflater.inflate(R.layout.fragment_signup_finish, container, false)
     }
 
     override fun onViewCreated(@NonNull view: View, @Nullable savedInstanceState: Bundle?) {

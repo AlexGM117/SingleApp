@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Single</string>
 
+    <string name="facebook_app_id">1298390690298048</string>
+    <string name="fb_login_protocol_scheme">fb1298390690298048</string>
+
+
     <!--LOGIN-->
     <string name="login_empty">Ingresa tu correo y contraeña para ingresar</string>
 

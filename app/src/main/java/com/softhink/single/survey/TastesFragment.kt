@@ -52,7 +52,7 @@ class TastesFragment : Fragment(),
                 }
             }
             pickerTastes.centerImmediately = true
-            pickerTastes.bubbleSize = 40
+            pickerTastes.bubbleSize = 60
             pickerTastes.listener = this
 
             btnSendSurvey.setOnClickListener(this)

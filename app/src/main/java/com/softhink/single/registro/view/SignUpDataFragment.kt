@@ -15,7 +15,7 @@ import com.softhink.single.R
 import com.softhink.single.registro.SignUpViewModel
 import com.softhink.single.registro.Status.*
 import kotlinx.android.synthetic.main.arrow_next.*
-import kotlinx.android.synthetic.main.fragment_registro_uno.*
+import kotlinx.android.synthetic.main.fragment_signup_data.*
 import java.lang.Exception
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -25,7 +25,7 @@ import java.util.Locale
 /**
  * A simple [Fragment] subclass.
  */
-class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+class SignUpDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private var userBirthday: Date? = null
     private var gender: String? = null
@@ -42,7 +42,7 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_uno, container, false)
+        return inflater.inflate(R.layout.fragment_signup_data, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,9 +118,9 @@ class RegDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCheck
 
     private fun toAccountFragment(){
         fragmentManager?.beginTransaction()
-                ?.add(R.id.registroContainer,
-                        RegAccountFragment(), RegAccountFragment::class.java.simpleName)
-                ?.addToBackStack(RegAccountFragment::class.java.simpleName)
+                ?.add(R.id.signUpContainer,
+                        SignUpAccountFragment(), SignUpAccountFragment::class.java.simpleName)
+                ?.addToBackStack(SignUpAccountFragment::class.java.simpleName)
                 ?.commit()
     }
 }

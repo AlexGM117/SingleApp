@@ -12,13 +12,13 @@ import com.softhink.single.R
 import com.softhink.single.registro.SignUpViewModel
 import com.softhink.single.registro.Status.*
 import kotlinx.android.synthetic.main.arrow_back_and_next.*
-import kotlinx.android.synthetic.main.fragment_registro_dos.*
+import kotlinx.android.synthetic.main.fragment_signup_account.*
 import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
  */
-class RegAccountFragment : BaseFragment(), View.OnClickListener {
+class SignUpAccountFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var model: SignUpViewModel
 
@@ -33,7 +33,7 @@ class RegAccountFragment : BaseFragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_dos, container, false)
+        return inflater.inflate(R.layout.fragment_signup_account, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,9 +64,9 @@ class RegAccountFragment : BaseFragment(), View.OnClickListener {
 
     private fun finishSignUp() {
         fragmentManager?.beginTransaction()
-                ?.add(R.id.registroContainer,
-                        RegistroTresFragment(), RegistroTresFragment::class.java.simpleName)
-                ?.addToBackStack(RegistroTresFragment::class.java.simpleName)
+                ?.add(R.id.signUpContainer,
+                        SignUpFinishFragment(), SignUpFinishFragment::class.java.simpleName)
+                ?.addToBackStack(SignUpFinishFragment::class.java.simpleName)
                 ?.commit()
     }
 }
