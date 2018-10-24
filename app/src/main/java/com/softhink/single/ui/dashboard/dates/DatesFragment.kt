@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard.dates
+package com.softhink.single.ui.dashboard.dates
 
 
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.softhink.single.base.BaseFragment
 import com.softhink.single.R
-import com.softhink.single.dashboard.adapters.DatesAdapter
+import com.softhink.single.ui.dashboard.adapters.DatesAdapter
 import kotlinx.android.synthetic.main.fragment_dates.*
 
 

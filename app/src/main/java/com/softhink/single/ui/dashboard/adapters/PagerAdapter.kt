@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard.adapters
+package com.softhink.single.ui.dashboard.adapters
 
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment

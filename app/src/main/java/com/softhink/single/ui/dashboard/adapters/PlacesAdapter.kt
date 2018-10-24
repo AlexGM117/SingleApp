@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard.adapters
+package com.softhink.single.ui.dashboard.adapters
 
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView

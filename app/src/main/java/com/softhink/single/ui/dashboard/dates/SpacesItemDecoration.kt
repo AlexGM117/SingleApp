@@ -1,4 +1,4 @@
-package com.softhink.single.dashboard.dates
+package com.softhink.single.ui.dashboard.dates
 
 import android.graphics.Rect
 import android.view.View
