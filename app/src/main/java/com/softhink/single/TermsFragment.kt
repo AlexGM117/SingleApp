@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.base.BaseFragment
-import com.softhink.single.dashboard.HelpActivity
-import com.softhink.single.dashboard.MainContainer
+import com.softhink.single.ui.dashboard.HelpActivity
+import com.softhink.single.ui.dashboard.MainContainer
 import kotlinx.android.synthetic.main.fragment_terms.*
 
 /**

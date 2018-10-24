@@ -14,7 +14,7 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.softhink.single.dashboard.MapsActivity" />
+            tools:context=".ui.dashboard.MapsActivity" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

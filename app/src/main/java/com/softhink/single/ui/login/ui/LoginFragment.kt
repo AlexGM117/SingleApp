@@ -1,0 +1,111 @@
+package com.softhink.single.ui.login.ui
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.softhink.single.Constants
+import com.softhink.single.DialogCallBack
+import com.softhink.single.R
+import com.softhink.single.SinglePreferences
+import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.registro.view.SignUpActivity
+import com.softhink.single.ui.survey.SurveyActivity
+import kotlinx.android.synthetic.main.fragment_login.*
+import java.util.*
+
+/**
+ * A simple [Fragment] subclass.
+ */
+class LoginFragment : BaseFragment(), View.OnClickListener {
+
+    private lateinit var callbackManager: CallbackManager
+    private val surveyFlag = "SURVEY_DESTINATION"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        callbackManager = CallbackManager.Factory.create()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (savedInstanceState == null) {
+            registro.setOnClickListener(this)
+            btnLoginFB.setOnClickListener(this)
+            btnDoLogin.setOnClickListener(this)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onClick(v: View) {
+        val fragmentManager = fragmentManager
+        when (v.id) {
+            R.id.btnLoginFB -> {
+                facebookCallback()
+            }
+
+            R.id.btnDoLogin -> fragmentManager?.beginTransaction()
+                    ?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                            R.anim.enter_from_left, R.anim.exit_to_right)
+                    ?.replace(R.id.containerLogin,
+                            LoginCommonFragment())
+                    ?.addToBackStack(Constants.LOGINCOMMONFRAGMENT)
+                    ?.commit()
+
+            R.id.registro -> {
+                startActivity(Intent(activity, SignUpActivity::class.java))
+                activity?.finish()
+            }
+        }
+    }
+
+    private fun facebookCallback() {
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                if (result != null) {
+                    SinglePreferences().setAccessToken(result.accessToken.token)
+                    showMessageDialog("Registro exitoso", object : DialogCallBack {
+                        override fun onAccept() {
+                            startActivity(Intent(activity, SurveyActivity::class.java)
+                                    .putExtra(surveyFlag, true))
+                            activity?.finish()
+                        }
+
+                        override fun onCancel() {
+                        }
+                    })
+                }
+            }
+
+            override fun onCancel() {
+
+            }
+
+            override fun onError(error: FacebookException?) {
+
+            }
+
+        })
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"))
+    }
+}

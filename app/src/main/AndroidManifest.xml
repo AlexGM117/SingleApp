@@ -55,25 +55,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.ui.LoginActivity"
+            android:name="com.softhink.single.ui.login.ui.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".registro.view.SignUpActivity"
+            android:name="com.softhink.single.ui.registro.view.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.MainContainer"
+            android:name="com.softhink.single.ui.dashboard.MainContainer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".survey.SurveyActivity"
+            android:name="com.softhink.single.ui.survey.SurveyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.places.PlaceDetailActivity"
+            android:name="com.softhink.single.ui.dashboard.places.PlaceDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".onboarding.OnboardingActivity"
+            android:name="com.softhink.single.ui.onboarding.OnboardingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".dashboard.profile.EditProfileActivity"
+            android:name="com.softhink.single.ui.dashboard.profile.EditProfileActivity"
             android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -88,11 +88,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".dashboard.MapsActivity"
+            android:name="com.softhink.single.ui.dashboard.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
-        <activity android:name=".dashboard.HelpActivity" />
-        <activity android:name=".dashboard.dates.SingleProfileActivity"></activity>
+        <activity android:name="com.softhink.single.ui.dashboard.HelpActivity" />
+        <activity android:name="com.softhink.single.ui.dashboard.dates.SingleProfileActivity"></activity>
     </application>
 
 </manifest>

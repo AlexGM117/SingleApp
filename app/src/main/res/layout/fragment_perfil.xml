@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".dashboard.profile.PerfilFragment"
+    tools:context=".ui.dashboard.profile.PerfilFragment"
     android:padding="16dp" >
 
     <LinearLayout
@@ -77,6 +77,12 @@
             android:text="Editar parámetros"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/accessToken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"/>
 
     </LinearLayout>
 

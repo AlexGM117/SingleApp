@@ -1,16 +1,16 @@
 package com.softhink.single
 
-import com.softhink.single.dashboard.dates.DatesFragment
-import com.softhink.single.dashboard.profile.PerfilFragment
-import com.softhink.single.dashboard.places.PlacesFragment
-import com.softhink.single.survey.PreferencesFragment
-import com.softhink.single.login.ui.LoginCommonFragment
-import com.softhink.single.login.ui.LoginFragment
-import com.softhink.single.login.ui.PassRecoveryFragment
-import com.softhink.single.login.ui.PassTmpFragment
-import com.softhink.single.registro.view.SignUpAccountFragment
-import com.softhink.single.registro.view.SignUpDataFragment
-import com.softhink.single.registro.view.SignUpFinishFragment
+import com.softhink.single.ui.dashboard.dates.DatesFragment
+import com.softhink.single.ui.dashboard.profile.PerfilFragment
+import com.softhink.single.ui.dashboard.places.PlacesFragment
+import com.softhink.single.ui.survey.PreferencesFragment
+import com.softhink.single.ui.login.ui.LoginCommonFragment
+import com.softhink.single.ui.login.ui.LoginFragment
+import com.softhink.single.ui.login.ui.PassRecoveryFragment
+import com.softhink.single.ui.login.ui.PassTmpFragment
+import com.softhink.single.ui.registro.view.SignUpAccountFragment
+import com.softhink.single.ui.registro.view.SignUpDataFragment
+import com.softhink.single.ui.registro.view.SignUpFinishFragment
 
 object Constants {
     val DATESFRAGMENT = DatesFragment::class.java.simpleName
