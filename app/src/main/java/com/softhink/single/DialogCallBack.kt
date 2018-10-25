@@ -1,6 +1,13 @@
 package com.softhink.single
 
 interface DialogCallBack {
-    fun onAccept()
-    fun onCancel()
+
+    interface SingleCallback{
+        fun onAccept()
+    }
+
+    interface Callback{
+        fun onAccept()
+        fun onCancel()
+    }
 }

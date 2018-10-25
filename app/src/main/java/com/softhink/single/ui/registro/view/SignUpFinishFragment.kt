@@ -17,6 +17,7 @@ import com.softhink.single.base.BaseFragment
 import com.softhink.single.DialogCallBack
 import com.softhink.single.GlideApp
 import com.softhink.single.R
+import com.softhink.single.SinglePreferences
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.survey.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
@@ -27,7 +28,8 @@ import java.lang.Exception
 /**
  * A simple [Fragment] subclass.
  */
-class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected, DialogCallBack {
+class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected,
+        DialogCallBack.Callback {
 
     private val GALLERY = 0
     private val CAMERA = 1
@@ -101,7 +103,6 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
 //                        FAILED -> showMessageDialog(it.data.toString())
 //                    }
 //                })
-
                 signUpSuccess("Registro exitoso")
             }
 
@@ -137,13 +138,10 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
     private fun signUpSuccess(message: String){
         val intent = Intent(activity, SurveyActivity::class.java)
         intent.putExtra(surveyFlag, true)
-        showMessageDialog(message, object : DialogCallBack {
+        showMessageDialog(message, object : DialogCallBack.SingleCallback {
             override fun onAccept() {
+                SinglePreferences().setAccessToken("token de registro")
                 startActivity(intent)
-                activity?.finish()
-            }
-
-            override fun onCancel() {
                 activity?.finish()
             }
         })

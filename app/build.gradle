@@ -15,6 +15,7 @@ android {
     }
     buildTypes {
         debug {
+            versionNameSuffix "-dev"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
         }

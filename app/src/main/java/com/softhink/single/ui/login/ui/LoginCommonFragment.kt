@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.softhink.single.base.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
+import com.softhink.single.SinglePreferences
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.login.LoginViewModel
 import com.softhink.single.ui.registro.Status.*
@@ -83,6 +84,7 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
     }
 
     fun loginSuccess() {
+        SinglePreferences().setAccessToken("token login")
         val intent = Intent(activity, MainContainer::class.java)
         startActivity(intent)
         activity?.finish()

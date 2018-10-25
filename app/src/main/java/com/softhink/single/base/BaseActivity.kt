@@ -5,8 +5,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.softhink.single.DialogCallBack
+import com.softhink.single.NetworkUtil
 import com.softhink.single.R
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -31,7 +33,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun setUpToolbar(title: String, back: Boolean) {
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = title
-        toolbar.setTitleTextColor(resources.getColor(R.color.colorGrayDark))
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
         toolbar.setTitleMargin(16, 0, 0, 0)
         setSupportActionBar(toolbar)
 
@@ -50,7 +52,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun setUpToolbar(title: String, listener: View.OnClickListener){
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = title
-        toolbar.setTitleTextColor(resources.getColor(R.color.colorGrayDark))
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
         toolbar.setTitleMargin(16, 0, 0, 0)
         setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(R.drawable.back)
@@ -65,7 +67,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 .show()
     }
 
-    fun showMessageDialog(message: String, listener: DialogCallBack){
+    fun showMessageDialog(message: String, listener: DialogCallBack.SingleCallback){
         MaterialDialog(this)
                 .title(R.string.app_name)
                 .message(text = message)
@@ -73,5 +75,9 @@ abstract class BaseActivity : AppCompatActivity() {
                     listener.onAccept()
                 }
                 .show()
+    }
+
+    fun isConnected() : Boolean{
+        return NetworkUtil().isOnline(this)
     }
 }

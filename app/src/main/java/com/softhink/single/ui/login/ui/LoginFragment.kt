@@ -83,14 +83,11 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             override fun onSuccess(result: LoginResult?) {
                 if (result != null) {
                     SinglePreferences().setAccessToken(result.accessToken.token)
-                    showMessageDialog("Registro exitoso", object : DialogCallBack {
+                    showMessageDialog("Registro exitoso", object : DialogCallBack.SingleCallback {
                         override fun onAccept() {
                             startActivity(Intent(activity, SurveyActivity::class.java)
                                     .putExtra(surveyFlag, true))
                             activity?.finish()
-                        }
-
-                        override fun onCancel() {
                         }
                     })
                 }

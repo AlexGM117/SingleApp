@@ -8,6 +8,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.list.listItems
 import com.softhink.single.DialogCallBack
+import com.softhink.single.NetworkUtil
 import com.softhink.single.R
 
 abstract class BaseFragment : Fragment() {
@@ -46,7 +47,7 @@ abstract class BaseFragment : Fragment() {
 
         return true
     }
-    fun showMessageDialogGalery(listener: DialogCallBack){
+    fun showMessageDialogGalery(listener: DialogCallBack.Callback){
         MaterialDialog(context!!)
                 .customView(R.layout.dialog_galery_access)
                 .positiveButton(text = "ACEPTAR"){
@@ -58,7 +59,7 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
-    fun showMessageDialog(message: String, listener: DialogCallBack){
+    fun showMessageDialog(message: String, listener: DialogCallBack.SingleCallback){
         MaterialDialog(context!!)
                 .title(R.string.app_name)
                 .message(text = message)
@@ -68,7 +69,7 @@ abstract class BaseFragment : Fragment() {
                 .show()
     }
 
-    fun showMessageDialog(title: String, message: String, listener: DialogCallBack){
+    fun showMessageDialog(title: String, message: String, listener: DialogCallBack.Callback){
         MaterialDialog(context!!)
                 .title(text = title)
                 .message(text = message)
@@ -79,6 +80,10 @@ abstract class BaseFragment : Fragment() {
                     listener.onCancel()
                 }
                 .show()
+    }
+
+    fun isConnected() : Boolean{
+        return NetworkUtil().isOnline(context!!)
     }
 
     interface OnOptionsSelected {

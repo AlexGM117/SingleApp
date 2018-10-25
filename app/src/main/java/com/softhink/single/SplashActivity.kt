@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.facebook.AccessToken
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.login.ui.LoginActivity
 
@@ -15,12 +14,14 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({
-            val accessToken = AccessToken.getCurrentAccessToken()
-            var intent: Intent? = null
-            if (accessToken == null) {
+            val token = SinglePreferences().getAccessToken()
+            var intent: Intent?
+            if (token == null) {
                 intent = Intent(this, LoginActivity::class.java)
-            } else if (!accessToken.isExpired){
+            } else if (!SinglePreferences().getAccessToken().isNullOrEmpty()) {
                 intent = Intent(this, MainContainer::class.java)
+            } else {
+                intent = Intent(this, LoginActivity::class.java)
             }
             startActivity(intent)
             finish()

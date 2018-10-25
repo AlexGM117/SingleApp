@@ -52,16 +52,14 @@ class TermsFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun dialogAcceptTerms() {
-        val intent = Intent(activity, MainContainer::class.java)
         showMessageDialog("Atención", "Estás aceptando los términos y condiciones de Single." +
-                "\n\n¿Deseas continuar?", object : DialogCallBack {
+                "\n\n¿Deseas continuar?", object : DialogCallBack.Callback {
             override fun onAccept() {
-                startActivity(intent)
+                startActivity(Intent(activity, MainContainer::class.java))
                 activity?.finish()
             }
 
             override fun onCancel() {
-                activity?.finish()
             }
         })
     }
