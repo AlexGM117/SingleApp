@@ -3,7 +3,7 @@ package com.softhink.single.ui.survey
 import android.os.Bundle
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
-import com.softhink.single.TermsFragment
+import com.softhink.single.ui.dashboard.TermsFragment
 
 class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
 

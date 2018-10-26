@@ -67,7 +67,7 @@ class SignUpDataFragment : BaseFragment(), View.OnClickListener, RadioGroup.OnCh
                     userBirthday, gender).observe(this,
                     Observer {
                         when(it.status){
-                            ERROR -> showMessageDialog(getString(it.data))
+                            ERROR -> showMessageDialog(it.message!!)
                             SUCCESS -> toAccountFragment()
                             FAILED -> TODO()
                         }

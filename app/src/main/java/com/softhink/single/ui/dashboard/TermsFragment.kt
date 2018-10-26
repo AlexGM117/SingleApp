@@ -1,4 +1,4 @@
-package com.softhink.single
+package com.softhink.single.ui.dashboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.softhink.single.DialogCallBack
+import com.softhink.single.R
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.base.BaseFragment
-import com.softhink.single.ui.dashboard.HelpActivity
-import com.softhink.single.ui.dashboard.MainContainer
 import kotlinx.android.synthetic.main.fragment_terms.*
 
 /**

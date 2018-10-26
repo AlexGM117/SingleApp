@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
-import com.softhink.single.TermsFragment
 
 class HelpActivity : BaseActivity() {
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.base.BaseFragment
 import com.softhink.single.DialogCallBack
@@ -19,6 +20,7 @@ import com.softhink.single.GlideApp
 import com.softhink.single.R
 import com.softhink.single.SinglePreferences
 import com.softhink.single.ui.registro.SignUpViewModel
+import com.softhink.single.ui.registro.Status
 import com.softhink.single.ui.survey.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_signup_finish.*
@@ -96,14 +98,19 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
             R.id.btnPrevious -> fragmentManager?.popBackStack()
 
             R.id.btnSendForm -> {
-//                model.callSignUpService().observe(this, Observer {
-//                    when (it.status) {
-//                        SUCCESS -> signUpSuccess("")
-//                        ERROR -> showMessageDialog("")
-//                        FAILED -> showMessageDialog(it.data.toString())
-//                    }
-//                })
-                signUpSuccess("Registro exitoso")
+                if (isConnected()) {
+                    btnSendForm.isEnabled = false
+                    model.callSignUpService().observe(this, Observer {
+                        when (it.status) {
+                            Status.SUCCESS -> signUpSuccess(it.message!!)
+                            Status.ERROR -> showMessageDialog(it.message!!)
+                            Status.FAILED -> showMessageDialog(it.message!!)
+                        }
+                        btnSendForm.isEnabled = true
+                    })
+                } else {
+                    showMessageDialog("Sin conexión a Internet")
+                }
             }
 
             R.id.selectPhoto -> if (checkPermissions()) {

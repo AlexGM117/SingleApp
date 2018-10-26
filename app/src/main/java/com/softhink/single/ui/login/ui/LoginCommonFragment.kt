@@ -57,8 +57,13 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
             }
 
             R.id.btnContinuar -> {
-                doLogin(txtUser.editText?.text?.toString()!!,
-                        txtPss.editText?.text?.toString()!!)
+                if(isConnected()) {
+                    btnContinuar.isEnabled = false
+                    doLogin(txtUser.editText?.text?.toString()!!,
+                            txtPss.editText?.text?.toString()!!)
+                } else {
+                    showMessageDialog("Sin conexión a Internet")
+                }
             }
 
             R.id.forgotPss -> {
@@ -77,8 +82,8 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
         mViewModel.login(toString, toString1).observe(this, Observer {
             when (it.status){
                 SUCCESS -> loginSuccess()
-                ERROR -> loginFail(it.data)
-                FAILED -> loginFail(it.data)
+                ERROR -> loginFail(it.message!!)
+                FAILED -> loginFail(it.message!!)
             }
         })
     }
@@ -92,5 +97,6 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     fun loginFail(message: String) {
         showMessageDialog(message)
+        btnContinuar.isEnabled = true
     }
 }

@@ -91,8 +91,10 @@
             android:name="com.softhink.single.ui.dashboard.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
-        <activity android:name="com.softhink.single.ui.dashboard.HelpActivity" />
-        <activity android:name="com.softhink.single.ui.dashboard.dates.SingleProfileActivity"></activity>
+        <activity android:name="com.softhink.single.ui.dashboard.HelpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.softhink.single.ui.dashboard.dates.SingleProfileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

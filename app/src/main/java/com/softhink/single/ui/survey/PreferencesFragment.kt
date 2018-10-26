@@ -7,18 +7,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.appyvet.materialrangebar.RangeBar
 import com.softhink.single.base.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
 import kotlinx.android.synthetic.main.arrow_next.*
 import kotlinx.android.synthetic.main.fragment_preferences.*
+import java.lang.Exception
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRangeBarChangeListener {
+
+    private lateinit var model: SurveyViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        model = activity?.run {
+            ViewModelProviders.of(this).get(SurveyViewModel::class.java)
+        }?:throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

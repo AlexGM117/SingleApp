@@ -54,7 +54,7 @@ class SignUpAccountFragment : BaseFragment(), View.OnClickListener {
                     Observer {
                         when(it.status){
                             SUCCESS -> finishSignUp()
-                            ERROR -> showMessageDialog(getString(it.data))
+                            ERROR -> showMessageDialog(it.message!!)
                             FAILED -> TODO()
                         }
                     })

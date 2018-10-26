@@ -8,12 +8,12 @@ class SingleRepository {
 
     private var singleClient = SingleClient.getInstance()
 
-    fun callLogin(request: LoginRequest, callback: BaseCallback<String>){
+    fun callLogin(request: LoginRequest, callback: BaseCallback<Any>){
         singleClient.login(request)
                 .enqueue(callback)
     }
 
-    fun callRegistro(request: RegRequest, callback: BaseCallback<GenericObserver<Any>>){
+    fun callRegistro(request: RegRequest, callback: BaseCallback<Any>){
         singleClient.userRegistry(request)
                 .enqueue(callback)
     }

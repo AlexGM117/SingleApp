@@ -32,8 +32,6 @@ object SingleClient {
             clientBuilder.interceptors().add(loggingInterceptor)
         }
 
-//        clientBuilder.addInterceptor(buildInterceptor())
-
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,16 +39,4 @@ object SingleClient {
                 .build()
                 .create(SingleService::class.java)
     }
-
-//    private fun buildInterceptor() : Interceptor {
-//        return Interceptor { chain ->
-//            var request: Request = chain.request()
-//            val headers = request.headers().newBuilder()
-//                    .add("JsonStub-User-Key", "bca9357c-bbbf-4fbd-a03c-ce38d8b3e1b1")
-//                    .add("JsonStub-Project-Key", "66dd5c7a-8ad6-4422-bbd6-77fbaa6435d2")
-//                    .build()
-//            request = request.newBuilder().headers(headers).build()
-//            chain.proceed(request)
-//        }
-//    }
 }

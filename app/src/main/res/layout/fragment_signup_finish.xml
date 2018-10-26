@@ -8,7 +8,6 @@
     android:focusable="true"
     android:background="@android:color/white">
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
         android:layout_width="wrap_content"
@@ -68,8 +67,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSendForm"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -85,10 +86,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_margin="5dp"
-                android:padding="16dp"
-                android:background="@color/colorGrayLight">
+                android:background="@color/colorGrayLight"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Large"
@@ -104,17 +105,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:layout_centerInParent="true"
-                        android:src="@color/colorGrayMed" />
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/icon_galeria" />
+                        android:src="@drawable/add_photo_resource" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -124,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
         </FrameLayout>
 

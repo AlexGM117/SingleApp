@@ -12,7 +12,6 @@ import com.igalata.bubblepicker.BubblePickerListener
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter
 import com.igalata.bubblepicker.model.PickerItem
 import com.softhink.single.R
-import com.softhink.single.TermsFragment
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_tastes.*
 
