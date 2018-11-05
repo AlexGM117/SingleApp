@@ -17,6 +17,7 @@ import com.softhink.single.DialogCallBack
 import com.softhink.single.R
 import com.softhink.single.SinglePreferences
 import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.registro.view.SignUpActivity
 import com.softhink.single.ui.survey.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_login.*

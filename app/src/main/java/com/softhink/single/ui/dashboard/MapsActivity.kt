@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -65,16 +66,18 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
                         swipeView.visibility = View.GONE
                         swipeViewDown.visibility = View.VISIBLE
                         view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                        linear1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                     }
 
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         params.gravity = Gravity.CENTER
                         matcher.visibility = View.VISIBLE
+                        matcher.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100)
                         swipeView.visibility = View.VISIBLE
                         swipeViewDown.visibility = View.GONE
                         singleName.layoutParams = params
-                        singleImage.layoutParams = LinearLayout.LayoutParams(440, 440)
-                        view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 700)
+                        singleImage.layoutParams = params
+                        view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
                     }
 
                     BottomSheetBehavior.STATE_HIDDEN -> {

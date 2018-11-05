@@ -24,7 +24,7 @@
         <com.softhink.single.CenterLockHorizontalScrollView
             android:id="@+id/scrollView_header"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:layout_below="@id/toolbar"
             android:layout_marginTop="8dp"

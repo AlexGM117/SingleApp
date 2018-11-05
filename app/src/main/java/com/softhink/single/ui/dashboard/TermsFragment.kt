@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.softhink.single.DialogCallBack
 import com.softhink.single.R
+import com.softhink.single.SinglePreferences
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.onboarding.OnboardingActivity
 import kotlinx.android.synthetic.main.fragment_terms.*
 
 /**
@@ -55,8 +57,14 @@ class TermsFragment : BaseFragment(), View.OnClickListener {
         showMessageDialog("Atención", "Estás aceptando los términos y condiciones de Single." +
                 "\n\n¿Deseas continuar?", object : DialogCallBack.Callback {
             override fun onAccept() {
-                startActivity(Intent(activity, MainContainer::class.java))
-                activity?.finish()
+                if (SinglePreferences().showTutorial) {
+                    startActivity(Intent(activity, OnboardingActivity::class.java)
+                            .putExtra("TermsFragment", true))
+                    activity?.finish()
+                } else{
+                    startActivity(Intent(activity, MainContainer::class.java))
+                    activity?.finish()
+                }
             }
 
             override fun onCancel() {

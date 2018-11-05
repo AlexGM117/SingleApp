@@ -10,37 +10,37 @@
     android:animateLayoutChanges="true"
     android:clickable="true"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="350dp"
+    app:behavior_peekHeight="250dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:focusable="true">
 
     <LinearLayout
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="250dp"
         android:orientation="vertical"
         android:padding="16dp" >
 
-        <ImageView
-            android:id="@+id/swipeViewDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/swipe_up"
-            android:rotation="180"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone" />
-
         <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".85"
+            android:layout_height="150dp"
             android:orientation="vertical"
             android:gravity="center_horizontal" >
 
+            <ImageView
+                android:id="@+id/swipeViewDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/swipe_up"
+                android:rotation="180"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/singleImage"
-                android:layout_width="220dp"
-                android:layout_height="220dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/avatar"/>
 
             <TextView
@@ -53,8 +53,7 @@
         <RelativeLayout
             android:id="@+id/matcher"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".15"
+            android:layout_height="50dp"
             android:orientation="horizontal" >
 
             <TextView

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.R
+import com.softhink.single.SinglePreferences
 import com.softhink.single.ZooOutPager
 import com.softhink.single.ui.dashboard.MainContainer
 import kotlinx.android.synthetic.main.activity_onboarding.*
@@ -42,7 +43,17 @@ class OnboardingActivity : BaseActivity(), ViewPager.OnPageChangeListener,
     }
 
     override fun onSkipOnboarding() {
-        startActivity(Intent(this, MainContainer::class.java))
-        finish()
+        if (intent.getBooleanExtra(key, false)){
+            SinglePreferences().showTutorial = false
+            SinglePreferences().firstAccess = false
+            startActivity(Intent(this, MainContainer::class.java))
+            finish()
+        } else {
+            finish()
+        }
+    }
+
+    companion object {
+        private const val key = "TermsFragment"
     }
 }
