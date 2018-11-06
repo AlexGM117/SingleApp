@@ -101,19 +101,20 @@ class SignUpViewModel: BaseViewModel() {
     }
 
     fun callSignUpService() : LiveData<GenericObserver<Any>> {
-        repository.callRegistro(request, object : BaseCallback<Any>(){
-            override fun handleResponseData(data: Any, message: String) {
-                responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
-            }
-
-            override fun handleError(error: Any?, message: String) {
-                responseRepository.value = GenericObserver(Status.ERROR, error, message)
-            }
-
-            override fun handleException(t: Exception) {
-                responseRepository.value = GenericObserver(Status.FAILED, null, t.message)
-            }
-        })
+//        repository.callRegistro(request, object : BaseCallback<Any>(){
+//            override fun handleResponseData(data: Any, message: String) {
+//                responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
+//            }
+//
+//            override fun handleError(error: Any?, message: String) {
+//                responseRepository.value = GenericObserver(Status.ERROR, error, message)
+//            }
+//
+//            override fun handleException(t: Exception) {
+//                responseRepository.value = GenericObserver(Status.FAILED, null, t.message)
+//            }
+//        })
+        responseRepository.value = GenericObserver(Status.SUCCESS, null, "Registro local")
 
         return responseRepository
     }

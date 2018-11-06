@@ -8,10 +8,24 @@
     tools:context=".ui.dashboard.dates.DatesFragment"
     android:background="@android:color/white">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/datesRecycler"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/datesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="60dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/actionButton"

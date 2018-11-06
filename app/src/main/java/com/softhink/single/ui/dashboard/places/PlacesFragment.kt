@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import com.softhink.single.CustomLinearLayoutManager
 
 import com.softhink.single.R
 import com.softhink.single.ui.dashboard.adapters.PlacesAdapter
@@ -31,8 +33,10 @@ class PlacesFragment : Fragment(), PlacesAdapter.ClickItem {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
+            val layoutManager = CustomLinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+            layoutManager.setScrollEnabled(false)
             recyclerPlaces.setHasFixedSize(true)
-            recyclerPlaces.layoutManager = LinearLayoutManager(activity)
+            recyclerPlaces.layoutManager = layoutManager
 
             val integers = ArrayList<Int>()
             integers.add(1)

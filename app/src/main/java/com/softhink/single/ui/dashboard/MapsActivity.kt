@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -108,7 +107,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         for (lats in markers){
             val marker = MarkerOptions()
                     .position(lats)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.avatar_mini))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_avatar_mini))
 
             mMap.addMarker(marker)
         }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background" >
-        <bitmap android:src="@drawable/custom_range_off"
+        <bitmap android:src="@drawable/ic_custom_range_off"
             android:tint="?attr/colorControlNormal" />
     </item>
     <item android:id="@android:id/secondaryProgress" >
-        <bitmap android:src="@drawable/custom_range_on"
+        <bitmap android:src="@drawable/ic_custom_range_on"
             android:tint="@color/colorGrayDark" />
     </item>
     <item android:id="@android:id/progress">
-        <bitmap android:src="@drawable/custom_range_on"
+        <bitmap android:src="@drawable/ic_custom_range_on"
             android:tint="@color/colorGrayDark" />
     </item>
 </layer-list>

@@ -19,6 +19,7 @@ import com.softhink.single.DialogCallBack
 import com.softhink.single.GlideApp
 import com.softhink.single.R
 import com.softhink.single.SinglePreferences
+import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status
 import com.softhink.single.ui.survey.SurveyActivity
@@ -30,8 +31,7 @@ import java.lang.Exception
 /**
  * A simple [Fragment] subclass.
  */
-class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.OnOptionsSelected,
-        DialogCallBack.Callback {
+class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
     private val GALLERY = 0
     private val CAMERA = 1
@@ -66,7 +66,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_REQUEST_READ_STORAGE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showImagePickerDialog(this)
+                pickerImageDialog()
             }
         }
     }
@@ -113,33 +113,35 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
                 }
             }
 
-            R.id.selectPhoto -> if (checkPermissions()) {
-                showImagePickerDialog(this)
-            } else {
-                showMessageDialogGalery(this)
+            R.id.selectPhoto -> {
+                pickerImageDialog()
             }
         }
     }
 
-    override fun fromGalery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    private fun pickerImageDialog() {
+        if (checkPermissions()) {
+            showImagePickerDialog(object : OnOptionsSelected{
+                override fun fromGalery() {
+                    val galleryIntent = Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
-        startActivityForResult(galleryIntent, GALLERY)
-    }
+                    startActivityForResult(galleryIntent, GALLERY)
+                }
 
-    override fun fromCamera() {
-        val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA)
-    }
-
-    override fun onAccept() {
-        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
-                PERMISSION_REQUEST_READ_STORAGE)
-    }
-
-    override fun onCancel() {
-
+                override fun fromCamera() {
+                    val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(intent, CAMERA)
+                }
+            })
+        } else {
+            showMessageDialogGalery(object : DialogCallBack.SingleCallback{
+                override fun onAccept() {
+                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
+                            PERMISSION_REQUEST_READ_STORAGE)
+                }
+            })
+        }
     }
 
     private fun signUpSuccess(message: String){
@@ -148,6 +150,11 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener, BaseFragment.
         showMessageDialog(message, object : DialogCallBack.SingleCallback {
             override fun onAccept() {
                 SinglePreferences().setAccessToken("token de registro")
+                val intent = if (SinglePreferences().firstAccess){
+                    Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
+                } else {
+                    Intent(activity, MainContainer::class.java)
+                }
                 startActivity(intent)
                 activity?.finish()
             }

@@ -32,7 +32,7 @@
                 android:id="@+id/swipeViewDown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/swipe_up"
+                android:src="@drawable/ic_swipe_up"
                 android:rotation="180"
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
@@ -41,7 +41,7 @@
                 android:id="@+id/singleImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/avatar"/>
+                android:src="@drawable/ic_avatar_big"/>
 
             <TextView
                 android:id="@+id/singleName"
@@ -80,7 +80,7 @@
             android:id="@+id/swipeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/swipe_up"
+            android:src="@drawable/ic_swipe_up"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>

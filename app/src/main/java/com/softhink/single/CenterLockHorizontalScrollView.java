@@ -50,11 +50,11 @@ public class CenterLockHorizontalScrollView extends HorizontalScrollView {
         ViewGroup parent = (ViewGroup) getChildAt(0);
         View preView = parent.getChildAt(prevIndex);
         ImageView iv = preView.findViewById(R.id.single_mini);
-        iv.setImageResource(R.drawable.avatar);
+        iv.setImageResource(R.drawable.ic_avatar_big);
 
         View view = parent.getChildAt(index);
         ImageView ivCurrent = view.findViewById(R.id.single_mini);
-        ivCurrent.setImageResource(R.drawable.avatar);
+        ivCurrent.setImageResource(R.drawable.ic_avatar_big);
 
         int screenWidth = ((Activity) context).getWindowManager()
                 .getDefaultDisplay().getWidth();

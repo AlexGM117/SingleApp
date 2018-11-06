@@ -43,14 +43,14 @@ public class SingleHeaderAdapter extends ArrayAdapter<String> {
 
             holder = new Holder();
             holder.ivStatus = layout.findViewById(R.id.single_mini);
-            holder.ivStatus.setImageResource(R.drawable.avatar);
+            holder.ivStatus.setImageResource(R.drawable.ic_avatar_big);
             layout.setTag(holder);
 
         } else {
             layout = (RelativeLayout) convertView;
             view = layout;
             holder = (Holder) layout.getTag();
-            holder.ivStatus.setImageResource(R.drawable.avatar);
+            holder.ivStatus.setImageResource(R.drawable.ic_avatar_big);
         }
         layout.setId(position);
         return layout;

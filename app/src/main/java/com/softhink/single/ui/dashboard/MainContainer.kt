@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.facebook.login.LoginManager
+import com.softhink.single.Converter
 import com.softhink.single.base.BaseActivity
 import com.softhink.single.ui.login.ui.LoginActivity
 import com.softhink.single.ui.onboarding.OnboardingActivity
@@ -17,6 +18,8 @@ import com.softhink.single.ui.dashboard.profile.PerfilFragment
 import kotlinx.android.synthetic.main.activity_main_container.*
 
 class MainContainer : BaseActivity() {
+
+    private var pushCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +36,9 @@ class MainContainer : BaseActivity() {
     }
 
     private fun setupTabIcons() {
-        tabs.getTabAt(0)?.setIcon(R.drawable.mis_citas)
-        tabs.getTabAt(1)?.setIcon(R.drawable.perfil)
-        tabs.getTabAt(2)?.setIcon(R.drawable.lugares)
+        tabs.getTabAt(0)?.setIcon(R.drawable.ic_dates_tab)
+        tabs.getTabAt(1)?.setIcon(R.drawable.ic_profile_tab)
+        tabs.getTabAt(2)?.setIcon(R.drawable.ic_place_tab)
     }
 
     private fun setUpViewPager() {
@@ -49,12 +52,23 @@ class MainContainer : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        val menuItem = menu.findItem(R.id.actionNotifications)
+        menuItem.icon = Converter().convertLayoutToImage(this, pushCount, R.drawable.ic_custom_range_on)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.actionNotifications -> {
+                if (pushCount == 10){
+                    pushCount--
+                } else{
+                    pushCount++
+                }
+                invalidateOptionsMenu()
+            }
+
             R.id.menuHelp -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 0))
 
             R.id.menuAsk -> startActivity(Intent(this, HelpActivity::class.java).putExtra(FRAGMENT_KEY, 1))

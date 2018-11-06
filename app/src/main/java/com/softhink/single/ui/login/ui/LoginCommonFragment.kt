@@ -16,7 +16,6 @@ import com.softhink.single.SinglePreferences
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.login.LoginViewModel
 import com.softhink.single.ui.registro.Status.*
-import com.softhink.single.ui.survey.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_login_common.*
 
 /**
@@ -27,7 +26,6 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var txtUser: TextInputLayout
     private lateinit var txtPss: TextInputLayout
-    private val surveyFlag = "SURVEY_DESTINATION"
 
     private val mViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
@@ -92,12 +90,7 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     private fun loginSuccess() {
         SinglePreferences().setAccessToken("token login")
-        val intent = if (SinglePreferences().firstAccess){
-            Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
-        } else {
-            Intent(activity, MainContainer::class.java)
-        }
-        startActivity(intent)
+        startActivity(Intent(activity, MainContainer::class.java))
         activity?.finish()
     }
 

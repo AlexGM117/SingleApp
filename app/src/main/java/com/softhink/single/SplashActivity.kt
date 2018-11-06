@@ -18,10 +18,12 @@ class SplashActivity : AppCompatActivity() {
             var intent: Intent?
             if (token == null) {
                 intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             } else if (!SinglePreferences().getAccessToken().isNullOrEmpty()) {
                 intent = Intent(this, MainContainer::class.java)
             } else {
                 intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             }
             startActivity(intent)
             finish()

@@ -1,12 +1,16 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    android:background="@android:color/white"
-    tools:context=".ui.dashboard.profile.EditProfileFragment">
+    android:background="@android:color/white" >
+    
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +24,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/img_perfil"
+                android:src="@drawable/ic_profile_asset"
                 android:layout_gravity="center"/>
 
             <View
@@ -37,7 +41,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre">
+                    android:hint="Nombre" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

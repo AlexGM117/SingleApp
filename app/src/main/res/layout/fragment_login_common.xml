@@ -49,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:clickable="true"
         android:padding="8dp"
-        android:src="@drawable/back"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toTopOf="@+id/guideline33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_single"
+        android:src="@drawable/ic_logo_single"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -70,6 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -86,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
-                android:drawableStart="@drawable/correo"
+                android:drawableStart="@drawable/ic_email"
                 android:hint="Usuario / Correo electrónico"
                 android:inputType="text"
                 android:maxLines="1" />
@@ -119,12 +120,6 @@
             android:text="Continuar"
             android:textColor="@android:color/white" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/selector_checkbox"
-            android:text="No cerrar sesión"
-            android:textColor="@color/colorGrayDark" />
     </LinearLayout>
 
     <TextView

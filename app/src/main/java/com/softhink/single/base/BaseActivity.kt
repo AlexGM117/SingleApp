@@ -38,7 +38,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (back) {
-            toolbar.setNavigationIcon(R.drawable.back)
+            toolbar.setNavigationIcon(R.drawable.ic_back)
             toolbar.setNavigationOnClickListener {
                 if (supportFragmentManager.backStackEntryCount > 0) {
                     supportFragmentManager.popBackStack()
@@ -55,7 +55,7 @@ abstract class BaseActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
         toolbar.setTitleMargin(16, 0, 0, 0)
         setSupportActionBar(toolbar)
-        toolbar.setNavigationIcon(R.drawable.back)
+        toolbar.setNavigationIcon(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener(listener)
     }
 

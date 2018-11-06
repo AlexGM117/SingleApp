@@ -42,7 +42,7 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            ageRangebar.setRangePinsByValue(18f, 28f)
+            ageRangebar.setRangePinsByValue(18f, 23f)
             ageRangebar.setOnRangeBarChangeListener(this)
             btnNextPage.setOnClickListener(this)
         }

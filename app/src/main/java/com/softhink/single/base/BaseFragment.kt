@@ -47,15 +47,13 @@ abstract class BaseFragment : Fragment() {
 
         return true
     }
-    fun showMessageDialogGalery(listener: DialogCallBack.Callback){
+    fun showMessageDialogGalery(listener: DialogCallBack.SingleCallback){
         MaterialDialog(context!!)
                 .customView(R.layout.dialog_galery_access)
                 .positiveButton(text = "ACEPTAR"){
                     listener.onAccept()
                 }
-                .negativeButton(text = "CANCELAR"){
-                    listener.onCancel()
-                }
+                .negativeButton(text = "CANCELAR")
                 .show()
     }
 
