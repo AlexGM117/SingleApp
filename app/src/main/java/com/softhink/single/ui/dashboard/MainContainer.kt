@@ -42,12 +42,7 @@ class MainContainer : BaseActivity() {
     }
 
     private fun setUpViewPager() {
-        val adapter = PagerAdapter(supportFragmentManager)
-        adapter.addFragments(DatesFragment(), "MIS CITAS")
-        adapter.addFragments(PerfilFragment(), "PERFIL")
-        adapter.addFragments(PlacesFragment(), "LUGARES")
-
-        viewPager!!.adapter = adapter
+        viewPager.adapter = PagerAdapter(supportFragmentManager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,72 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="25dp" >
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/onb_container">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/onboarding_profile" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/onb_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
         android:orientation="vertical"
-        android:elevation="5dp">
-
-        <LinearLayout
+        android:layout_alignParentBottom="true">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".4" >
+            android:layout_height="wrap_content"
+            android:text="El botón “Singlear” te mostrará un mapa por zona en el cual podrás buscar perfiles basados en los parámetros que llenaste de la encuesta."
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="16dp" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Singelear"
-                android:textColor="@android:color/black"
-                style="@style/TextAppearance.AppCompat.Display1"
-                android:layout_marginBottom="8dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Te serán mostrados perfiles basados en los parámetros que llenaste de la encuesta."
-                android:textColor="@android:color/black"
-                style="@style/TextAppearance.AppCompat.Medium"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".1"
-            android:gravity="center_vertical" >
-
-            <TextView
-                android:id="@+id/skipOnboarding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Omitir"
-                android:textColor="@color/colorAccent"
-                style="@style/TextAppearance.AppCompat.Headline"/>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/skipOnboarding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Omitir"
+            android:textColor="@color/colorAccent"
+            style="@style/TextAppearance.AppCompat.Headline"/>
 
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

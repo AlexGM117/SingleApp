@@ -12,19 +12,19 @@ class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preferences)
+        setContentView(R.layout.activity_survey)
 
         welcomeScreen = intent.getBooleanExtra(surveyFlag, false)
 
         if (welcomeScreen) {
             setUpToolbar("Encuesta", false)
             supportFragmentManager?.beginTransaction()?.
-                    replace(R.id.containerPreferences, SurveyFragment())?.
+                    replace(R.id.containerSurvey, SurveyFragment())?.
                     commitNow()
         } else {
             setUpToolbar("Parámetros", true)
             supportFragmentManager?.beginTransaction()?.
-                    replace(R.id.containerPreferences, PreferencesFragment())?.
+                    replace(R.id.containerSurvey, PreferencesFragment())?.
                     commitNow()
         }
     }
@@ -39,7 +39,7 @@ class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
         if (welcomeScreen){
             supportFragmentManager?.
                     beginTransaction()?.
-                    replace(R.id.containerPreferences, TermsFragment(), TermsFragment::class.java.simpleName)?.
+                    replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
                     commit()
         } else{
             //Call Service

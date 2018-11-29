@@ -35,7 +35,7 @@ class SurveyFragment : BaseFragment(), View.OnClickListener {
                 updateToolbar("Encuesta", true)
                 fragmentManager?.
                         beginTransaction()?.
-                        add(R.id.containerPreferences, PreferencesFragment(),
+                        add(R.id.containerSurvey, PreferencesFragment(),
                                 Constants.PREFERENCESFRAGMENT)?.
                         commit()
             }

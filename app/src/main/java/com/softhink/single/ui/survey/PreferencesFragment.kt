@@ -54,7 +54,7 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
             R.id.btnNextPage -> {
                 val fragmentManager = fragmentManager
                 fragmentManager!!.beginTransaction()
-                        .replace(R.id.containerPreferences, InterestsFragment())
+                        .replace(R.id.containerSurvey, InterestsFragment())
                         .addToBackStack(Constants.PREFERENCESFRAGMENT)
                         .commit()
             }

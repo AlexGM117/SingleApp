@@ -23,10 +23,8 @@ object SingleClient {
             //DEV
 //            BASE_URL = "http://singleservices.ddns.net/registro/login"
 
-            loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-                override fun log(message: String) {
-                    Log.d("Single Services:", message)
-                }
+            loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+                message -> Log.d("Single Services:", message)
             })
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             clientBuilder.interceptors().add(loggingInterceptor)
