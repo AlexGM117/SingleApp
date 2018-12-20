@@ -94,6 +94,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.softhink.single.ui.dashboard.dates.SingleProfileActivity"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="221b6b769d297673576b1ccd3a92cdc9352b84f0" />
     </application>
 
 </manifest>

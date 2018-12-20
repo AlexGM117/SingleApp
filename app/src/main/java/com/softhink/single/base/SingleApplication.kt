@@ -2,8 +2,9 @@ package com.softhink.single.base
 
 import android.app.Application
 import android.content.Context
-import com.facebook.FacebookSdk
+import com.crashlytics.android.Crashlytics
 import com.facebook.appevents.AppEventsLogger
+import io.fabric.sdk.android.Fabric
 
 class SingleApplication : Application() {
     init {
@@ -22,5 +23,6 @@ class SingleApplication : Application() {
         super.onCreate()
         AppEventsLogger.activateApp(this)
         application = this
+        Fabric.with(this, Crashlytics())
     }
 }
