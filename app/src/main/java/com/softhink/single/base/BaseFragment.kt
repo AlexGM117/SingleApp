@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
         toolbar.setUpToolbar(title, back)
     }
 
-    fun showMessageDialog(message: String){
+    fun qshowMessageDialog(message: String){
         MaterialDialog(context!!)
                 .title(R.string.app_name)
                 .message(text = message)
@@ -77,6 +77,14 @@ abstract class BaseFragment : Fragment() {
                 .negativeButton(text = "CANCELAR") {
                     listener.onCancel()
                 }
+                .show()
+    }
+
+    fun showMessageDialog(message: String){
+        MaterialDialog(context!!)
+                .title(text = getString(R.string.app_name))
+                .message(text = message)
+                .positiveButton(text = "ACEPTAR")
                 .show()
     }
 

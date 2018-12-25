@@ -4,19 +4,25 @@ import com.google.gson.annotations.SerializedName
 
 import java.io.Serializable
 
-class User : Serializable {
-    @SerializedName("order")
-    var order: Int = 0
-    @SerializedName("token")
-    var token: String? = null
-    @SerializedName("imageProfile")
-    var imageProfile: String? = null
+class UserResponse: Serializable {
+    @SerializedName("idUsuario")
+    var idUsuario: Int? = null
+    @SerializedName("fullName")
+    var fullName: String? = null
+    @SerializedName("birthdate")
+    var birthDate: String? = null
+    @SerializedName("idPerfil")
+    var idPerfil: Int? = null
     @SerializedName("email")
     var email: String? = null
-    @SerializedName("profileType")
-    var profileType: Int = 0
-    @SerializedName("fullname")
-    var fullname: String? = null
-    @SerializedName("userId")
-    var userId: Int = 0
+    @SerializedName("username")
+    var username: String? = null
+    @SerializedName("password")
+    var password: String? = null
+    @SerializedName("sex")
+    var sex: String? = null
+    @SerializedName("activo")
+    var activo: String? = null
+    @SerializedName("token")
+    var token: String? = null
 }

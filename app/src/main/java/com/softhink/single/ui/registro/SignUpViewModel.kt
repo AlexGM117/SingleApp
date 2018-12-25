@@ -3,11 +3,11 @@ package com.softhink.single.ui.registro
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.softhink.single.*
 import com.softhink.single.base.BaseCallback
 import com.softhink.single.base.BaseViewModel
-import com.softhink.single.models.request.RegRequest
+import com.softhink.single.models.request.RegistroRequest
+import com.softhink.single.models.response.UserResponse
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,15 +15,15 @@ class SignUpViewModel: BaseViewModel() {
 
     private var repository = SingleRepository()
     private var statusForm = SingleLiveEvent<GenericObserver<Any>>()
-    private var responseRepository = MutableLiveData<GenericObserver<Any>>()
-    private var request = RegRequest()
+    private var responseRepository = MutableLiveData<GenericObserver<UserResponse>>()
+    private var request = RegistroRequest()
 
     fun validateForm(name: String, date: Date?, gender: String?): LiveData<GenericObserver<Any>>{
         if (isValidName(name) && isValidDate(date) && genderSelected(gender)) {
-            request.name = name
-            request.date = SimpleDateFormat("yyyy-MM-dd", Locale("ES")).format(date)
-            request.gender = gender!!
-            statusForm.value = GenericObserver(Status.SUCCESS, null, getString(R.string.signup_succes))
+            request.fullName = name
+            request.birthdate = SimpleDateFormat("yyyy-MM-dd", Locale("ES")).format(date)
+            request.sex = gender!!
+            statusForm.value = GenericObserver(Status.SUCCESS, null, getString(R.string.signup_complete))
         }
         return statusForm
     }
@@ -31,9 +31,9 @@ class SignUpViewModel: BaseViewModel() {
     fun accountData(email: String, pss: String, pss2: String): LiveData<GenericObserver<Any>> {
         statusForm = SingleLiveEvent<GenericObserver<Any>>()
         if(isValidEmail(email) && passwordMatch(pss, pss2)){
-            statusForm.value = GenericObserver(Status.SUCCESS, null, getString(R.string.signup_succes))
+            statusForm.value = GenericObserver(Status.SUCCESS, null, getString(R.string.signup_complete))
             request.email = email
-            request.pss = pss
+            request.password = pss
         }
 
         return statusForm
@@ -100,21 +100,20 @@ class SignUpViewModel: BaseViewModel() {
         return false
     }
 
-    fun callSignUpService() : LiveData<GenericObserver<Any>> {
-//        repository.callRegistro(request, object : BaseCallback<Any>(){
-//            override fun handleResponseData(data: Any, message: String) {
-//                responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
-//            }
-//
-//            override fun handleError(error: Any?, message: String) {
-//                responseRepository.value = GenericObserver(Status.ERROR, error, message)
-//            }
-//
-//            override fun handleException(t: Exception) {
-//                responseRepository.value = GenericObserver(Status.FAILED, null, t.message)
-//            }
-//        })
-        responseRepository.value = GenericObserver(Status.SUCCESS, null, "Registro local")
+    fun callSignUpService() : LiveData<GenericObserver<UserResponse>> {
+        repository.callRegistro(request, object : BaseCallback<UserResponse>(){
+            override fun handleResponseData(data: UserResponse, message: String?) {
+                responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
+            }
+
+            override fun handleError(message: String) {
+                responseRepository.value = GenericObserver(Status.ERROR, null, message)
+            }
+
+            override fun handleException(t: Exception) {
+                responseRepository.value = GenericObserver(Status.FAILED, null, t.message)
+            }
+        })
 
         return responseRepository
     }

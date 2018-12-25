@@ -7,7 +7,7 @@ import java.io.Serializable
 
 data class LoginRequest(
         @SerializedName("user") var username: String?,
-        @SerializedName("password") var password: String?) : BaseRequest(), Serializable{
+        @SerializedName("password") var password: String?) : Serializable{
 
     constructor() : this(null, null)
 }

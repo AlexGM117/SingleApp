@@ -4,6 +4,8 @@
     <string name="facebook_app_id">1298390690298048</string>
     <string name="fb_login_protocol_scheme">fb1298390690298048</string>
 
+    <string name="error_generic_message">Por el momento el servicio no esta disponible.</string>
+
 
     <!--LOGIN-->
     <string name="login_empty">Ingresa tu correo y contraeña para ingresar</string>
@@ -14,7 +16,7 @@
     <string name="date_mask">0%1$d</string>
 
     <!--REGISTRO-->
-    <string name="signup_succes">Complete</string>
+    <string name="signup_complete">Complete</string>
     <string name="signup_empty_name">Agrega tu nombre para registrarte</string>
     <string name="signup_invalid_name">Desbes agregar un nombre válido</string>
     <string name="signup_birthday_null">Agrega tu fecha de nacimiento</string>
@@ -25,4 +27,5 @@
     <string name="signup_missing_pss">Ingresa una contraseña y confirmala</string>
     <string name="signup_pss_lenght">Tú contraseña debe contener minimo 8 caracteres</string>
     <string name="signup_pss_match">Verifica la contraseña que ingresaste</string>
+    <string name="signup_sucesss">REGISTRO EXITOSO</string>
 </resources>

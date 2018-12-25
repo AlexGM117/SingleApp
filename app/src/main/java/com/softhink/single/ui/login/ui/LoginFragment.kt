@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.crashlytics.android.Crashlytics
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -63,13 +64,15 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                 facebookCallback()
             }
 
-            R.id.btnDoLogin -> fragmentManager?.beginTransaction()
-                    ?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                            R.anim.enter_from_left, R.anim.exit_to_right)
-                    ?.replace(R.id.containerLogin,
-                            LoginCommonFragment())
-                    ?.addToBackStack(Constants.LOGINCOMMONFRAGMENT)
-                    ?.commit()
+            R.id.btnDoLogin -> {
+                fragmentManager?.beginTransaction()
+                        ?.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        ?.replace(R.id.containerLogin,
+                                LoginCommonFragment())
+                        ?.addToBackStack(Constants.LOGINCOMMONFRAGMENT)
+                        ?.commit()
+            }
 
             R.id.registro -> {
                 startActivity(Intent(activity, SignUpActivity::class.java))

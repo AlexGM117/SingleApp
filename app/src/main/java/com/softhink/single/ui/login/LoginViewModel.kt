@@ -7,35 +7,32 @@ import com.softhink.single.GenericObserver
 import com.softhink.single.SingleLiveEvent
 import com.softhink.single.SingleRepository
 import com.softhink.single.models.request.LoginRequest
+import com.softhink.single.models.response.LoginResponse
+import com.softhink.single.models.response.UserResponse
 import com.softhink.single.ui.registro.Status
 
 class LoginViewModel : ViewModel() {
 
     private var repository: SingleRepository = SingleRepository()
-    private var login = SingleLiveEvent<GenericObserver<Any>>()
+    private var login = SingleLiveEvent<GenericObserver<UserResponse>>()
     private val request = LoginRequest()
 
-    fun login(user: String, pss: String): LiveData<GenericObserver<Any>> {
+    fun login(user: String, pss: String): LiveData<GenericObserver<UserResponse>> {
         request.username = user
         request.password = pss
         if (validateData()){
-            return if (request.username.equals("admin") && request.username.equals("admin")){
-                login.value = GenericObserver(Status.SUCCESS, null, "Login local")
-                login
-            } else {
-                makeRequest()
-            }
+            return makeRequest()
         }
         return login
     }
 
-    private fun makeRequest() : LiveData<GenericObserver<Any>> {
-        repository.callLogin(request, object : BaseCallback<Any>() {
-            override fun handleResponseData(data: Any, message: String) {
+    private fun makeRequest() : LiveData<GenericObserver<UserResponse>> {
+        repository.callLogin(request, object : BaseCallback<UserResponse>() {
+            override fun handleResponseData(data: UserResponse, message: String?) {
                 login.value = GenericObserver(Status.SUCCESS, data, message)
             }
 
-            override fun handleError(error: Any?, message: String) {
+            override fun handleError(message: String) {
                 login.value = GenericObserver(Status.ERROR, null, message)
             }
 

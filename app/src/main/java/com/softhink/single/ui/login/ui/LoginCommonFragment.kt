@@ -3,7 +3,7 @@ package com.softhink.single.ui.login.ui
 import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.textfield.TextInputLayout
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +13,7 @@ import com.softhink.single.base.BaseFragment
 import com.softhink.single.Constants
 import com.softhink.single.R
 import com.softhink.single.SinglePreferences
+import com.softhink.single.models.response.UserResponse
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.login.LoginViewModel
 import com.softhink.single.ui.registro.Status.*
@@ -23,9 +24,6 @@ import kotlinx.android.synthetic.main.fragment_login_common.*
  *
  */
 class LoginCommonFragment : BaseFragment(), View.OnClickListener {
-
-    private lateinit var txtUser: TextInputLayout
-    private lateinit var txtPss: TextInputLayout
 
     private val mViewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
@@ -40,9 +38,6 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            txtUser = view.findViewById(R.id.loginUser)
-            txtPss = view.findViewById(R.id.loginPss)
-
             arrowBack.setOnClickListener(this)
             btnContinuar.setOnClickListener(this)
             forgotPss.setOnClickListener(this)
@@ -59,8 +54,8 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
             R.id.btnContinuar -> {
                 if(isConnected()) {
                     btnContinuar.isEnabled = false
-                    doLogin(txtUser.editText?.text?.toString()!!,
-                            txtPss.editText?.text?.toString()!!)
+                    doLogin(loginUser.editText?.text?.toString()!!,
+                            loginPss.editText?.text?.toString()!!)
                 } else {
                     showMessageDialog("Sin conexión a Internet")
                 }
@@ -81,14 +76,15 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
     private fun doLogin(toString: String, toString1: String) {
         mViewModel.login(toString, toString1).observe(this, Observer {
             when (it.status){
-                SUCCESS -> loginSuccess()
+                SUCCESS -> loginSuccess(it.data)
                 ERROR -> loginFail(it.message!!)
                 FAILED -> loginFail(it.message!!)
             }
         })
     }
 
-    private fun loginSuccess() {
+    private fun loginSuccess(data: UserResponse?) {
+        Log.i(LoginCommonFragment::class.java.simpleName, data.toString())
         SinglePreferences().setAccessToken("token login")
         startActivity(Intent(activity, MainContainer::class.java))
         activity?.finish()

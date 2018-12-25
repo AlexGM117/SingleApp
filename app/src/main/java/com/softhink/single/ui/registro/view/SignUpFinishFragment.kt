@@ -102,7 +102,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
                     btnSendForm.isEnabled = false
                     model.callSignUpService().observe(this, Observer {
                         when (it.status) {
-                            Status.SUCCESS -> signUpSuccess(it.message!!)
+                            Status.SUCCESS -> signUpSuccess(it.message)
                             Status.ERROR -> showMessageDialog(it.message!!)
                             Status.FAILED -> showMessageDialog(it.message!!)
                         }
@@ -144,10 +144,10 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    private fun signUpSuccess(message: String){
+    private fun signUpSuccess(message: String?){
         val intent = Intent(activity, SurveyActivity::class.java)
         intent.putExtra(surveyFlag, true)
-        showMessageDialog(message, object : DialogCallBack.SingleCallback {
+        showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, object : DialogCallBack.SingleCallback {
             override fun onAccept() {
                 SinglePreferences().setAccessToken("token de registro")
                 val intent = if (SinglePreferences().firstAccess){

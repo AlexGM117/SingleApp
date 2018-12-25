@@ -5,7 +5,24 @@ import java.io.Serializable
 
 class LoginResponse : Serializable {
 
-    @SerializedName("user")
-    var user: User? = null
-
+    @SerializedName("idUsuario")
+    var idUsuario: Int? = null
+    @SerializedName("fullName")
+    var fullName: String? = null
+    @SerializedName("birthdate")
+    var birthDate: String? = null
+    @SerializedName("idPerfil")
+    var idPerfil: Int? = null
+    @SerializedName("email")
+    var email: String? = null
+    @SerializedName("username")
+    var username: String? = null
+    @SerializedName("password")
+    var password: String? = null
+    @SerializedName("sex")
+    var sex: String? = null
+    @SerializedName("activo")
+    var activo: String? = null
+    @SerializedName("token")
+    var token: String? = null
 }
