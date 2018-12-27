@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.softhink.single.base.BaseCallback
 import com.softhink.single.GenericObserver
+import com.softhink.single.R
 import com.softhink.single.SingleLiveEvent
 import com.softhink.single.SingleRepository
+import com.softhink.single.base.SingleApplication
 import com.softhink.single.models.request.LoginRequest
-import com.softhink.single.models.response.LoginResponse
 import com.softhink.single.models.response.UserResponse
 import com.softhink.single.ui.registro.Status
 
@@ -37,7 +38,8 @@ class LoginViewModel : ViewModel() {
             }
 
             override fun handleException(t: Exception) {
-                login.value = GenericObserver(Status.FAILED, null, t.message!!)
+                login.value = GenericObserver(Status.FAILED, null,
+                        SingleApplication.applicationContext().getString(R.string.error_generic_message))
             }
         })
 

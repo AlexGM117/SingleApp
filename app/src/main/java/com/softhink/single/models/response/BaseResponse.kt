@@ -9,5 +9,5 @@ class BaseResponse<T> : Serializable {
     @SerializedName("message")
     var responseMessage: String? = null
     @SerializedName("body")
-    var result: T? = null
+    var responseData: T? = null
 }

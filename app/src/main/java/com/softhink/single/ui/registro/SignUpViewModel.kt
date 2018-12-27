@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.softhink.single.*
 import com.softhink.single.base.BaseCallback
 import com.softhink.single.base.BaseViewModel
+import com.softhink.single.base.SingleApplication
 import com.softhink.single.models.request.RegistroRequest
 import com.softhink.single.models.response.UserResponse
 import java.text.SimpleDateFormat
@@ -111,7 +112,8 @@ class SignUpViewModel: BaseViewModel() {
             }
 
             override fun handleException(t: Exception) {
-                responseRepository.value = GenericObserver(Status.FAILED, null, t.message)
+                responseRepository.value = GenericObserver(Status.FAILED, null,
+                        SingleApplication.applicationContext().getString(R.string.error_generic_message))
             }
         })
 

@@ -80,6 +80,8 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
                 ERROR -> loginFail(it.message!!)
                 FAILED -> loginFail(it.message!!)
             }
+
+            btnContinuar.isEnabled = true
         })
     }
 
@@ -92,6 +94,5 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     private fun loginFail(message: String) {
         showMessageDialog(message)
-        btnContinuar.isEnabled = true
     }
 }

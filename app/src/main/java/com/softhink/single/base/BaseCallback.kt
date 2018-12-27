@@ -8,14 +8,22 @@ import retrofit2.Response
 abstract class BaseCallback<T> : Callback<BaseResponse<T>> {
 
     override fun onResponse(call: Call<BaseResponse<T>>, response: Response<BaseResponse<T>>) {
-        if (response.body()?.responseCode?.equals("200")!!){
-            if (response.body() != null)
-                handleResponseData(response.body()!!.result!!, response.body()!!.responseMessage)
-            else
+        if (response.body() != null) {
+            if (response.body()!!.responseCode != null){
+                if (response.body()!!.responseCode!! == "200"){
+                    if (response.body()!!.responseData != null)
+                        handleResponseData(response.body()!!.responseData!!, response.body()!!.responseMessage)
+                    else
+                        handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message))
+                } else {
+                    handleError(if (response.body()!!.responseMessage!!.isNullOrEmpty()) SingleApplication.applicationContext().getString(R.string.error_generic_message)
+                    else response.body()!!.responseMessage!!)
+                }
+            } else {
                 handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message))
+            }
         } else {
-            handleError(if (response.body()!!.responseMessage!!.isNullOrEmpty()) SingleApplication.applicationContext().getString(R.string.error_generic_message)
-            else response.body()!!.responseMessage!!)
+            handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message))
         }
     }
 
