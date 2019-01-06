@@ -7,33 +7,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.crashlytics.android.Crashlytics
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.facebook.AccessToken
 import com.softhink.single.Constants
 import com.softhink.single.DialogCallBack
 import com.softhink.single.R
 import com.softhink.single.SinglePreferences
 import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.login.LoginFbViewModel
+import com.softhink.single.ui.registro.Status.*
 import com.softhink.single.ui.registro.view.SignUpActivity
 import com.softhink.single.ui.survey.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_login.*
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class LoginFragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var callbackManager: CallbackManager
     private val surveyFlag = "SURVEY_DESTINATION"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        callbackManager = CallbackManager.Factory.create()
+    private val mViewModel: LoginFbViewModel by lazy {
+        ViewModelProviders.of(this).get(LoginFbViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +48,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+        mViewModel.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onClick(v: View) {
@@ -82,11 +77,11 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun facebookCallback() {
-        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
-            override fun onSuccess(result: LoginResult?) {
-                if (result != null) {
-                    SinglePreferences().setAccessToken(result.accessToken.token)
-                    showMessageDialog("Registro exitoso", object : DialogCallBack.SingleCallback {
+        mViewModel.fbLogin(this).observe(this, Observer {
+            when (it.status) {
+                SUCCESS -> {
+                    SinglePreferences().setAccessToken(AccessToken.getCurrentAccessToken().token)
+                    showMessageDialog(it.message!!, object : DialogCallBack.SingleCallback {
                         override fun onAccept() {
                             startActivity(Intent(activity, SurveyActivity::class.java)
                                     .putExtra(surveyFlag, true))
@@ -94,18 +89,13 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
                         }
                     })
                 }
+                ERROR -> {
+                    showMessageDialog(it.message!!)
+                }
+                FAILED -> {
+                    showMessageDialog(it.message!!)
+                }
             }
-
-            override fun onCancel() {
-
-            }
-
-            override fun onError(error: FacebookException?) {
-
-            }
-
         })
-
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"))
     }
 }

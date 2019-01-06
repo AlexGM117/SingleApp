@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.crashlytics.android.core.CrashlyticsCore
 import com.facebook.appevents.AppEventsLogger
+import com.facebook.stetho.Stetho
 import com.softhink.single.BuildConfig
 import io.fabric.sdk.android.Fabric
 
@@ -22,8 +23,9 @@ class SingleApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppEventsLogger.activateApp(this)
         application = this
-        Fabric.with(this, CrashlyticsCore.Builder().disabled(BuildConfig.BUILD_TYPE == "debug").build())
+        AppEventsLogger.activateApp(this)
+        Fabric.with(this, CrashlyticsCore.Builder().disabled(BuildConfig.FLAVOR == "dev").build())
+        Stetho.initializeWithDefaults(this)
     }
 }

@@ -22,7 +22,7 @@ class SignUpViewModel: BaseViewModel() {
     fun validateForm(name: String, date: Date?, gender: String?): LiveData<GenericObserver<Any>>{
         if (isValidName(name) && isValidDate(date) && genderSelected(gender)) {
             request.fullName = name
-            request.birthdate = SimpleDateFormat("yyyy-MM-dd", Locale("ES")).format(date)
+            request.birthdate = SimpleDateFormat("dd-MM-yyyy", Locale("ES")).format(date)
             request.sex = gender!!
             statusForm.value = GenericObserver(Status.SUCCESS, null, getString(R.string.signup_complete))
         }
@@ -107,7 +107,7 @@ class SignUpViewModel: BaseViewModel() {
                 responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
             }
 
-            override fun handleError(message: String) {
+            override fun handleError(message: String, resultCode: String?) {
                 responseRepository.value = GenericObserver(Status.ERROR, null, message)
             }
 

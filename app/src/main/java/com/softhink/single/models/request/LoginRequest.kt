@@ -6,7 +6,7 @@ import com.softhink.single.models.AppInfo
 import java.io.Serializable
 
 data class LoginRequest(
-        @SerializedName("user") var username: String?,
+        @SerializedName("email") var username: String?,
         @SerializedName("password") var password: String?) : Serializable{
 
     constructor() : this(null, null)

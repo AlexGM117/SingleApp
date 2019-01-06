@@ -33,7 +33,7 @@ class LoginViewModel : ViewModel() {
                 login.value = GenericObserver(Status.SUCCESS, data, message)
             }
 
-            override fun handleError(message: String) {
+            override fun handleError(message: String, resultCode: String?) {
                 login.value = GenericObserver(Status.ERROR, null, message)
             }
 

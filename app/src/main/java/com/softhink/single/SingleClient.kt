@@ -1,6 +1,7 @@
 package com.softhink.single
 
 import android.util.Log
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -28,6 +29,7 @@ object SingleClient {
             })
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             clientBuilder.interceptors().add(loggingInterceptor)
+            clientBuilder.addInterceptor(StethoInterceptor())
         }
 
         return Retrofit.Builder()
