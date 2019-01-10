@@ -3,10 +3,10 @@ package com.softhink.single.ui.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
-import com.softhink.single.base.BaseActivity
+import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
-import com.softhink.single.SinglePreferences
-import com.softhink.single.ZooOutPager
+import com.softhink.single.data.manager.SinglePreferences
+import com.softhink.single.ui.common.ZooOutPager
 import com.softhink.single.ui.dashboard.MainContainer
 import kotlinx.android.synthetic.main.activity_onboarding.*
 

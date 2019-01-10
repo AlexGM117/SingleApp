@@ -10,7 +10,7 @@ import android.widget.DatePicker
 import android.widget.RadioGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status.*

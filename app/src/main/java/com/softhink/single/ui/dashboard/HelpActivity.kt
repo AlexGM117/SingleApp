@@ -2,7 +2,7 @@ package com.softhink.single.ui.dashboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.softhink.single.base.BaseActivity
+import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
 
 class HelpActivity : BaseActivity() {

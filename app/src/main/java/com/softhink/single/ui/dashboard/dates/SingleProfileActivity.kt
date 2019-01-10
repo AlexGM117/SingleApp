@@ -2,7 +2,7 @@ package com.softhink.single.ui.dashboard.dates
 
 import android.os.Bundle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.softhink.single.base.BaseActivity
+import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.ui.dashboard.adapters.GaleryAdapter
 import kotlinx.android.synthetic.main.activity_single_profile.*

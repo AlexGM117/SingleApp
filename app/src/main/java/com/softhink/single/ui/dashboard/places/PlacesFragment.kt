@@ -4,12 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.softhink.single.CustomLinearLayoutManager
+import com.softhink.single.ui.common.CustomLinearLayoutManager
 
 import com.softhink.single.R
 import com.softhink.single.ui.dashboard.adapters.PlacesAdapter

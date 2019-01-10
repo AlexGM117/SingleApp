@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status.*

@@ -14,15 +14,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.softhink.single.base.BaseFragment
-import com.softhink.single.DialogCallBack
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.GlideApp
 import com.softhink.single.R
-import com.softhink.single.SinglePreferences
+import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status
-import com.softhink.single.ui.survey.SurveyActivity
+import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_signup_finish.*
 import java.io.IOException
@@ -101,12 +100,14 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
                 if (isConnected()) {
                     btnSendForm.isEnabled = false
                     model.callSignUpService().observe(this, Observer {
-                        when (it.status) {
-                            Status.SUCCESS -> signUpSuccess(it.message)
-                            Status.ERROR -> showMessageDialog(it.message!!)
-                            Status.FAILED -> showMessageDialog(it.message!!)
+                        if (it != null) {
+                            when (it.status) {
+                                Status.SUCCESS -> signUpSuccess(it.message)
+                                Status.ERROR -> showMessageDialog(it.message!!)
+                                Status.FAILED -> showMessageDialog(it.message!!)
+                            }
+                            btnSendForm.isEnabled = true
                         }
-                        btnSendForm.isEnabled = true
                     })
                 } else {
                     showMessageDialog("Sin conexión a Internet")
@@ -121,25 +122,19 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
     private fun pickerImageDialog() {
         if (checkPermissions()) {
-            showImagePickerDialog(object : OnOptionsSelected{
-                override fun fromGalery() {
-                    val galleryIntent = Intent(Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            showMessageDialog(fromGalery = {
+                val galleryIntent = Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
-                    startActivityForResult(galleryIntent, GALLERY)
-                }
-
-                override fun fromCamera() {
-                    val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, CAMERA)
-                }
+                startActivityForResult(galleryIntent, GALLERY)
+            }, fromCamera = {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA)
             })
         } else {
-            showMessageDialogGalery(object : DialogCallBack.SingleCallback{
-                override fun onAccept() {
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
-                            PERMISSION_REQUEST_READ_STORAGE)
-                }
+            showMessageDialog(positiveClick = {
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
+                        PERMISSION_REQUEST_READ_STORAGE)
             })
         }
     }
@@ -147,17 +142,15 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
     private fun signUpSuccess(message: String?){
         val intent = Intent(activity, SurveyActivity::class.java)
         intent.putExtra(surveyFlag, true)
-        showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, object : DialogCallBack.SingleCallback {
-            override fun onAccept() {
-                SinglePreferences().setAccessToken("token de registro")
-                val intent = if (SinglePreferences().firstAccess){
-                    Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
-                } else {
-                    Intent(activity, MainContainer::class.java)
-                }
-                startActivity(intent)
-                activity?.finish()
-            }
+        showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, positiveClick = {
+            SinglePreferences().setAccessToken("token de registro")
+//                val intent = if (SinglePreferences().firstAccess){
+//                    Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
+//                } else {
+            Intent(activity, MainContainer::class.java)
+//                }
+            startActivity(intent)
+            activity?.finish()
         })
     }
 }

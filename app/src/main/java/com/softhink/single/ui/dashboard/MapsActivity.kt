@@ -11,9 +11,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.softhink.single.base.BaseActivity
+import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
-import com.softhink.single.SingleHeaderAdapter
+import com.softhink.single.ui.common.SingleHeaderAdapter
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 

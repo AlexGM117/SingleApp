@@ -2,13 +2,15 @@ package com.softhink.single.ui.registro
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.softhink.single.*
-import com.softhink.single.base.BaseCallback
-import com.softhink.single.base.BaseViewModel
-import com.softhink.single.base.SingleApplication
-import com.softhink.single.models.request.RegistroRequest
-import com.softhink.single.models.response.UserResponse
+import com.softhink.single.data.manager.GenericObserver
+import com.softhink.single.data.manager.SingleLiveEvent
+import com.softhink.single.data.manager.SingleRepository
+import com.softhink.single.ui.base.BaseCallback
+import com.softhink.single.ui.base.BaseViewModel
+import com.softhink.single.SingleApplication
+import com.softhink.single.data.remote.request.RegistroRequest
+import com.softhink.single.data.remote.response.UserResponse
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +18,7 @@ class SignUpViewModel: BaseViewModel() {
 
     private var repository = SingleRepository()
     private var statusForm = SingleLiveEvent<GenericObserver<Any>>()
-    private var responseRepository = MutableLiveData<GenericObserver<UserResponse>>()
+    private var responseRepository = SingleLiveEvent<GenericObserver<UserResponse>>()
     private var request = RegistroRequest()
 
     fun validateForm(name: String, date: Date?, gender: String?): LiveData<GenericObserver<Any>>{

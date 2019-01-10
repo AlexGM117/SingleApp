@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.softhink.single.base.BaseFragment
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.R
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 

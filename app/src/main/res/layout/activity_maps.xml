@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
-        <com.softhink.single.CenterLockHorizontalScrollView
+        <com.softhink.single.ui.common.CenterLockHorizontalScrollView
             android:id="@+id/scrollView_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal" />
-        </com.softhink.single.CenterLockHorizontalScrollView>
+        </com.softhink.single.ui.common.CenterLockHorizontalScrollView>
 
     </RelativeLayout>
 

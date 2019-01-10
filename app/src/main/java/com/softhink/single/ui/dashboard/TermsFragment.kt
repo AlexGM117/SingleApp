@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.softhink.single.DialogCallBack
 import com.softhink.single.R
-import com.softhink.single.SinglePreferences
-import com.softhink.single.base.BaseActivity
-import com.softhink.single.base.BaseFragment
+import com.softhink.single.data.manager.SinglePreferences
+import com.softhink.single.ui.base.BaseActivity
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.ui.onboarding.OnboardingActivity
 import kotlinx.android.synthetic.main.fragment_terms.*
 
@@ -55,19 +54,14 @@ class TermsFragment : BaseFragment(), View.OnClickListener {
 
     private fun dialogAcceptTerms() {
         showMessageDialog("Atención", "Estás aceptando los términos y condiciones de Single." +
-                "\n\n¿Deseas continuar?", object : DialogCallBack.Callback {
-            override fun onAccept() {
-                if (SinglePreferences().showTutorial) {
-                    startActivity(Intent(activity, OnboardingActivity::class.java)
-                            .putExtra("TermsFragment", true))
-                    activity?.finish()
-                } else{
-                    startActivity(Intent(activity, MainContainer::class.java))
-                    activity?.finish()
-                }
-            }
-
-            override fun onCancel() {
+                "\n\n¿Deseas continuar?", positiveClick = {
+            if (SinglePreferences().showTutorial) {
+                startActivity(Intent(activity, OnboardingActivity::class.java)
+                        .putExtra("TermsFragment", true))
+                activity?.finish()
+            } else{
+                startActivity(Intent(activity, MainContainer::class.java))
+                activity?.finish()
             }
         })
     }

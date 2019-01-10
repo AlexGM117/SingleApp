@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.softhink.single.R
-import com.softhink.single.SinglePreferences
+import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.MapsActivity
-import com.softhink.single.ui.survey.SurveyActivity
+import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_perfil.*
 
 /**

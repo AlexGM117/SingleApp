@@ -2,14 +2,14 @@ package com.softhink.single.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.softhink.single.base.BaseCallback
-import com.softhink.single.GenericObserver
+import com.softhink.single.ui.base.BaseCallback
+import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.R
-import com.softhink.single.SingleLiveEvent
-import com.softhink.single.SingleRepository
-import com.softhink.single.base.SingleApplication
-import com.softhink.single.models.request.LoginRequest
-import com.softhink.single.models.response.UserResponse
+import com.softhink.single.data.manager.SingleLiveEvent
+import com.softhink.single.data.manager.SingleRepository
+import com.softhink.single.SingleApplication
+import com.softhink.single.data.remote.request.LoginRequest
+import com.softhink.single.data.remote.response.UserResponse
 import com.softhink.single.ui.registro.Status
 
 class LoginViewModel : ViewModel() {
@@ -48,11 +48,11 @@ class LoginViewModel : ViewModel() {
 
     private fun validateData(): Boolean{
         if (request.username.isNullOrBlank()){
-            login.value = GenericObserver(Status.ERROR, null,"Ingresa tu correo y contraeña para ingresar")
+            login.value = GenericObserver(Status.ERROR, null, "Ingresa tu correo y contraeña para ingresar")
             return false
         }
         if (request.password.isNullOrBlank()){
-            login.value = GenericObserver(Status.ERROR, null,"Ingresa tu correo y contraeña para ingresar")
+            login.value = GenericObserver(Status.ERROR, null, "Ingresa tu correo y contraeña para ingresar")
             return false
         }
 

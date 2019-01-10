@@ -3,10 +3,10 @@ package com.softhink.single.ui.registro.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.softhink.single.base.BaseActivity
-import com.softhink.single.Constants
+import com.softhink.single.ui.base.BaseActivity
+import com.softhink.single.util.Constants
 import com.softhink.single.R
-import com.softhink.single.ui.login.ui.LoginActivity
+import com.softhink.single.ui.login.view.LoginActivity
 
 class SignUpActivity : BaseActivity(), View.OnClickListener{
 

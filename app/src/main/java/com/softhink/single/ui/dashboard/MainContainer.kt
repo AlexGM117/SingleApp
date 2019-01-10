@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.facebook.login.LoginManager
-import com.softhink.single.Converter
-import com.softhink.single.base.BaseActivity
-import com.softhink.single.ui.login.ui.LoginActivity
+import com.softhink.single.ui.common.Converter
+import com.softhink.single.ui.base.BaseActivity
+import com.softhink.single.ui.login.view.LoginActivity
 import com.softhink.single.ui.onboarding.OnboardingActivity
 import com.softhink.single.R
-import com.softhink.single.SinglePreferences
+import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.adapters.PagerAdapter
-import com.softhink.single.ui.dashboard.dates.DatesFragment
-import com.softhink.single.ui.dashboard.places.PlacesFragment
-import com.softhink.single.ui.dashboard.profile.PerfilFragment
 import kotlinx.android.synthetic.main.activity_main_container.*
 
 class MainContainer : BaseActivity() {

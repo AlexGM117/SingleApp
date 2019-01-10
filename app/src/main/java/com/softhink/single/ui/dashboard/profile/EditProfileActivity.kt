@@ -1,7 +1,7 @@
 package com.softhink.single.ui.dashboard.profile
 
 import android.os.Bundle
-import com.softhink.single.base.BaseActivity
+import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
 
 class EditProfileActivity : BaseActivity() {
