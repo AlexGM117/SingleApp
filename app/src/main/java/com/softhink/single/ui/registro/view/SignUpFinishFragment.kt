@@ -18,13 +18,11 @@ import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.GlideApp
 import com.softhink.single.R
 import com.softhink.single.data.manager.SinglePreferences
-import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status
 import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_signup_finish.*
-import java.io.IOException
 import java.lang.Exception
 
 /**
@@ -74,13 +72,8 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
         when (requestCode) {
             GALLERY -> if (data != null) {
                 val contentURI = data.data
-                try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
-                    GlideApp.with(this).load(bitmap).centerCrop().into(imagePreview)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-
+                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
+                GlideApp.with(this).load(bitmap).centerCrop().into(imagePreview)
             }
 
             CAMERA -> if (data != null) {
@@ -144,11 +137,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
         intent.putExtra(surveyFlag, true)
         showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, positiveClick = {
             SinglePreferences().setAccessToken("token de registro")
-//                val intent = if (SinglePreferences().firstAccess){
-//                    Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
-//                } else {
-            Intent(activity, MainContainer::class.java)
-//                }
+            Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
             startActivity(intent)
             activity?.finish()
         })
