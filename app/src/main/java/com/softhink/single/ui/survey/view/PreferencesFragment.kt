@@ -17,13 +17,14 @@ import kotlinx.android.synthetic.main.arrow_next.*
 import kotlinx.android.synthetic.main.fragment_preferences.*
 import java.lang.Exception
 
-
 /**
  * A simple [Fragment] subclass.
  */
 class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRangeBarChangeListener {
 
     private lateinit var viewModel: SurveyViewModel
+    private var minAge: Int = -1
+    private var maxAge: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +42,9 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
 
     override fun onViewCreated(@NonNull view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (savedInstanceState == null) {
+            minAge = 18
+            maxAge = 23
             ageRangebar.setRangePinsByValue(18f, 23f)
             ageRangebar.setOnRangeBarChangeListener(this)
             btnNextPage.setOnClickListener(this)
@@ -53,16 +55,27 @@ class PreferencesFragment : BaseFragment(), View.OnClickListener, RangeBar.OnRan
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnNextPage -> {
-                val fragmentManager = fragmentManager
-                fragmentManager!!.beginTransaction()
-                        .replace(R.id.containerSurvey, InterestsFragment())
-                        .addToBackStack(Constants.PREFERENCESFRAGMENT)
-                        .commit()
+                if (!switchMan.isChecked && !switchWoman.isChecked) {
+                    showMessageDialog("Debes seleccionar al menos una opcion")
+                } else {
+                    viewModel.savePreferences(switchMan.isChecked, switchWoman.isChecked, switchVisible.isChecked, minAge, maxAge)
+                    val fragmentManager = fragmentManager
+                    fragmentManager!!.beginTransaction()
+                            .replace(R.id.containerSurvey, InterestsFragment())
+                            .addToBackStack(Constants.PREFERENCESFRAGMENT)
+                            .commit()
+                }
             }
         }
     }
 
     override fun onRangeChangeListener(rangeBar: RangeBar, leftPinIndex: Int, rightPinIndex: Int, leftPinValue: String, rightPinValue: String) {
-
+        if (leftPinValue > rightPinValue) {
+            minAge = rightPinValue.toInt()
+            maxAge = leftPinValue.toInt()
+        } else {
+            minAge = leftPinValue.toInt()
+            maxAge = rightPinValue.toInt()
+        }
     }
 }

@@ -15,9 +15,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.ui.base.BaseFragment
-import com.softhink.single.GlideApp
 import com.softhink.single.R
 import com.softhink.single.data.manager.SinglePreferences
+import com.softhink.single.ui.common.GlideApp
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status
 import com.softhink.single.ui.survey.view.SurveyActivity
@@ -95,7 +95,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
                     model.callSignUpService().observe(this, Observer {
                         if (it != null) {
                             when (it.status) {
-                                Status.SUCCESS -> signUpSuccess(it.message)
+                                Status.SUCCESS -> signUpSuccess(it.message, it.data?.username!!)
                                 Status.ERROR -> showMessageDialog(it.message!!)
                                 Status.FAILED -> showMessageDialog(it.message!!)
                             }
@@ -132,8 +132,9 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    private fun signUpSuccess(message: String?){
+    private fun signUpSuccess(message: String?, username: String){
         val intent = Intent(activity, SurveyActivity::class.java)
+        intent.putExtra("USERNAME", username)
         intent.putExtra(surveyFlag, true)
         showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, positiveClick = {
             SinglePreferences().setAccessToken("token de registro")

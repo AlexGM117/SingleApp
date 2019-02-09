@@ -12,7 +12,8 @@ import com.softhink.single.data.manager.SingleRepository
 import com.softhink.single.ui.base.BaseCallback
 import com.softhink.single.SingleApplication
 import com.softhink.single.data.remote.request.LoginRequest
-import com.softhink.single.data.remote.request.RegistroRequest
+import com.softhink.single.data.remote.request.SignUpRequest
+import com.softhink.single.data.remote.request.UserRequest
 import com.softhink.single.data.remote.response.FacebookResponse
 import com.softhink.single.data.remote.response.UserResponse
 import com.softhink.single.ui.registro.Status
@@ -46,8 +47,8 @@ class FacebookRepository : BaseCallback<UserResponse>() {
 
     override fun handleError(message: String, resultCode: String?) {
         if (resultCode == "202"){
-            repository.callRegistro(RegistroRequest(facebookResponse.name, facebookResponse.birthday,
-                    facebookResponse.gender, facebookResponse.email, facebookResponse.id, null), this)
+            repository.callRegistro(SignUpRequest(UserRequest(facebookResponse.name, facebookResponse.birthday,
+                    facebookResponse.gender, facebookResponse.email, facebookResponse.id, null)), this)
         } else {
             userResponse.value = GenericObserver(Status.ERROR, null, message)
         }

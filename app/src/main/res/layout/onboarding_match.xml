@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@android:color/white">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/onb_container">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".85"
+        android:gravity="center">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -16,27 +18,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/onb_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".15"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_alignParentBottom="true">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descarta y mira otro perfil, o conecta y espera la confirmación de Mach."
-            android:gravity="center"
-            android:textColor="@android:color/black"/>
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/skipOnboarding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Omitir"
-            android:textColor="@color/colorAccent"
-            style="@style/TextAppearance.AppCompat.Headline"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="Descarta y mira otro perfil, o conecta y espera la confirmación de Mach."
+                android:gravity="center"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/skipOnboarding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="Omitir"
+                android:textColor="@color/colorAccent"
+                style="@style/TextAppearance.AppCompat.Headline"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

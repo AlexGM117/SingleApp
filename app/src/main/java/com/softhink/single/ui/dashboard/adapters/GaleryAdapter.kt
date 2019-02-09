@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.softhink.single.GlideApp
 import com.softhink.single.R
+import com.softhink.single.ui.common.GlideApp
 
 class GaleryAdapter : RecyclerView.Adapter<GaleryAdapter.GaleryView>() {
 

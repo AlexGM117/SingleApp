@@ -25,6 +25,7 @@ import java.lang.Exception
 class InterestsFragment : BaseFragment(), BubblePickerListener, View.OnClickListener {
 
     private lateinit var viewModel: SurveyViewModel
+    private var listSelected = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,17 +42,15 @@ class InterestsFragment : BaseFragment(), BubblePickerListener, View.OnClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (savedInstanceState == null) {
+            val titles = viewModel.listHab.value
             picker.adapter = object : BubblePickerAdapter {
-                var titles = viewModel.listGustos.value!!.data!!
-
                 override val totalCount: Int
-                    get() = titles.size
+                    get() = titles?.size!!
 
                 override fun getItem(position: Int): PickerItem {
                     return PickerItem().apply {
-                        title = titles[position]
+                        title = titles!![position].nombre
                         color = Color.parseColor("#DA7C86")
                         textColor = Color.WHITE
                         backgroundImage = ContextCompat.getDrawable(context!!, R.drawable.bg_bubble_red)
@@ -80,20 +79,25 @@ class InterestsFragment : BaseFragment(), BubblePickerListener, View.OnClickList
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.btnLastPage -> fragmentManager?.beginTransaction()?.
-                    replace(R.id.containerSurvey, TastesFragment(), TastesFragment::class.java.simpleName)?.
-                    addToBackStack(TastesFragment::class.java.simpleName)
-                    ?.commit()
+            R.id.btnLastPage -> {
+                if (listSelected.isEmpty()) {
+                    showMessageDialog("Debes seleccionar al menos una opcion")
+                } else {
+                    viewModel.saveInterests(listSelected)
+                    fragmentManager?.beginTransaction()?.replace(R.id.containerSurvey, TastesFragment(), TastesFragment::class.java.simpleName)?.addToBackStack(TastesFragment::class.java.simpleName)
+                            ?.commit()
+                }
+            }
 
             R.id.btnFirstPage -> fragmentManager?.popBackStack()
         }
     }
 
-    override fun onBubbleSelected(pickerItem: PickerItem) {
-        Log.i("SingleApp", "Burbuja seleccionada: " + pickerItem.title!!)
+    override fun onBubbleSelected(item: PickerItem) {
+        listSelected.add(item.title!!)
     }
 
-    override fun onBubbleDeselected(pickerItem: PickerItem) {
-        Log.i("SingleApp", "Burbuja desseleccionada: " + pickerItem.title!!)
+    override fun onBubbleDeselected(item: PickerItem) {
+        listSelected.remove(item.title)
     }
 }

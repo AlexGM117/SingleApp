@@ -13,6 +13,7 @@ import com.igalata.bubblepicker.BubblePickerListener
 import com.igalata.bubblepicker.adapter.BubblePickerAdapter
 import com.igalata.bubblepicker.model.PickerItem
 import com.softhink.single.R
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.ui.survey.SurveyViewModel
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_tastes.*
@@ -22,11 +23,11 @@ import java.lang.Exception
  * A simple [Fragment] subclass.
  *
  */
-class TastesFragment : Fragment(),
+class TastesFragment : BaseFragment(),
         View.OnClickListener, BubblePickerListener {
 
-    private lateinit var callback: CallbackSurvey
     private lateinit var viewModel: SurveyViewModel
+    private var listSelected = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +47,13 @@ class TastesFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            val tastes = viewModel.listHab.value!!.data!!
-
+            val tastes = viewModel.listGustos.value
             pickerTastes.adapter = object : BubblePickerAdapter {
-                override val totalCount = tastes.size
+                override val totalCount = tastes?.size!!
 
                 override fun getItem(position: Int): PickerItem {
                     return PickerItem().apply {
-                        title = tastes[position]
+                        title = tastes!![position].nombre
                         textColor = Color.WHITE
                         textSize = 32F
                         color = Color.parseColor("#8b9dd3")
@@ -70,11 +70,6 @@ class TastesFragment : Fragment(),
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        callback = context as CallbackSurvey
-    }
-
     override fun onResume() {
         super.onResume()
         pickerTastes.onResume()
@@ -88,7 +83,12 @@ class TastesFragment : Fragment(),
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnSendSurvey -> {
-                callback.showTerms()
+                if (listSelected.isEmpty()) {
+                    showMessageDialog("Debes seleccionar al menos una opcion")
+                } else {
+                    viewModel.saveTastes(listSelected)
+//                callback.showTerms()
+                }
             }
 
             R.id.btnPrevious -> {
@@ -98,14 +98,10 @@ class TastesFragment : Fragment(),
     }
 
     override fun onBubbleDeselected(item: PickerItem) {
-
+        listSelected.remove(item.title)
     }
 
     override fun onBubbleSelected(item: PickerItem) {
-
-    }
-
-    interface CallbackSurvey {
-        fun showTerms()
+        listSelected.add(item.title!!)
     }
 }

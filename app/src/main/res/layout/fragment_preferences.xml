@@ -62,6 +62,7 @@
                             android:text="Hombres" />
 
                         <Switch
+                            android:id="@+id/switchMan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true" />
@@ -84,6 +85,7 @@
                             android:text="Mujeres" />
 
                         <Switch
+                            android:id="@+id/switchWoman"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true" />
@@ -181,6 +183,7 @@
                         android:text="Mostrar mi perfil" />
 
                     <Switch
+                        android:id="@+id/switchVisible"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true" />

@@ -1,11 +1,15 @@
 package com.softhink.single.ui.survey.view
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.ui.dashboard.TermsFragment
+import com.softhink.single.ui.registro.Status.*
+import com.softhink.single.ui.survey.SurveyViewModel
 
-class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
+class SurveyActivity : BaseActivity() {
 
     private val surveyFlag = "SURVEY_DESTINATION"
     private var welcomeScreen : Boolean = false
@@ -13,9 +17,52 @@ class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
-
         welcomeScreen = intent.getBooleanExtra(surveyFlag, false)
+        val model = ViewModelProviders.of(this).get(SurveyViewModel::class.java)
+        model.setUsername(intent.getStringExtra("USERNAME"))
+        model.getLists().observe(this, Observer {
+            if (it != null) {
+                when(it.status) {
+                    SUCCESS -> initSurvey()
+                    ERROR -> showMessageDialog(getString(R.string.error_generic_message))
+                    FAILED -> showMessageDialog(getString(R.string.error_generic_message))
+                }
+            }
+        })
 
+        model.surveyResponse.observe(this, Observer {
+            if(it != null) {
+                when(it.status) {
+                    SUCCESS -> showTerms()
+                    ERROR -> showMessageDialog(it.message!!, positiveClick = {
+                        showTerms()
+                    })
+                    FAILED -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                        showTerms()
+                    })
+                }
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.findFragmentByTag(TermsFragment::class.java.simpleName) == null){
+            super.onBackPressed()
+        }
+    }
+
+    fun showTerms() {
+        if (welcomeScreen){
+            supportFragmentManager?.
+                    beginTransaction()?.
+                    replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
+                    commit()
+        } else{
+            finish()
+        }
+    }
+
+    private fun initSurvey(){
         if (welcomeScreen) {
             setUpToolbar("Encuesta", false)
             supportFragmentManager?.beginTransaction()?.
@@ -26,24 +73,6 @@ class SurveyActivity : BaseActivity(), TastesFragment.CallbackSurvey {
             supportFragmentManager?.beginTransaction()?.
                     replace(R.id.containerSurvey, PreferencesFragment())?.
                     commitNow()
-        }
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.findFragmentByTag(TermsFragment::class.java.simpleName) == null){
-            super.onBackPressed()
-        }
-    }
-
-    override fun showTerms() {
-        if (welcomeScreen){
-            supportFragmentManager?.
-                    beginTransaction()?.
-                    replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
-                    commit()
-        } else{
-            //Call Service
-            finish()
         }
     }
 }

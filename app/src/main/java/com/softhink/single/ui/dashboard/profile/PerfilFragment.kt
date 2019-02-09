@@ -38,7 +38,9 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         var intent: Intent? = null
         when (v.id) {
-            R.id.toEditParams -> intent = Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, false)
+            R.id.toEditParams -> intent = Intent(activity, SurveyActivity::class.java)
+                    .putExtra("USERNAME", "username")
+                    .putExtra(surveyFlag, false)
 
             R.id.toEditProfile -> intent = Intent(activity, EditProfileActivity::class.java)
 
