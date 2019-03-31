@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class LoginResponse : Serializable {
-
     @SerializedName("idUsuario")
     var idUsuario: Int? = null
     @SerializedName("fullName")

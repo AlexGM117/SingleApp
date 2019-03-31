@@ -25,6 +25,7 @@ abstract class BaseFragment : Fragment() {
 
         return true
     }
+
     inline fun showMessageDialog(crossinline positiveClick:() -> Unit){
         MaterialDialog(context!!)
                 .customView(R.layout.dialog_galery_access)

@@ -1,131 +1,80 @@
 package com.softhink.single.ui.dashboard
 
 import android.os.Bundle
-import android.view.Gravity
-import android.view.View
-import android.widget.LinearLayout
-import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
-import com.softhink.single.ui.common.SingleHeaderAdapter
-import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.bottom_sheet.*
+import com.softhink.single.data.remote.response.UserResponse
+import com.softhink.single.ui.registro.Status
+import kotlin.random.Random
 
 class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private lateinit var mMap: GoogleMap
-    private val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
-
+    private val mViewModel: MapViewModel by lazy {
+        ViewModelProviders.of(this).get(MapViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-
         setUpToolbar("", true)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-        val strings: MutableList<String> = mutableListOf("", "", "", "", "", "", "", "", "", "")
-        val adapter = SingleHeaderAdapter(this, R.layout.single_header, strings)
-        scrollView_header.setAdapter(adapter, strings)
-        scrollView_header.setCenter(0, adapter)
-
-        val bottomSheetBehavior = BottomSheetBehavior.from(singleBottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_DRAGGING
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-
-            override fun onStateChanged(bottomSheet: View, state: Int) {
-                when(state){
-                    BottomSheetBehavior.STATE_DRAGGING ->{
-                    }
-
-                    BottomSheetBehavior.STATE_SETTLING -> {
-                    }
-
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        params.gravity = Gravity.START
-                        matcher.visibility = View.GONE
-                        singleImage.layoutParams = LinearLayout.LayoutParams(120, 120)
-                        singleName.layoutParams = params
-                        swipeView.visibility = View.GONE
-                        swipeViewDown.visibility = View.VISIBLE
-                        view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                        linear1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                    }
-
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        params.gravity = Gravity.CENTER
-                        matcher.visibility = View.VISIBLE
-                        matcher.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100)
-                        swipeView.visibility = View.VISIBLE
-                        swipeViewDown.visibility = View.GONE
-                        singleName.layoutParams = params
-                        singleImage.layoutParams = params
-                        view1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-                    }
-
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                    }
-
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-                    }
-                }
-            }
-        })
-    }
-
-    private fun animateBottomSheetArrow(offset: Float) {
-        val slideOffset = String.format("%.1f", offset).toFloat()
-        swipeView.rotation = slideOffset * 180
+        mViewModel.getListOfUsers()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json))
-
         val mexicoCity = LatLng(19.429507, -99.163656)
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mexicoCity, 12f))
 
+        mMap.setOnMarkerClickListener(this)
+        mMap.setOnMapClickListener(this)
+
+        mViewModel.getListResponse().observe(this, Observer {
+            when(it.status){
+                Status.SUCCESS -> putMarkers(it.data!!)
+                Status.ERROR -> errorDialog(it.message)
+                Status.FAILED -> errorDialog(it.message)
+            }
+        })
+    }
+
+    private fun putMarkers(data: List<UserResponse>) {
         val markers = arrayOf(LatLng(19.427411, -99.166339), LatLng(19.427517, -99.129610), LatLng(19.419569, -99.140644),
                 LatLng(19.421987, -99.175018), LatLng(19.398625, -99.160190))
-        for (lats in markers){
+        for (i in data.indices){
             val marker = MarkerOptions()
-                    .position(lats)
+                    .title(data[i].fullName)
+                    .position(markers[Random.nextInt(0, 4)])
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_avatar_mini))
 
             mMap.addMarker(marker)
         }
-
-        mMap.setOnMarkerClickListener(this)
-        mMap.setOnMapClickListener(this)
     }
 
-    override fun onMarkerClick(marker: Marker?): Boolean {
-        scrollView_header.visibility = View.VISIBLE
-        singleBottomSheet.visibility = View.VISIBLE
+    private fun errorDialog(message: String?) {
+        showMessageDialog(message!!, positiveClick = {
+            finish()
+        })
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+
         return true
     }
 
     override fun onMapClick(p0: LatLng?) {
-        if (scrollView_header.isVisible && singleBottomSheet.isVisible){
-            scrollView_header.visibility = View.GONE
-            singleBottomSheet.visibility = View.GONE
-        }
+
     }
 }

@@ -33,29 +33,11 @@ android {
         }
     }
 
-    flavorDimensions "enviroment"
-
-    productFlavors {
-        dev {
-            ext.enableCrashlytics = false
-            versionNameSuffix "-dev"
-        }
-
-        qa {
-            versionNameSuffix "-qa"
-        }
-
-        pro {
-            versionNameSuffix "-pro"
-        }
-    }
-
     applicationVariants.all { variant ->
         variant.outputs.all{ outputs ->
-            def flavor = variant.productFlavors[0].name
             def date = new Date()
             def formatDate = date.format("ddMM")
-            def apkName = appName + "-" + formatDate + "-" + flavor + ".apk"
+            def apkName = appName + "-" + formatDate + "-.apk"
             outputFileName = new File(apkName)
         }
 

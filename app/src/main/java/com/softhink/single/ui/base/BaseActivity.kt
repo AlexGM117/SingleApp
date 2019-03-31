@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.softhink.single.util.NetworkUtil
 import com.softhink.single.R
 
@@ -58,12 +59,35 @@ abstract class BaseActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener(listener)
     }
 
+    inline fun showMessageDialog(crossinline positiveClick:() -> Unit){
+        MaterialDialog(this)
+                .customView(R.layout.dialog_galery_access)
+                .positiveButton(text = "ACEPTAR"){
+                    positiveClick()
+                }
+                .negativeButton(text = "CANCELAR")
+                .show()
+    }
+
     inline fun showMessageDialog(message: String, crossinline positiveClick:() -> Unit = {}) {
         MaterialDialog(this)
                 .title(R.string.app_name)
                 .message(text = message)
                 .positiveButton(text = "Continuar"){
                     positiveClick()
+                }
+                .show()
+    }
+
+    inline fun showMessageDialog(title: String, message: String, crossinline positiveClick:() -> Unit = {}, crossinline  negativeClick:() -> Unit = {}){
+        MaterialDialog(this)
+                .title(text = title)
+                .message(text = message)
+                .positiveButton(text = "CONTINUAR"){
+                    positiveClick()
+                }
+                .negativeButton(text = "CANCELAR") {
+                    negativeClick()
                 }
                 .show()
     }

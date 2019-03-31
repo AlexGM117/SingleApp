@@ -1,11 +1,8 @@
 package com.softhink.single.data.manager
 
 import com.softhink.single.api.SingleClient
+import com.softhink.single.data.remote.request.*
 import com.softhink.single.ui.base.BaseCallback
-import com.softhink.single.data.remote.request.LoginRequest
-import com.softhink.single.data.remote.request.UserRequest
-import com.softhink.single.data.remote.request.SaveSurveyRequest
-import com.softhink.single.data.remote.request.SignUpRequest
 import com.softhink.single.data.remote.response.EncuestaResponse
 import com.softhink.single.data.remote.response.SurveyResponse
 import com.softhink.single.data.remote.response.UserResponse
@@ -30,5 +27,9 @@ class SingleRepository {
 
     fun callSendSurvey(request: SaveSurveyRequest, callback: BaseCallback<EncuestaResponse>) {
         singleClient.requestSendSurvey(request).enqueue(callback)
+    }
+
+    fun callGetUsers(request: UserTest, callback: BaseCallback<List<UserResponse>>) {
+        singleClient.requestSinglear(request).enqueue(callback)
     }
 }

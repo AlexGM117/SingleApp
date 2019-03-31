@@ -20,28 +20,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
-
-        <com.softhink.single.ui.common.CenterLockHorizontalScrollView
-            android:id="@+id/scrollView_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="8dp"
-            android:padding="3dp"
-            android:scrollbars="none"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal" />
-        </com.softhink.single.ui.common.CenterLockHorizontalScrollView>
-
     </RelativeLayout>
-
-    <include layout="@layout/bottom_sheet"
-        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

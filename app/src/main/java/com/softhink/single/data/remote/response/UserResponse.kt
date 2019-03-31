@@ -1,7 +1,6 @@
 package com.softhink.single.data.remote.response
 
 import com.google.gson.annotations.SerializedName
-
 import java.io.Serializable
 
 class UserResponse: Serializable {

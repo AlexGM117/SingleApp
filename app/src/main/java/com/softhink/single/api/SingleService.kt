@@ -3,6 +3,7 @@ package com.softhink.single.api
 import com.softhink.single.data.remote.request.LoginRequest
 import com.softhink.single.data.remote.request.SaveSurveyRequest
 import com.softhink.single.data.remote.request.SignUpRequest
+import com.softhink.single.data.remote.request.UserTest
 import com.softhink.single.data.remote.response.BaseResponse
 import com.softhink.single.data.remote.response.EncuestaResponse
 import com.softhink.single.data.remote.response.SurveyResponse
@@ -25,4 +26,7 @@ interface SingleService {
 
     @POST("registro/encuesta")
     fun requestSendSurvey(@Body request: SaveSurveyRequest): Call<BaseResponse<EncuestaResponse>>
+
+    @POST("match")
+    fun requestSinglear(@Body request: UserTest): Call<BaseResponse<List<UserResponse>>>
 }
