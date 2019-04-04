@@ -27,6 +27,6 @@ interface SingleService {
     @POST("registro/encuesta")
     fun requestSendSurvey(@Body request: SaveSurveyRequest): Call<BaseResponse<EncuestaResponse>>
 
-    @POST("match")
+    @POST("single/match")
     fun requestSinglear(@Body request: UserTest): Call<BaseResponse<List<UserResponse>>>
 }
