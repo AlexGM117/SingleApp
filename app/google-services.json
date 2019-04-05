@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "269663780919",
+    "firebase_url": "https://single-206218.firebaseio.com",
+    "project_id": "single-206218",
+    "storage_bucket": "single-206218.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269663780919:android:dcc379c734339523",
+        "android_client_info": {
+          "package_name": "com.softhink.single"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269663780919-uue31csepcmgq64uuqsdne1dvp3gt9ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq5Nz-TTMxwZUFg2nlZWY6H2Ni6fAb-Zs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
