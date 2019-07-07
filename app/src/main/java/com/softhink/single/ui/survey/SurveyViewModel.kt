@@ -81,7 +81,7 @@ class SurveyViewModel : ViewModel() {
     }
 
     fun getLists() :LiveData<GenericObserver<Any>> {
-        repository.callListGustos(object : BaseCallback<List<SurveyResponse>>(){
+        repository.callGetCatalogs(object : BaseCallback<List<SurveyResponse>>(){
             override fun handleResponseData(data: List<SurveyResponse>, message: String?) {
                 if (!data.isNullOrEmpty() && !data[0].interestList.isNullOrEmpty() && !data[0].tastesList.isNullOrEmpty() && !data[0].genders.isNullOrEmpty()) {
                     servicesResponse.value = GenericObserver(Status.SUCCESS, null, null)

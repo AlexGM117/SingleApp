@@ -1,20 +1,25 @@
 package com.softhink.single.ui.base
 
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.softhink.single.util.NetworkUtil
 import com.softhink.single.R
+import com.softhink.single.util.NetworkUtil
 
 abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var toolbar: Toolbar
     protected lateinit var mFragmentManager: FragmentManager
+    protected var PERMISSIONS_REQUEST_CODE = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,5 +99,40 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun isConnected() : Boolean{
         return NetworkUtil().isOnline(this)
+    }
+
+    fun checkPermissionsGranted(activity: Activity) : Boolean {
+        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED)
+                listPermissionsNeeded.add(permission)
+        }
+
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(activity, permissions, PERMISSIONS_REQUEST_CODE)
+            return false
+        }
+
+        return true
+    }
+
+    fun checkPermissionGranted(perm: Array<String>) : Boolean {
+        val listPermissionsNeeded = ArrayList<String>()
+
+        for (permission in perm) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                listPermissionsNeeded.add(permission)
+        }
+
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, perm, PERMISSIONS_REQUEST_CODE)
+            return false
+        }
+
+        return true
     }
 }

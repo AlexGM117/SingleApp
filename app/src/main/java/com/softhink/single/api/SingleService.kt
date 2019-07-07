@@ -21,7 +21,7 @@ interface SingleService {
     @POST("registro/alta")
     fun userRegistro(@Body request : SignUpRequest) : Call<BaseResponse<UserResponse>>
 
-    @GET("catalogo/catalogos")
+    @GET("catalogo/catalogos2")
     fun getCatalogs() : Call<BaseResponse<List<SurveyResponse>>>
 
     @POST("registro/encuesta")

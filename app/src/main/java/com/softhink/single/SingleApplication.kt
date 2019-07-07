@@ -24,7 +24,7 @@ class SingleApplication : Application() {
         super.onCreate()
         application = this
         AppEventsLogger.activateApp(this)
-        Fabric.with(this, CrashlyticsCore.Builder().disabled(BuildConfig.FLAVOR == "dev").build())
+        Fabric.with(this, CrashlyticsCore.Builder().disabled(BuildConfig.BUILD_TYPE == "debug").build())
         Stetho.initializeWithDefaults(this)
     }
 }

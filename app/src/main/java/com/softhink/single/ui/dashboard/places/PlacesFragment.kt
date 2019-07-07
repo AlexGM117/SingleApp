@@ -48,10 +48,6 @@ class PlacesFragment : Fragment(), PlacesAdapter.ClickItem {
         }
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-    }
-
     override fun onDetach() {
         super.onDetach()
     }

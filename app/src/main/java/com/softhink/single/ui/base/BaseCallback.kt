@@ -12,14 +12,14 @@ abstract class BaseCallback<T> : Callback<BaseResponse<T>> {
     override fun onResponse(call: Call<BaseResponse<T>>, response: Response<BaseResponse<T>>) {
         if (response.body() != null) {
             if (response.body()!!.responseCode != null){
-                if (response.body()!!.responseCode!! == "200"){
+                if (response.body()!!.responseCode == "200"){
                     if (response.body()!!.responseData != null)
-                        handleResponseData(response.body()!!.responseData!!, response.body()!!.responseMessage)
+                        handleResponseData(response.body()!!.responseData, response.body()!!.responseMessage)
                     else
-                        handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message), response.body()!!.responseCode!!)
+                        handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message), response.body()!!.responseCode)
                 } else {
-                    handleError(if (response.body()!!.responseMessage!!.isNullOrEmpty()) SingleApplication.applicationContext().getString(R.string.error_generic_message)
-                    else response.body()!!.responseMessage!!, response.body()!!.responseCode!!)
+                    handleError(if (response.body()!!.responseMessage.isEmpty()) SingleApplication.applicationContext().getString(R.string.error_generic_message)
+                    else response.body()!!.responseMessage, response.body()!!.responseCode)
                 }
             } else {
                 handleError(SingleApplication.applicationContext().getString(R.string.error_generic_message), null)

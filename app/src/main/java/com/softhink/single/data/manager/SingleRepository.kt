@@ -21,7 +21,7 @@ class SingleRepository {
                 .enqueue(callback)
     }
 
-    fun callListGustos(callback: BaseCallback<List<SurveyResponse>>) {
+    fun callGetCatalogs(callback: BaseCallback<List<SurveyResponse>>) {
         singleClient.getCatalogs().enqueue(callback)
     }
 

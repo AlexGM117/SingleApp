@@ -1,10 +1,12 @@
 package com.softhink.single.ui.survey.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
+import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.dashboard.TermsFragment
 import com.softhink.single.ui.registro.Status.*
 import com.softhink.single.ui.survey.SurveyViewModel
@@ -24,8 +26,18 @@ class SurveyActivity : BaseActivity() {
             if (it != null) {
                 when(it.status) {
                     SUCCESS -> initSurvey()
-                    ERROR -> showMessageDialog(getString(R.string.error_generic_message))
-                    FAILED -> showMessageDialog(getString(R.string.error_generic_message))
+                    ERROR -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                        finish()
+                        if (welcomeScreen) {
+                            startActivity(Intent(this, MainContainer::class.java))
+                        }
+                    })
+                    FAILED -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                        finish()
+                        if (welcomeScreen) {
+                            startActivity(Intent(this, MainContainer::class.java))
+                        }
+                    })
                 }
             }
         })
@@ -53,9 +65,7 @@ class SurveyActivity : BaseActivity() {
 
     fun showTerms() {
         if (welcomeScreen){
-            supportFragmentManager?.
-                    beginTransaction()?.
-                    replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
+            supportFragmentManager.beginTransaction().replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
                     commit()
         } else{
             finish()
@@ -65,14 +75,10 @@ class SurveyActivity : BaseActivity() {
     private fun initSurvey(){
         if (welcomeScreen) {
             setUpToolbar("Encuesta", false)
-            supportFragmentManager?.beginTransaction()?.
-                    replace(R.id.containerSurvey, SurveyFragment())?.
-                    commitNow()
+            supportFragmentManager.beginTransaction().replace(R.id.containerSurvey, SurveyFragment()).commitNow()
         } else {
             setUpToolbar("Parámetros", true)
-            supportFragmentManager?.beginTransaction()?.
-                    replace(R.id.containerSurvey, PreferencesFragment())?.
-                    commitNow()
+            supportFragmentManager.beginTransaction().replace(R.id.containerSurvey, PreferencesFragment()).commitNow()
         }
     }
 }

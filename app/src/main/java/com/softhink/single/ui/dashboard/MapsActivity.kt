@@ -1,8 +1,12 @@
 package com.softhink.single.ui.dashboard
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,8 +15,9 @@ import com.google.android.gms.maps.model.*
 import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
 import com.softhink.single.data.remote.response.UserResponse
+import com.softhink.single.ui.dashboard.adapters.SingleHeaderAdapter
 import com.softhink.single.ui.registro.Status
-import kotlin.random.Random
+import kotlinx.android.synthetic.main.activity_maps.*
 
 class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
@@ -35,14 +40,47 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json))
-        val mexicoCity = LatLng(19.429507, -99.163656)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mexicoCity, 12f))
+        if (checkPermissionGranted(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))) {
+            initMap()
+        }
+    }
 
-        mMap.setOnMarkerClickListener(this)
-        mMap.setOnMapClickListener(this)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSIONS_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initMap()
+            } else {
+                finish()
+            }
+        }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        marker.showInfoWindow()
+        setVisibilityOfHeader(View.VISIBLE)
+        return true
+    }
+
+    override fun onMapClick(latLng: LatLng) {
+        setVisibilityOfHeader(View.GONE)
+    }
+
+    private fun initMap() {
+        CurrentLocationListener(this).observe(this, Observer {
+            if (it != null) {
+                println("Latitud: ${it.latitude}")
+                println("Longitud: ${it.longitude}")
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 10f))
+                mMap.setOnMarkerClickListener(this)
+                mMap.setOnMapClickListener(this)
+                mMap.setMinZoomPreference(11f)
+                mMap.setMaxZoomPreference(14f)
+            }
+        })
 
         mViewModel.getListResponse().observe(this, Observer {
-            when(it.status){
+            when (it.status) {
                 Status.SUCCESS -> putMarkers(it.data!!)
                 Status.ERROR -> errorDialog(it.message)
                 Status.FAILED -> errorDialog(it.message)
@@ -50,17 +88,20 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         })
     }
 
+    private fun initHeader(singles: List<UserResponse>) {
+        singlesHeader.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        singlesHeader.adapter = SingleHeaderAdapter(singles)
+    }
+
     private fun putMarkers(data: List<UserResponse>) {
-        val markers = arrayOf(LatLng(19.427411, -99.166339), LatLng(19.427517, -99.129610), LatLng(19.419569, -99.140644),
-                LatLng(19.421987, -99.175018), LatLng(19.398625, -99.160190))
         for (i in data.indices){
             val marker = MarkerOptions()
-                    .title(data[i].fullName)
-                    .position(markers[Random.nextInt(0, 4)])
+                    .title(data[i].username)
+                    .position(LatLng(data[i].latitud.toDouble(), data[i].longitud.toDouble()))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_avatar_mini))
-
             mMap.addMarker(marker)
         }
+        initHeader(data)
     }
 
     private fun errorDialog(message: String?) {
@@ -69,12 +110,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         })
     }
 
-    override fun onMarkerClick(marker: Marker): Boolean {
-
-        return true
-    }
-
-    override fun onMapClick(p0: LatLng?) {
-
+    private fun setVisibilityOfHeader(visibility: Int) {
+        singlesHeader.visibility = visibility
     }
 }

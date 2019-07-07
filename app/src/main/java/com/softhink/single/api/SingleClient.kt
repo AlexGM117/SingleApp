@@ -1,6 +1,5 @@
 package com.softhink.single.api
 
-import android.util.Log
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.softhink.single.BuildConfig
 import okhttp3.OkHttpClient
@@ -12,7 +11,7 @@ import java.util.concurrent.TimeUnit
 object SingleClient {
     lateinit var clientBuilder : OkHttpClient.Builder
     var loggingInterceptor = HttpLoggingInterceptor()
-    private var BASE_URL = "http://singleservices.ddns.net/" //PRO
+    private var BASE_URL = "https://single-services.herokuapp.com/" //PRO
 
     fun getInstance() : SingleService {
         clientBuilder = OkHttpClient.Builder()
@@ -22,12 +21,8 @@ object SingleClient {
         if (BuildConfig.DEBUG){
             //DEV
 //            BASE_URL = "http://singleservices.ddns.net/registro/login"
-
-            loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                message -> Log.d("Single Services:", message)
-            })
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            clientBuilder.interceptors().add(loggingInterceptor)
+            clientBuilder.addInterceptor(loggingInterceptor)
             clientBuilder.addInterceptor(StethoInterceptor())
         }
 

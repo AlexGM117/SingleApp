@@ -32,7 +32,6 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
     private val GALLERY = 0
     private val CAMERA = 1
-    private val PERMISSION_REQUEST_READ_STORAGE = 1
     private lateinit var model: SignUpViewModel
     private val surveyFlag = "SURVEY_DESTINATION"
 
@@ -62,8 +61,10 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            PERMISSION_REQUEST_READ_STORAGE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            PERMISSION_REQUEST_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 pickerImageDialog()
+            } else {
+                checkPermissionGranted(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA))
             }
         }
     }
@@ -114,7 +115,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun pickerImageDialog() {
-        if (checkPermissions()) {
+        if (checkPermissionGranted(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA))) {
             showMessageDialog(fromGalery = {
                 val galleryIntent = Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -123,11 +124,6 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
             }, fromCamera = {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMERA)
-            })
-        } else {
-            showMessageDialog(positiveClick = {
-                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA),
-                        PERMISSION_REQUEST_READ_STORAGE)
             })
         }
     }

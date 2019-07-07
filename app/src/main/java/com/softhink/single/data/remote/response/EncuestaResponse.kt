@@ -2,27 +2,15 @@ package com.softhink.single.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-class EncuestaResponse {
-    @SerializedName("idPerfil")
-    var idPerfil: Int? = null
-    @SerializedName("nombre")
-    var nombre: String? = null
-    @SerializedName("descripcion")
-    var description: String? = null
-    @SerializedName("calificacion")
-    var calificacion: Int? = null
-    @SerializedName("estatus")
-    var estatus: Int? = null
-    @SerializedName("foto")
-    var foto: String? = null
-    @SerializedName("preferencia")
-    var preferencia: String? = null
-    @SerializedName("activo")
-    var activo: Int? = null
-    @SerializedName("visible")
-    var visible: Int? = null
-    @SerializedName("edadMinima")
-    var edadMinima: Int? = null
-    @SerializedName("edadMaxima")
-    var edadMaxima: Int? = null
-}
+data class EncuestaResponse(
+    @SerializedName("idPerfil") val idPerfil: Int,
+    @SerializedName("nombre") val nombre: String,
+    @SerializedName("descripcion") val description: String,
+    @SerializedName("calificacion") val calificacion: Int,
+    @SerializedName("estatus") val estatus: Int,
+    @SerializedName("foto") var foto: String,
+    @SerializedName("preferencia") val preferencia: String,
+    @SerializedName("activo") val activo: Int,
+    @SerializedName("visible") val visible: Int,
+    @SerializedName("edadMinima") val edadMinima: Int,
+    @SerializedName("edadMaxima") val edadMaxima: Int)

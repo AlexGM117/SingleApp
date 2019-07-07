@@ -1,7 +1,7 @@
 package com.softhink.single.ui.base
 
-import android.Manifest
 import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
@@ -12,21 +12,14 @@ import com.softhink.single.R
 
 abstract class BaseFragment : Fragment() {
 
+    protected val PERMISSION_REQUEST_CODE = 123
+
     fun updateToolbar(title: String, back: Boolean){
         val toolbar = activity!! as BaseActivity
         toolbar.setUpToolbar(title, back)
     }
 
-    fun checkPermissions(): Boolean{
-        if(ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            return false
-        }
-
-        return true
-    }
-
-    inline fun showMessageDialog(crossinline positiveClick:() -> Unit){
+    inline fun showPermissionsDialog(crossinline positiveClick:() -> Unit){
         MaterialDialog(context!!)
                 .customView(R.layout.dialog_galery_access)
                 .positiveButton(text = "ACEPTAR"){
@@ -74,5 +67,23 @@ abstract class BaseFragment : Fragment() {
 
     fun isConnected() : Boolean{
         return NetworkUtil().isOnline(context!!)
+    }
+
+    fun checkPermissionGranted(perm: Array<String>) : Boolean {
+        val listPermissionsNeeded = ArrayList<String>()
+
+        for (permission in perm) {
+            if (ContextCompat.checkSelfPermission(activity!!, permission) != PackageManager.PERMISSION_GRANTED)
+                listPermissionsNeeded.add(permission)
+        }
+
+        if (listPermissionsNeeded.isNotEmpty()) {
+            showPermissionsDialog(positiveClick = {
+                ActivityCompat.requestPermissions(activity!!, perm, PERMISSION_REQUEST_CODE)
+            })
+            return false
+        }
+
+        return true
     }
 }
