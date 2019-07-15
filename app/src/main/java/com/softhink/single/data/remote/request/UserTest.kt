@@ -1,3 +1,7 @@
 package com.softhink.single.data.remote.request
 
-data class UserTest(var user: String)
+import com.google.gson.annotations.SerializedName
+
+data class UserTest(@SerializedName("user") var user: String,
+                    @SerializedName("latitud") var latitud: String,
+                    @SerializedName("longitud") var longitud: String)

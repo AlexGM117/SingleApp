@@ -1,20 +1,17 @@
 package com.softhink.single.ui.login
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import com.softhink.single.ui.base.BaseCallback
 import com.softhink.single.data.manager.GenericObserver
-import com.softhink.single.R
 import com.softhink.single.data.manager.SingleLiveEvent
-import com.softhink.single.data.manager.SingleRepository
-import com.softhink.single.SingleApplication
 import com.softhink.single.data.remote.request.LoginRequest
 import com.softhink.single.data.remote.response.UserResponse
+import com.softhink.single.ui.base.BaseViewModel
 import com.softhink.single.ui.registro.Status
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel() {
 
-    private var repository: SingleRepository = SingleRepository()
+//    private var login = SingleLiveEvent<GenericObserver<UserResponse>>()
     private var login = SingleLiveEvent<GenericObserver<UserResponse>>()
     private val request = LoginRequest()
 
@@ -28,20 +25,9 @@ class LoginViewModel : ViewModel() {
     }
 
     private fun makeRequest() : LiveData<GenericObserver<UserResponse>> {
-        repository.callLogin(request, object : BaseCallback<UserResponse>() {
-            override fun handleResponseData(data: UserResponse, message: String?) {
-                login.value = GenericObserver(Status.SUCCESS, data, message)
-            }
-
-            override fun handleError(message: String, resultCode: String?) {
-                login.value = GenericObserver(Status.ERROR, null, message)
-            }
-
-            override fun handleException(t: Exception) {
-                login.value = GenericObserver(Status.FAILED, null,
-                        SingleApplication.applicationContext().getString(R.string.error_generic_message))
-            }
-        })
+        scope.launch {
+            login.postValue(repository.makeRequest(request))
+        }
 
         return login
     }

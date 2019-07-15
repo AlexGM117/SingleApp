@@ -120,6 +120,10 @@
                 android:layout_margin="5dp"
                 android:visibility="visible" />
 
+            <include
+                layout="@layout/loading"
+                android:visibility="gone"/>
+
         </FrameLayout>
 
     </androidx.cardview.widget.CardView>

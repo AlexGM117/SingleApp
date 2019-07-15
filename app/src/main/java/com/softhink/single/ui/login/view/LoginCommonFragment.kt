@@ -18,6 +18,7 @@ import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.login.LoginViewModel
 import com.softhink.single.ui.registro.Status.*
 import kotlinx.android.synthetic.main.fragment_login_common.*
+import kotlinx.android.synthetic.main.loading.*
 
 /**
  * A simple [Fragment] subclass.
@@ -74,8 +75,10 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun doLogin(toString: String, toString1: String) {
+        loadingScreen.visibility = View.VISIBLE
         mViewModel.login(toString, toString1).observe(this, Observer {
             if (it != null) {
+                loadingScreen.visibility = View.GONE
                 when (it.status) {
                     SUCCESS -> loginSuccess(it.data)
                     ERROR -> loginFail(it.message!!)

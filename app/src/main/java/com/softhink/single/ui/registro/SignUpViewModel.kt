@@ -5,19 +5,16 @@ import androidx.lifecycle.LiveData
 import com.softhink.single.*
 import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.data.manager.SingleLiveEvent
-import com.softhink.single.data.manager.SingleRepository
-import com.softhink.single.ui.base.BaseCallback
 import com.softhink.single.ui.base.BaseViewModel
-import com.softhink.single.SingleApplication
 import com.softhink.single.data.remote.request.SignUpRequest
 import com.softhink.single.data.remote.request.UserRequest
 import com.softhink.single.data.remote.response.UserResponse
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SignUpViewModel: BaseViewModel() {
 
-    private var repository = SingleRepository()
     private var statusForm = SingleLiveEvent<GenericObserver<Any>>()
     private var responseRepository = SingleLiveEvent<GenericObserver<UserResponse>>()
     private var userRequest = UserRequest()
@@ -105,21 +102,9 @@ class SignUpViewModel: BaseViewModel() {
     }
 
     fun callSignUpService() : LiveData<GenericObserver<UserResponse>> {
-        repository.callRegistro(SignUpRequest(userRequest), object : BaseCallback<UserResponse>(){
-            override fun handleResponseData(data: UserResponse, message: String?) {
-                responseRepository.value = GenericObserver(Status.SUCCESS, data, message)
-            }
-
-            override fun handleError(message: String, resultCode: String?) {
-                responseRepository.value = GenericObserver(Status.ERROR, null, message)
-            }
-
-            override fun handleException(t: Exception) {
-                responseRepository.value = GenericObserver(Status.FAILED, null,
-                        SingleApplication.applicationContext().getString(R.string.error_generic_message))
-            }
-        })
-
+        scope.launch {
+            responseRepository.postValue(repository.makeRequest(SignUpRequest(userRequest)))
+        }
         return responseRepository
     }
 }

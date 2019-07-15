@@ -3,7 +3,7 @@ package com.softhink.single.data.manager
 import android.content.Context
 import com.softhink.single.SingleApplication
 
-class SinglePreferences() {
+class SinglePreferences {
     companion object {
         private val TAG = this::class.java.simpleName
 

@@ -3,17 +3,17 @@ package com.softhink.single.ui.login
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.data.manager.SingleLiveEvent
 import com.softhink.single.data.remote.response.UserResponse
+import com.softhink.single.ui.base.BaseViewModel
 import com.softhink.single.ui.registro.Status
 import java.util.*
 
-class LoginFbViewModel : ViewModel() {
+class LoginFbViewModel : BaseViewModel() {
 
     private var callbackManager: CallbackManager = CallbackManager.Factory.create()
     private var loginResponse = SingleLiveEvent<GenericObserver<UserResponse>>()
@@ -27,10 +27,7 @@ class LoginFbViewModel : ViewModel() {
             override fun onSuccess(result: LoginResult?) {
                 if (result != null) {
                     if (result.accessToken.declinedPermissions.size == 0) {
-                        FacebookRepository().makeRequest(result.accessToken).observeForever {
-                            if (it != null)
-                                loginResponse.value = it
-                        }
+                        //TODO Make Login or SignUp request
                     } else {
                         loginResponse.value = GenericObserver(Status.ERROR, null, "El usuario no acepto los permisos")
                     }

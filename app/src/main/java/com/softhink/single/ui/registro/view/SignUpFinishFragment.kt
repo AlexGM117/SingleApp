@@ -23,6 +23,7 @@ import com.softhink.single.ui.registro.Status
 import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_signup_finish.*
+import kotlinx.android.synthetic.main.loading.*
 import java.lang.Exception
 
 /**
@@ -92,15 +93,17 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
             R.id.btnSendForm -> {
                 if (isConnected()) {
+                    loadingScreen.visibility = View.VISIBLE
                     btnSendForm.isEnabled = false
                     model.callSignUpService().observe(this, Observer {
                         if (it != null) {
+                            loadingScreen.visibility = View.GONE
+                            btnSendForm.isEnabled = true
                             when (it.status) {
                                 Status.SUCCESS -> signUpSuccess(it.message, it.data?.username!!)
                                 Status.ERROR -> showMessageDialog(it.message!!)
                                 Status.FAILED -> showMessageDialog(it.message!!)
                             }
-                            btnSendForm.isEnabled = true
                         }
                     })
                 } else {

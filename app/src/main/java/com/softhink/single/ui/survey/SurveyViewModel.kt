@@ -2,20 +2,18 @@ package com.softhink.single.ui.survey
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.softhink.single.data.manager.GenericObserver
-import com.softhink.single.data.manager.SingleRepository
 import com.softhink.single.data.remote.request.SaveSurveyRequest
 import com.softhink.single.data.remote.response.BaseObject
 import com.softhink.single.data.remote.response.EncuestaResponse
 import com.softhink.single.data.remote.response.SurveyResponse
-import com.softhink.single.ui.base.BaseCallback
+import com.softhink.single.ui.base.BaseViewModel
 import com.softhink.single.ui.registro.Status
+import kotlinx.coroutines.launch
 
-class SurveyViewModel : ViewModel() {
+class SurveyViewModel : BaseViewModel() {
 
-    private var repository = SingleRepository()
-    private var servicesResponse = MutableLiveData<GenericObserver<Any>>()
+    private var servicesResponse = MutableLiveData<GenericObserver<List<SurveyResponse>>>()
     var listGustos = MutableLiveData<List<BaseObject>>()
     var listHab = MutableLiveData<List<BaseObject>>()
     private var listGender = ArrayList<BaseObject>()
@@ -80,46 +78,22 @@ class SurveyViewModel : ViewModel() {
         return list
     }
 
-    fun getLists() :LiveData<GenericObserver<Any>> {
-        repository.callGetCatalogs(object : BaseCallback<List<SurveyResponse>>(){
-            override fun handleResponseData(data: List<SurveyResponse>, message: String?) {
-                if (!data.isNullOrEmpty() && !data[0].interestList.isNullOrEmpty() && !data[0].tastesList.isNullOrEmpty() && !data[0].genders.isNullOrEmpty()) {
-                    servicesResponse.value = GenericObserver(Status.SUCCESS, null, null)
-                    listGustos.value = data[0].tastesList
-                    listHab.value = data[0].interestList
-                    listGender = data[0].genders as ArrayList<BaseObject>
-                } else {
-                    servicesResponse.value = GenericObserver(Status.ERROR, null, null)
-                }
+    fun getLists() : LiveData<GenericObserver<List<SurveyResponse>>> {
+        scope.launch {
+            val data = repository.makeRequest()
+            if (data?.data.isNullOrEmpty() || data?.data?.get(0)?.tastesList.isNullOrEmpty()
+                    || data?.data?.get(0)?.genders.isNullOrEmpty() || data?.data?.get(0)?.interestList.isNullOrEmpty()) {
+                data?.status = Status.ERROR
             }
-
-            override fun handleError(message: String, resultCode: String?) {
-                servicesResponse.value = GenericObserver(Status.ERROR, null, null)
-            }
-
-            override fun handleException(t: Exception) {
-                servicesResponse.value = GenericObserver(Status.FAILED, null, null)
-            }
-        })
-
+            servicesResponse.postValue(data)
+        }
         return servicesResponse
     }
 
     private fun sendSurvey() {
-        repository.callSendSurvey(request, object : BaseCallback<EncuestaResponse>(){
-            override fun handleResponseData(data: EncuestaResponse, message: String?) {
-                surveyResponse.value = GenericObserver(Status.SUCCESS, data, message)
-            }
-
-            override fun handleError(message: String, resultCode: String?) {
-                surveyResponse.value = GenericObserver(Status.ERROR, null, message)
-            }
-
-            override fun handleException(t: Exception) {
-                surveyResponse.value = GenericObserver(Status.FAILED, null, t.message)
-            }
-
-        })
+        scope.launch {
+            surveyResponse.postValue(repository.makeRequest(request))
+        }
     }
 
     fun setUsername(username: String) {
