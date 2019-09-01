@@ -28,7 +28,6 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(v: View, savedInstanceState: Bundle?) {
         super.onViewCreated(v, savedInstanceState)
         if (savedInstanceState == null) {
-            accessToken.text = "Token: ${SinglePreferences().getAccessToken()}"
             toEditProfile.setOnClickListener(this)
             toEditParams.setOnClickListener(this)
             singlear.setOnClickListener(this)

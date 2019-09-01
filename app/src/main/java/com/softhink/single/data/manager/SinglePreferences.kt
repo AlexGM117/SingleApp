@@ -15,7 +15,9 @@ class SinglePreferences {
         private val KEY_SHOW_TUTORIAL = "$TAG.KEY_SHOW_TUTORIAL"
     }
 
-    private var accessToken: String? = sharedPreferences.getString(KEY_ACCESS_TOKEN, null)
+    var accessToken: String?
+        get() = sharedPreferences.getString(KEY_ACCESS_TOKEN, "")
+        set(userId) = sharedPreferences.edit().putString(KEY_ACCESS_TOKEN, userId).apply()
 
     var firstAccess: Boolean
         get() = sharedPreferences.getBoolean(KEY_FIRST_ACCESS, true)
@@ -24,16 +26,4 @@ class SinglePreferences {
     var showTutorial: Boolean
         get() = sharedPreferences.getBoolean(KEY_SHOW_TUTORIAL, true)
         set(showTutorial) = sharedPreferences.edit().putBoolean(KEY_SHOW_TUTORIAL, showTutorial).apply()
-
-    fun setAccessToken(accessToken: String?) {
-        setPreferences(KEY_ACCESS_TOKEN, accessToken)
-    }
-
-    fun getAccessToken() = accessToken
-
-    private fun setPreferences(key: String, value: String?){
-        val editor = sharedPreferences.edit()
-        editor.putString(key, value)
-        editor.apply()
-    }
 }

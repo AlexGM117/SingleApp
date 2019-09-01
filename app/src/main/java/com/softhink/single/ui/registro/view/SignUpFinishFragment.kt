@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.arrow_back.*
 import kotlinx.android.synthetic.main.fragment_signup_finish.*
 import kotlinx.android.synthetic.main.loading.*
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
 /**
@@ -76,11 +78,13 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
                 val contentURI = data.data
                 val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, contentURI)
                 GlideApp.with(this).load(bitmap).centerCrop().into(imagePreview)
+                model.setPhoto(encodeImage(bitmap))
             }
 
             CAMERA -> if (data != null) {
                 val thumbnail = data.extras!!.get("data") as Bitmap
                 GlideApp.with(this).load(thumbnail).centerCrop().into(imagePreview)
+                model.setPhoto(encodeImage(thumbnail))
             }
         }
     }
@@ -133,13 +137,19 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
 
     private fun signUpSuccess(message: String?, username: String){
         val intent = Intent(activity, SurveyActivity::class.java)
-        intent.putExtra("USERNAME", username)
         intent.putExtra(surveyFlag, true)
         showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, positiveClick = {
-            SinglePreferences().setAccessToken("token de registro")
+            SinglePreferences().accessToken = username
             Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
             startActivity(intent)
             activity?.finish()
         })
+    }
+
+    private fun encodeImage(bm: Bitmap): String {
+        val baos = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val b = baos.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
     }
 }

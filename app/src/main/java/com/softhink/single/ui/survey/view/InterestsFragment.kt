@@ -43,7 +43,7 @@ class InterestsFragment : BaseFragment(), BubblePickerListener, View.OnClickList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            val titles = viewModel.listHab.value
+            val titles = viewModel.getElementsOfList("interes")
             picker.adapter = object : BubblePickerAdapter {
                 override val totalCount: Int
                     get() = titles?.size!!
@@ -84,7 +84,9 @@ class InterestsFragment : BaseFragment(), BubblePickerListener, View.OnClickList
                     showMessageDialog("Debes seleccionar al menos una opcion")
                 } else {
                     viewModel.saveInterests(listSelected)
-                    fragmentManager?.beginTransaction()?.replace(R.id.containerSurvey, TastesFragment(), TastesFragment::class.java.simpleName)?.addToBackStack(TastesFragment::class.java.simpleName)
+                    fragmentManager?.beginTransaction()?.
+                            replace(R.id.containerSurvey, TastesFragment(), TastesFragment::class.java.simpleName)?.
+                            addToBackStack(TastesFragment::class.java.simpleName)
                             ?.commit()
                 }
             }

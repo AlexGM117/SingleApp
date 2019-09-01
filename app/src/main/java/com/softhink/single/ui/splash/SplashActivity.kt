@@ -29,12 +29,8 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun initSession() {
-        val token = SinglePreferences().getAccessToken()
         var intent: Intent?
-        if (token == null) {
-            intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        } else if (!SinglePreferences().getAccessToken().isNullOrEmpty()) {
+        if (!SinglePreferences().accessToken.isNullOrEmpty()) {
             intent = Intent(this, MainContainer::class.java)
         } else {
             intent = Intent(this, LoginActivity::class.java)

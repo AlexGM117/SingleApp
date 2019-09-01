@@ -1,13 +1,7 @@
 package com.softhink.single.api
 
-import com.softhink.single.data.remote.request.LoginRequest
-import com.softhink.single.data.remote.request.SaveSurveyRequest
-import com.softhink.single.data.remote.request.SignUpRequest
-import com.softhink.single.data.remote.request.UserTest
-import com.softhink.single.data.remote.response.BaseResponse
-import com.softhink.single.data.remote.response.EncuestaResponse
-import com.softhink.single.data.remote.response.SurveyResponse
-import com.softhink.single.data.remote.response.UserResponse
+import com.softhink.single.data.remote.request.*
+import com.softhink.single.data.remote.response.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,12 +16,18 @@ interface SingleService {
     @POST("registro/alta")
     fun userRegistro(@Body request : SignUpRequest) : Deferred<Response<BaseResponse<UserResponse>>>
 
+    @POST("registro/update2")
+    fun userUpdate(@Body request: UserRequest) : Deferred<Response<BaseResponse<UserResponse>>>
+
+    @POST("registro/myProfile")
+    fun myProfile(@Body request: UserTest) : Deferred<Response<BaseResponse<UserProfile>>>
+
     @GET("catalogo/catalogos2")
-    fun getCatalogs() : Deferred<Response<BaseResponse<List<SurveyResponse>>>>
+    fun getCatalogs() : Deferred<Response<BaseResponse<SurveyResponse>>>
 
     @POST("registro/encuesta")
-    fun requestSendSurvey(@Body request: SaveSurveyRequest): Deferred<Response<BaseResponse<EncuestaResponse>>>
+    fun requestSendSurvey(@Body request: SurveyRequest): Deferred<Response<BaseResponse<EncuestaResponse>>>
 
     @POST("single/match")
-    fun requestSinglear(@Body request: UserTest): Deferred<Response<BaseResponse<List<UserResponse>>>>
+    fun requestSinglear(@Body request: SinglearRequest): Deferred<Response<BaseResponse<List<UserResponse>>>>
 }

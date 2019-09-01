@@ -73,7 +73,7 @@ class MainContainer : BaseActivity() {
 
             R.id.menuLogout -> {
                 LoginManager.getInstance().logOut()
-                SinglePreferences().setAccessToken(null)
+                SinglePreferences().accessToken = null
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

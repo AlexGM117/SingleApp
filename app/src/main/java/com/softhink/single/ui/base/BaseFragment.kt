@@ -19,6 +19,16 @@ abstract class BaseFragment : Fragment() {
         toolbar.setUpToolbar(title, back)
     }
 
+    fun showMessageDialog(message: String?) {
+        MaterialDialog(context!!)
+                .title(R.string.app_name)
+                .message(text = message)
+                .positiveButton(text = "ACEPTAR"){
+                    activity?.finish()
+                }
+                .show()
+    }
+
     inline fun showPermissionsDialog(crossinline positiveClick:() -> Unit){
         MaterialDialog(context!!)
                 .customView(R.layout.dialog_galery_access)

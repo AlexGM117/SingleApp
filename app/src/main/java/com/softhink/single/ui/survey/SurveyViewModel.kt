@@ -3,7 +3,7 @@ package com.softhink.single.ui.survey
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.softhink.single.data.manager.GenericObserver
-import com.softhink.single.data.remote.request.SaveSurveyRequest
+import com.softhink.single.data.remote.request.SurveyRequest
 import com.softhink.single.data.remote.response.BaseObject
 import com.softhink.single.data.remote.response.EncuestaResponse
 import com.softhink.single.data.remote.response.SurveyResponse
@@ -13,15 +13,11 @@ import kotlinx.coroutines.launch
 
 class SurveyViewModel : BaseViewModel() {
 
-    private var servicesResponse = MutableLiveData<GenericObserver<List<SurveyResponse>>>()
-    var listGustos = MutableLiveData<List<BaseObject>>()
-    var listHab = MutableLiveData<List<BaseObject>>()
-    private var listGender = ArrayList<BaseObject>()
-    private var request = SaveSurveyRequest()
+    private var servicesResponse = MutableLiveData<GenericObserver<SurveyResponse>>()
+    var request = SurveyRequest()
     var surveyResponse = MutableLiveData<GenericObserver<EncuestaResponse>>()
 
     fun savePreferences(man: Boolean, woman: Boolean, visible: Boolean, minAge: Int, maxAge: Int) {
-        request.username = "Test09022019123003093"
         request.preferencia = filterList(man, woman)
         request.visible = if (visible) "1" else "0"
         request.minima = minAge.toString()
@@ -29,30 +25,20 @@ class SurveyViewModel : BaseViewModel() {
     }
 
     fun saveInterests(listSelected: ArrayList<String>) {
-        request.gustos = filterList(listSelected)
+        request.intereses = filterList(listSelected)
     }
 
     fun saveTastes(listSelected: ArrayList<String>) {
-        request.habitos = filterList2(listSelected)
+        request.consumo = filterList(listSelected)
         sendSurvey()
     }
 
     private fun filterList(listSelected: ArrayList<String>): List<BaseObject>? {
         val list = ArrayList<BaseObject>()
+        val listas = ArrayList(servicesResponse.value?.data!!.interestList)
+        listas.addAll(servicesResponse.value?.data!!.tastesList)
         for (x in listSelected) {
-            for (item in listHab.value!!) {
-                if (x == item.nombre) {
-                    list.add(item)
-                }
-            }
-        }
-        return list
-    }
-
-    private fun filterList2(listSelected: ArrayList<String>): List<BaseObject>? {
-        val list = ArrayList<BaseObject>()
-        for (x in listSelected) {
-            for (item in listGustos.value!!) {
+            for (item in listas) {
                 if (x == item.nombre) {
                     list.add(item)
                 }
@@ -64,13 +50,13 @@ class SurveyViewModel : BaseViewModel() {
     private fun filterList(man: Boolean, woman: Boolean): List<BaseObject>? {
         val list = ArrayList<BaseObject>()
         if (man) {
-            for (item in listGender) {
+            for (item in servicesResponse.value?.data!!.genders) {
                 if (item.nombre == "Hombre")
                     list.add(item)
             }
         }
         if(woman) {
-            for (item in listGender) {
+            for (item in servicesResponse.value?.data!!.genders) {
                 if (item.nombre == "Mujer")
                     list.add(item)
             }
@@ -78,25 +64,29 @@ class SurveyViewModel : BaseViewModel() {
         return list
     }
 
-    fun getLists() : LiveData<GenericObserver<List<SurveyResponse>>> {
+    fun getLists() : LiveData<GenericObserver<SurveyResponse>> {
         scope.launch {
             val data = repository.makeRequest()
-            if (data?.data.isNullOrEmpty() || data?.data?.get(0)?.tastesList.isNullOrEmpty()
-                    || data?.data?.get(0)?.genders.isNullOrEmpty() || data?.data?.get(0)?.interestList.isNullOrEmpty()) {
-                data?.status = Status.ERROR
+            if (data!!.data == null || data.data?.interestList.isNullOrEmpty() || data.data?.genders.isNullOrEmpty() ||
+                    data.data?.tastesList.isNullOrEmpty()) {
+                data.status = Status.ERROR
             }
             servicesResponse.postValue(data)
         }
         return servicesResponse
     }
 
+    fun getElementsOfList(string: String) : List<BaseObject>? {
+        return when (string) {
+            "interes" -> servicesResponse.value?.data?.interestList
+            "consumo" -> servicesResponse.value?.data?.tastesList
+            else -> return null
+        }
+    }
+
     private fun sendSurvey() {
         scope.launch {
             surveyResponse.postValue(repository.makeRequest(request))
         }
-    }
-
-    fun setUsername(username: String) {
-        request.username = username
     }
 }

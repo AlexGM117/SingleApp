@@ -80,7 +80,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
             if (it != null) {
                 when (it.status) {
                     SUCCESS -> {
-                        SinglePreferences().setAccessToken(AccessToken.getCurrentAccessToken().token)
+//                        SinglePreferences().setAccessToken(AccessToken.getCurrentAccessToken().token)
                         showMessageDialog(it.message!!, positiveClick = {
                             startActivity(Intent(activity, SurveyActivity::class.java)
                                     .putExtra("USERNAME", it.data?.username)

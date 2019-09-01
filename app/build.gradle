@@ -4,13 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
-def appName
-if (project.hasProperty("applicationName")){
-    appName = applicationName
-} else {
-    appName = parent.name
-}
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -40,7 +33,7 @@ android {
         variant.outputs.all{ outputs ->
             def date = new Date()
             def formatDate = date.format("ddMM")
-            def apkName = appName + "-" + formatDate + "-.apk"
+            def apkName = parent.name + "-" + formatDate + "-.apk"
             outputFileName = new File(apkName)
         }
 
@@ -59,7 +52,7 @@ ext {
     lifecycle_version = "2.0.0"
     androidxSupportVersion = "1.1.0-rc01"
     androidxMaterialVersion = "1.0.0"
-    firebaseVersion = '17.0.0'
+    firebaseVersion = '17.1.0'
     kotlinCoroutines = '1.2.0'
 }
 
@@ -82,8 +75,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$playServices"
     implementation "com.google.android.gms:play-services-location:$playServices"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"

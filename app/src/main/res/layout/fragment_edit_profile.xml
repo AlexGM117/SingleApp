@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre" >
@@ -66,6 +67,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Correo  electrónico">
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profilePass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cambiar contraseña" >
@@ -116,6 +119,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profileAboutMe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Acerca de mí" >
@@ -124,8 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
-                        android:padding="8dp"
-                        android:text="@string/text_ex"/>
+                        android:padding="8dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -138,12 +141,19 @@
                 android:layout_marginBottom="16dp" />
 
             <Button
-                android:id="@+id/btnSendChanges"
+                android:id="@+id/btnUpdateProfile"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 style="@style/ButtonSingle"
                 android:text="Guardar cambios" />
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/loading"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</RelativeLayout>

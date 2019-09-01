@@ -47,7 +47,7 @@ class TastesFragment : BaseFragment(),
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            val tastes = viewModel.listGustos.value
+            val tastes = viewModel.getElementsOfList("consumo")
             pickerTastes.adapter = object : BubblePickerAdapter {
                 override val totalCount = tastes?.size!!
 
@@ -87,7 +87,6 @@ class TastesFragment : BaseFragment(),
                     showMessageDialog("Debes seleccionar al menos una opcion")
                 } else {
                     viewModel.saveTastes(listSelected)
-//                callback.showTerms()
                 }
             }
 

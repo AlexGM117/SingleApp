@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.ui.base.BaseActivity
 import com.softhink.single.R
+import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.MainContainer
 import com.softhink.single.ui.dashboard.TermsFragment
 import com.softhink.single.ui.registro.Status.*
@@ -21,18 +22,18 @@ class SurveyActivity : BaseActivity() {
         setContentView(R.layout.activity_survey)
         welcomeScreen = intent.getBooleanExtra(surveyFlag, false)
         val model = ViewModelProviders.of(this).get(SurveyViewModel::class.java)
-        model.setUsername(intent.getStringExtra("USERNAME"))
+        model.request.username = SinglePreferences().accessToken!!
         model.getLists().observe(this, Observer {
             if (it != null) {
                 when(it.status) {
                     SUCCESS -> initSurvey()
-                    ERROR -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                    ERROR -> showMessageDialog(it.message!!, positiveClick = {
                         finish()
                         if (welcomeScreen) {
                             startActivity(Intent(this, MainContainer::class.java))
                         }
                     })
-                    FAILED -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                    FAILED -> showMessageDialog(it.message!!, positiveClick = {
                         finish()
                         if (welcomeScreen) {
                             startActivity(Intent(this, MainContainer::class.java))
@@ -49,7 +50,7 @@ class SurveyActivity : BaseActivity() {
                     ERROR -> showMessageDialog(it.message!!, positiveClick = {
                         showTerms()
                     })
-                    FAILED -> showMessageDialog(getString(R.string.error_generic_message), positiveClick = {
+                    FAILED -> showMessageDialog(it.message!!, positiveClick = {
                         showTerms()
                     })
                 }
@@ -65,8 +66,7 @@ class SurveyActivity : BaseActivity() {
 
     fun showTerms() {
         if (welcomeScreen){
-            supportFragmentManager.beginTransaction().replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName)?.
-                    commit()
+            supportFragmentManager.beginTransaction().replace(R.id.containerSurvey, TermsFragment(), TermsFragment::class.java.simpleName).commit()
         } else{
             finish()
         }

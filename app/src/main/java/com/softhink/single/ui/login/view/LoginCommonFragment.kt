@@ -92,7 +92,7 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
 
     private fun loginSuccess(data: UserResponse?) {
         Log.i(LoginCommonFragment::class.java.simpleName, data.toString())
-        SinglePreferences().setAccessToken("token login")
+        SinglePreferences().accessToken = data?.username!!
         startActivity(Intent(activity, MainContainer::class.java))
         activity?.finish()
     }
