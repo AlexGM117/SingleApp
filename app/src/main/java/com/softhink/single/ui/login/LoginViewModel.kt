@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel : BaseViewModel() {
 
-//    private var login = SingleLiveEvent<GenericObserver<UserResponse>>()
     private var login = SingleLiveEvent<GenericObserver<UserResponse>>()
     private val request = LoginRequest()
 

@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.R
+import com.softhink.single.SingleApplication
 import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.MapsActivity
 import com.softhink.single.ui.survey.view.SurveyActivity
@@ -18,6 +21,12 @@ import kotlinx.android.synthetic.main.fragment_perfil.*
 class PerfilFragment : Fragment(), View.OnClickListener {
 
     private val surveyFlag = "SURVEY_DESTINATION"
+    private lateinit var mViewModel: ProfileViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,7 +40,17 @@ class PerfilFragment : Fragment(), View.OnClickListener {
             toEditProfile.setOnClickListener(this)
             toEditParams.setOnClickListener(this)
             singlear.setOnClickListener(this)
+
+            loadSingleData()
         }
+    }
+
+    private fun loadSingleData() {
+        mViewModel.getDataFromLocal().singleData.observe(this, Observer {
+            it?.let {
+                singleUserName.text = it[0].fullName
+            }
+        })
     }
 
     override fun onClick(v: View) {

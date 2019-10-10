@@ -8,5 +8,6 @@ data class UserProfile(
         @SerializedName("calificacion") val userScore: Double,
         @SerializedName("descripcion") val description: String,
         @SerializedName("profesion") val job: String,
+        @SerializedName("galeria") val galery: List<String>,
         @SerializedName("latitud") val latitud: Double,
         @SerializedName("longitud") val longitud: Double)

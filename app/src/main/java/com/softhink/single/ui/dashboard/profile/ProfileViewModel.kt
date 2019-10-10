@@ -2,6 +2,9 @@ package com.softhink.single.ui.dashboard.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import com.softhink.single.SingleData
+import com.softhink.single.SingleRepository
 import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.data.remote.request.UserRequest
@@ -12,13 +15,13 @@ import com.softhink.single.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class ProfileViewModel: BaseViewModel() {
+
+    val mData = MutableLiveData<SingleData>()
     var liveDta = MutableLiveData<GenericObserver<UserProfile>>()
 
-    fun getMyProfile() {
-        scope.launch {
+    fun getMyProfile() = scope.launch {
             liveDta.postValue(repository.makeRequest(UserTest(SinglePreferences().accessToken!!)))
         }
-    }
 
     fun updateProfile(newName: String, toString1: String, newAboutMe: String) : LiveData<GenericObserver<UserResponse>> {
         val result = MutableLiveData<GenericObserver<UserResponse>>()
@@ -31,5 +34,13 @@ class ProfileViewModel: BaseViewModel() {
             result.postValue(repository.makeRequest(request))
         }
         return result
+    }
+
+    fun getDataFromLocal(): SingleRepository {
+        return roomRepository
+    }
+
+    fun updateLocaStore(data: UserProfile) {
+
     }
 }

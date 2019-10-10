@@ -13,7 +13,7 @@ class SingleApplication : Application() {
     }
 
     companion object {
-        private var application: Application? = null
+        private var application: SingleApplication? = null
 
         fun applicationContext(): Context{
             return application!!.applicationContext

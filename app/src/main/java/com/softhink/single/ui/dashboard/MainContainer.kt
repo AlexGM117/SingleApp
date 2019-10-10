@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProviders
 import com.facebook.login.LoginManager
 import com.softhink.single.ui.common.Converter
 import com.softhink.single.ui.base.BaseActivity
@@ -12,9 +13,14 @@ import com.softhink.single.ui.onboarding.OnboardingActivity
 import com.softhink.single.R
 import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.ui.dashboard.adapters.PagerAdapter
+import com.softhink.single.ui.dashboard.profile.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_main_container.*
 
 class MainContainer : BaseActivity() {
+
+    private val mViewModel: ProfileViewModel by lazy {
+        ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+    }
 
     private var pushCount = 0
 
@@ -74,6 +80,7 @@ class MainContainer : BaseActivity() {
             R.id.menuLogout -> {
                 LoginManager.getInstance().logOut()
                 SinglePreferences().accessToken = null
+                mViewModel.restoreData()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

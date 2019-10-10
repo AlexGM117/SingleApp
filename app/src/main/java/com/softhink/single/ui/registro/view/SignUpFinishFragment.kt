@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.R
 import com.softhink.single.data.manager.SinglePreferences
+import com.softhink.single.data.remote.response.UserResponse
 import com.softhink.single.ui.common.GlideApp
 import com.softhink.single.ui.registro.SignUpViewModel
 import com.softhink.single.ui.registro.Status
@@ -104,7 +105,7 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
                             loadingScreen.visibility = View.GONE
                             btnSendForm.isEnabled = true
                             when (it.status) {
-                                Status.SUCCESS -> signUpSuccess(it.message, it.data?.username!!)
+                                Status.SUCCESS -> signUpSuccess(it.message, it.data!!)
                                 Status.ERROR -> showMessageDialog(it.message!!)
                                 Status.FAILED -> showMessageDialog(it.message!!)
                             }
@@ -135,11 +136,12 @@ class SignUpFinishFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    private fun signUpSuccess(message: String?, username: String){
+    private fun signUpSuccess(message: String?, data: UserResponse) {
+        model.saveLocalData(data)
         val intent = Intent(activity, SurveyActivity::class.java)
         intent.putExtra(surveyFlag, true)
         showMessageDialog(if (message.isNullOrEmpty()) getString(R.string.signup_sucesss) else message, positiveClick = {
-            SinglePreferences().accessToken = username
+            SinglePreferences().accessToken = data.username
             Intent(activity, SurveyActivity::class.java).putExtra(surveyFlag, true)
             startActivity(intent)
             activity?.finish()

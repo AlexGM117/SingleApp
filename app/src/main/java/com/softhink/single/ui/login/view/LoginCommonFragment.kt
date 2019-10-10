@@ -3,7 +3,6 @@ package com.softhink.single.ui.login.view
 import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -80,9 +79,9 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
             if (it != null) {
                 loadingScreen.visibility = View.GONE
                 when (it.status) {
-                    SUCCESS -> loginSuccess(it.data)
-                    ERROR -> loginFail(it.message!!)
-                    FAILED -> loginFail(it.message!!)
+                    SUCCESS -> loginSuccess(it.data!!)
+                    ERROR -> showMessageDialog(it.message!!)
+                    FAILED -> showMessageDialog(it.message!!)
                 }
 
                 btnContinuar.isEnabled = true
@@ -90,14 +89,10 @@ class LoginCommonFragment : BaseFragment(), View.OnClickListener {
         })
     }
 
-    private fun loginSuccess(data: UserResponse?) {
-        Log.i(LoginCommonFragment::class.java.simpleName, data.toString())
-        SinglePreferences().accessToken = data?.username!!
+    private fun loginSuccess(data: UserResponse) {
+        mViewModel.saveLocalData(data)
+        SinglePreferences().accessToken = data.username
         startActivity(Intent(activity, MainContainer::class.java))
         activity?.finish()
-    }
-
-    private fun loginFail(message: String) {
-        showMessageDialog(message)
     }
 }

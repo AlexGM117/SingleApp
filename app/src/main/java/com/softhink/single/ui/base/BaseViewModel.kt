@@ -4,13 +4,18 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import com.softhink.single.R
 import com.softhink.single.SingleApplication
+import com.softhink.single.SingleData
+import com.softhink.single.SingleRepository
+import com.softhink.single.api.SingleRoomDatabase
 import com.softhink.single.data.manager.ApiRepository
 import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.data.manager.SingleLiveEvent
+import com.softhink.single.data.remote.response.UserResponse
 import com.softhink.single.ui.registro.Status
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -21,6 +26,7 @@ abstract class BaseViewModel : ViewModel() {
         get() = parentJob + Dispatchers.Default
     protected val scope = CoroutineScope(coroutineContext)
     protected val repository = ApiRepository()
+    protected val roomRepository = SingleRepository(SingleRoomDatabase.getDatabase(SingleApplication.applicationContext(), scope).singleDataDAO())
 
     fun getString(string: Int): String {
         return SingleApplication.applicationContext().getString(string)
@@ -76,5 +82,22 @@ abstract class BaseViewModel : ViewModel() {
             return false
         }
         return true
+    }
+
+    fun saveLocalData(data: UserResponse) = scope.launch {
+        val dataInsert = SingleData(data.username,
+                data.fullName,
+                null,
+                data.birthDate,
+                data.email,
+                null,
+                null,
+                data.fechaAlta,
+                null)
+        roomRepository.insert(dataInsert)
+    }
+
+    fun restoreData() = scope.launch {
+        roomRepository.truncate()
     }
 }

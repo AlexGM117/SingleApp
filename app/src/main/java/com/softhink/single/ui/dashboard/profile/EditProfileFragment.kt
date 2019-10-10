@@ -39,7 +39,7 @@ class EditProfileFragment : BaseFragment(), View.OnClickListener {
             mViewModel.liveDta.observe(this, Observer {
                 if (it != null) {
                     when(it.status) {
-                        SUCCESS -> successResponse(it.data)
+                        SUCCESS -> successResponse(it.data!!)
                         ERROR -> showMessageDialog(it.message)
                         FAILED -> showMessageDialog(it.message)
                     }
@@ -49,9 +49,10 @@ class EditProfileFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    private fun successResponse(data: UserProfile?) {
-        profileName.editText?.setText(data?.userName)
-        profileAboutMe.editText?.setText(data?.description)
+    private fun successResponse(data: UserProfile) {
+        mViewModel.updateLocaStore(data)
+        profileName.editText?.setText(data.userName)
+        profileAboutMe.editText?.setText(data.description)
     }
 
     override fun onClick(v: View?) {
