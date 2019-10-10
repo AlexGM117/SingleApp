@@ -28,6 +28,6 @@ interface SingleService {
     @POST("registro/encuesta")
     fun requestSendSurvey(@Body request: SurveyRequest): Deferred<Response<BaseResponse<EncuestaResponse>>>
 
-    @POST("single/match")
+    @POST("single/singlear")
     fun requestSinglear(@Body request: SinglearRequest): Deferred<Response<BaseResponse<List<UserResponse>>>>
 }
