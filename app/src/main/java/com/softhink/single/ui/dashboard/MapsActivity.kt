@@ -34,7 +34,6 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        mViewModel.getListOfUsers()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -71,6 +70,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
             if (it != null) {
                 println("Latitud: ${it.latitude}")
                 println("Longitud: ${it.longitude}")
+                mViewModel.updateLocation(LatLng(it.latitude, it.longitude))
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 10f))
                 mMap.setOnMarkerClickListener(this)
                 mMap.setOnMapClickListener(this)
@@ -105,9 +105,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClick
     }
 
     private fun errorDialog(message: String?) {
-        showMessageDialog(message!!, positiveClick = {
-            finish()
-        })
+        showMessageDialog(message)
     }
 
     private fun setVisibilityOfHeader(visibility: Int) {

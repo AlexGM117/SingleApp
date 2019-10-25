@@ -64,6 +64,16 @@ abstract class BaseActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener(listener)
     }
 
+    fun showMessageDialog(message: String?) {
+        MaterialDialog(this)
+                .title(R.string.app_name)
+                .message(text = message)
+                .positiveButton(text = "ACEPTAR"){
+                    finish()
+                }
+                .show()
+    }
+
     inline fun showMessageDialog(crossinline positiveClick:() -> Unit){
         MaterialDialog(this)
                 .customView(R.layout.dialog_galery_access)

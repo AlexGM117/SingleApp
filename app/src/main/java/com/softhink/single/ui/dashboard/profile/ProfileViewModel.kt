@@ -2,9 +2,7 @@ package com.softhink.single.ui.dashboard.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.softhink.single.SingleData
-import com.softhink.single.SingleRepository
 import com.softhink.single.data.manager.GenericObserver
 import com.softhink.single.data.manager.SinglePreferences
 import com.softhink.single.data.remote.request.UserRequest
@@ -16,12 +14,17 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel: BaseViewModel() {
 
-    val mData = MutableLiveData<SingleData>()
+    var mData: LiveData<List<SingleData>>? = null
     var liveDta = MutableLiveData<GenericObserver<UserProfile>>()
+
+    init {
+        getMyProfile()
+        getDataFromLocal()
+    }
 
     fun getMyProfile() = scope.launch {
             liveDta.postValue(repository.makeRequest(UserTest(SinglePreferences().accessToken!!)))
-        }
+    }
 
     fun updateProfile(newName: String, toString1: String, newAboutMe: String) : LiveData<GenericObserver<UserResponse>> {
         val result = MutableLiveData<GenericObserver<UserResponse>>()
@@ -36,11 +39,14 @@ class ProfileViewModel: BaseViewModel() {
         return result
     }
 
-    fun getDataFromLocal(): SingleRepository {
-        return roomRepository
+    private fun getDataFromLocal() {
+        mData = roomRepository.
+                getProfileFromRoom()
     }
 
-    fun updateLocaStore(data: UserProfile) {
-
+    fun updateLocaStore(data: UserResponse, description: String) {
+        scope.launch {
+            roomRepository.insert(SingleData(data.username, data.fullName, description, data.birthDate, data.email, null, null, data.fechaAlta, null))
+        }
     }
 }

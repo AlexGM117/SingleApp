@@ -59,11 +59,11 @@ class MainContainer : BaseActivity() {
 
         when (item.itemId) {
             R.id.actionNotifications -> {
-                if (pushCount == 10){
-                    pushCount--
-                } else{
-                    pushCount++
-                }
+//                if (pushCount == 10){
+//                    pushCount--
+//                } else{
+//                    pushCount++
+//                }
                 invalidateOptionsMenu()
             }
 

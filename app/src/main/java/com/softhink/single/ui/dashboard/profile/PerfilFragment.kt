@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.softhink.single.R
-import com.softhink.single.SingleApplication
-import com.softhink.single.data.manager.SinglePreferences
+import com.softhink.single.ui.base.BaseFragment
 import com.softhink.single.ui.dashboard.MapsActivity
 import com.softhink.single.ui.survey.view.SurveyActivity
 import kotlinx.android.synthetic.main.fragment_perfil.*
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_perfil.*
 /**
  * A simple [Fragment] subclass.
  */
-class PerfilFragment : Fragment(), View.OnClickListener {
+class PerfilFragment : BaseFragment(), View.OnClickListener {
 
     private val surveyFlag = "SURVEY_DESTINATION"
     private lateinit var mViewModel: ProfileViewModel
@@ -46,9 +45,10 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loadSingleData() {
-        mViewModel.getDataFromLocal().singleData.observe(this, Observer {
-            it?.let {
+        mViewModel.mData?.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
                 singleUserName.text = it[0].fullName
+                singleDescription.text = it[0].description
             }
         })
     }

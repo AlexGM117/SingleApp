@@ -14,7 +14,15 @@ open class BaseRepository {
             is Result.Success -> {
                 if (result.data.responseCode == "200") {
                     if (result.data.responseData != null) {
-                        data = GenericObserver(Status.SUCCESS, result.data.responseData, result.data.responseMessage)
+                        if (result.data.responseData is List<*>) {
+                            if (!result.data.responseData.isNullOrEmpty()) {
+                                data = GenericObserver(Status.SUCCESS, result.data.responseData, result.data.responseMessage)
+                            } else {
+                                data = GenericObserver(Status.ERROR, null, if(result.data.responseMessage != null) result.data.responseMessage else errorMessage)
+                            }
+                        } else {
+                            data = GenericObserver(Status.SUCCESS, result.data.responseData, result.data.responseMessage)
+                        }
                     } else {
                         data = GenericObserver(Status.ERROR, null, if(result.data.responseMessage != null) result.data.responseMessage else errorMessage)
                     }

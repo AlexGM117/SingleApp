@@ -2,7 +2,7 @@ package com.softhink.single.data.remote.request
 
 import com.google.gson.annotations.SerializedName
 
-data class UserRequest(@SerializedName("fullName") var fullName: String?,
+data class UserRequest(@SerializedName("nombre") var fullName: String?,
                        @SerializedName("user") var userId: String?,
                        @SerializedName("descripcion") var description: String?,
                        @SerializedName("birthdate") var birthdate: String?,
